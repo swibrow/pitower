@@ -1,0 +1,7 @@
+---
+machine:
+  network:
+    hostname: worker-04 # DC:A6:32:4F:EE:E2
+  install:
+    extraKernelArgs:
+      - initcall_blacklist=sensors_nct6683_init

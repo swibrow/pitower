@@ -1,0 +1,54 @@
+---
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata:
+  name: cluster-infra-nginx-certificates
+  namespace: flux-system
+spec:
+  dependsOn:
+    - name: cluster-infra-cert-manager-issuers
+  path: ./pitower/kubernetes/infra/networking/nginx/certificates
+  prune: true
+  sourceRef:
+    kind: GitRepository
+    name: pitower
+  wait: true
+  interval: 30m
+  retryInterval: 1m
+  timeout: 5m
+---
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata:
+  name: cluster-infra-nginx-external
+  namespace: flux-system
+spec:
+  dependsOn:
+    - name: cluster-infra-nginx-certificates
+  path: ./pitower/kubernetes/infra/networking/nginx/external
+  prune: true
+  sourceRef:
+    kind: GitRepository
+    name: pitower
+  wait: false
+  interval: 30m
+  retryInterval: 1m
+  timeout: 5m
+---
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata:
+  name: cluster-infra-nginx-internal
+  namespace: flux-system
+spec:
+  dependsOn:
+    - name: cluster-infra-nginx-certificates
+  path: ./pitower/kubernetes/infra/networking/nginx/internal
+  prune: true
+  sourceRef:
+    kind: GitRepository
+    name: pitower
+  wait: false
+  interval: 30m
+  retryInterval: 1m
+  timeout: 5m

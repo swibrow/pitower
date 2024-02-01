@@ -1,0 +1,16 @@
+---
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata:
+  name: cluster-infra-external-dns
+  namespace: flux-system
+spec:
+  path: ./pitower/kubernetes/infra/networking/external-dns/app
+  prune: true
+  sourceRef:
+    kind: GitRepository
+    name: pitower
+  wait: true
+  interval: 30m
+  retryInterval: 1m
+  timeout: 5m

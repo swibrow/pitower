@@ -1,0 +1,119 @@
+---
+version: "3"
+
+tasks:
+  config:
+    cmds:
+      - sops -d ./secrets.sops.yaml > ./secrets.yaml
+      - talosctl gen config
+          pitower
+          https://192.168.0.200:6443
+          --with-secrets ./secrets.yaml
+          --with-examples=true
+          --config-patch @patches/general.patch
+          --output ./clusterconfig
+          --force
+          # --config-patch @config.patch
+          # --config-patch-worker @worker.patch
+
+  patch:
+    dir: ./clusterconfig
+    cmds:
+      - talosctl machineconfig patch ./controlplane.yaml --patch @../patches/nodes/master-01.patch --output master-01.yaml
+      - talosctl machineconfig patch ./controlplane.yaml --patch @../patches/nodes/master-02.patch --output master-02.yaml
+      - talosctl machineconfig patch ./controlplane.yaml --patch @../patches/nodes/master-03.patch --output master-03.yaml
+      - talosctl machineconfig patch ./worker.yaml --patch @../patches/nodes/worker-01.patch --output worker-01.yaml
+      - talosctl machineconfig patch ./worker.yaml --patch @../patches/nodes/worker-02.patch --output worker-02.yaml
+      - talosctl machineconfig patch ./worker.yaml --patch @../patches/nodes/worker-03.patch --output worker-03.yaml
+      - talosctl machineconfig patch ./worker.yaml --patch @../patches/nodes/worker-04.patch --output worker-04.yaml
+      - talosctl machineconfig patch ./worker.yaml --patch @../patches/nodes/worker-05.patch --output worker-05.yaml
+      - talosctl machineconfig patch ./worker.yaml --patch @../patches/nodes/worker-06.patch --output worker-06.yaml
+
+  init:
+    dir: ./clusterconfig
+    cmds:
+      - talosctl apply-config --insecure --nodes 192.168.0.201 --file ./master-01.yaml
+      - talosctl apply-config --insecure --nodes 192.168.0.202 --file ./master-02.yaml
+      - talosctl apply-config --insecure --nodes 192.168.0.203 --file ./master-03.yaml
+      - talosctl config endpoint 192.168.0.201 192.168.0.202 192.168.0.203
+      - talosctl config merge ~/.talos/config
+      - talosctl bootstrap --nodes 192.168.0.201
+
+  bootstrap:
+    dir: ./clusterconfig
+    cmds:
+      - talosctl kubeconfig --nodes 192.168.0.200 --force
+
+  flux:
+    cmds:
+      - brew install fluxcd/tap/flux
+      - flux install
+      - task: ../
+      - kubectl apply -f ../kubernetes/infra/flux-system/bootstrap.yaml
+
+  apply:controlplanes:
+    dir: ./clusterconfig
+    env:
+      TALOSCONFIG: talosconfig
+    cmds:
+      - talosctl apply-config --endpoints 192.168.0.201 --nodes 192.168.0.201 --file ./master-01.yaml
+      - talosctl apply-config --endpoints 192.168.0.202 --nodes 192.168.0.202 --file ./master-02.yaml
+      - talosctl apply-config --endpoints 192.168.0.203 --nodes 192.168.0.203 --file ./master-03.yaml
+
+  apply:workers:
+    dir: ./clusterconfig
+    cmds:
+      - for: ['1', '2', '3', '4', '5', '6']
+        cmd: talosctl apply-config --insecure --nodes 192.168.0.21{{ .ITEM }} --file ./worker-0{{ .ITEM }}.yaml
+
+  apply:worker:
+    dir: ./clusterconfig
+    cmds:
+      - talosctl apply-config --insecure --nodes 192.168.0.21{{ .CLI_ARGS }} --file ./worker-0{{ .CLI_ARGS }}.yaml
+
+  # talos:upgrade:cp:
+  #   dir: ./clusterconfig
+  #   cmds:
+  #     - talosctl upgrade --endpoints 192.168.0.201,192.168.0.202,192.168.0.203
+  #       --image ghcr.io/siderolabs/installer:v1.6.3
+  #       --nodes 192.168.0.201
+
+  addons:
+    cmds:
+      - kustomize build ./addons --enable-helm | kubectl apply -f -
+
+  reset:
+    cmds:
+      - talosctl reset
+        --system-labels-to-wipe=STATE
+        --system-labels-to-wipe=EPHEMERAL
+        --system-labels-to-wipe=META
+        --reboot
+        --graceful
+        -n 192.168.0.2{{.CLI_ARGS}}
+
+  workers:nuke:
+    cmds:
+      - for: ['1', '2', '3', '4', '5', '6']
+        cmd: >
+          talosctl reset
+          --system-labels-to-wipe=STATE
+          --system-labels-to-wipe=EPHEMERAL
+          --system-labels-to-wipe=META
+          --graceful=false
+          --reboot
+          --wait=false
+          --nodes 192.168.0.21{{ .ITEM }}
+
+  controlplanes:nuke:
+    cmds:
+      - for: ['1', '2', '3']
+        cmd: >
+          talosctl reset
+          --system-labels-to-wipe=STATE
+          --system-labels-to-wipe=EPHEMERAL
+          --system-labels-to-wipe=META
+          --graceful=false
+          --reboot
+          --wait=false
+          --nodes 192.168.0.20{{ .ITEM }}

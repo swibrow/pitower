@@ -1,0 +1,12 @@
+---
+machine:
+  network:
+    hostname: master-03
+    interfaces:
+    - interface: enxdca63246b2ba
+      dhcp: true
+      vip:
+        ip: 192.168.0.200
+  install:
+    extraKernelArgs:
+      - initcall_blacklist=sensors_nct6683_init
