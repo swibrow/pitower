@@ -1,0 +1,10 @@
+machine:
+  kubelet:
+    extraArgs:
+      rotate-server-certificates: true
+cluster:
+  network:
+    cni:
+      name: none
+  proxy:
+    disabled: true
