@@ -1,0 +1,107 @@
+---
+# yaml-language-server: $schema=https://raw.githubusercontent.com/fluxcd-community/flux2-schemas/main/helmrelease-helm-v2beta2.json
+apiVersion: helm.toolkit.fluxcd.io/v2beta2
+kind: HelmRelease
+metadata:
+  name: firefly
+spec:
+  chart:
+    spec:
+      chart: app-template
+      version: 2.5.0
+      interval: 30m
+      sourceRef:
+        kind: HelmRepository
+        name: bjw-s
+        namespace: flux-system
+  interval: 30m
+  values:
+    controllers:
+      main:
+        containers:
+          main:
+            image:
+              repository: fireflyiii/core
+              tag: version-6.1.9
+            resources:
+              requests:
+                cpu: 15m
+                memory: 164Mi
+            envFrom:
+              - secretRef:
+                  name: firefly-secret
+            env:
+              DB_CONNECTION: pgsql
+              DB_HOST: &dbhost postgres-rw.database.svc.cluster.local
+              DB_PORT: "5432"
+              DB_DATABASE: firefly
+              TRUSTED_PROXIES: "**"
+              MAIL_MAILER: log
+              MAIL_HOST: smtp-relay.gmail.com
+              MAIL_PORT: 587
+          # cronjob:
+          #   image:
+          #     repository: alpine
+          #     tag: 3.19.1
+          #   imagePullPolicy: IfNotPresent
+          #   command:
+          #     - sh
+          #   args:
+          #     - -c
+          #     - >-
+          #       echo "0 */3 * * * wget -qO- http://firefly-iii:8080/api/v1/cron/$(STATIC_CRON_TOKEN)"
+          #       | crontab -
+          #       && crond -f -L /dev/stdout
+          #   env:
+          #     - name: STATIC_CRON_TOKEN
+          #       valueFrom:
+          #         secretKeyRef:
+          #           name: firefly-iii-secret
+          #           key: STATIC_CRON_TOKEN
+        initContainers:
+          wait-database:
+            image:
+              repository: alpine
+              tag: 3.19.1
+            imagePullPolicy: IfNotPresent
+            command:
+              - sh
+            args:
+              - -c
+              - >-
+                until nc -w 1 -v $MYSQL_HOST:3306 || nc -w 1 -v $POSTGRES_HOST:5432;
+                do echo "Waiting for database";
+                done
+            env:
+              - name: POSTGRES_HOST
+                value: *dbhost
+    service:
+      main:
+        ports:
+          http:
+            port: 8080
+    ingress:
+      main:
+        enabled: true
+        primary: true
+        className: internal
+        hosts:
+          - host: &host money.${SECRET_DOMAIN}
+            paths:
+              - path: /
+                pathType: Prefix
+                service:
+                  name: main
+                  port: http
+        tls:
+          - hosts:
+              - *host
+    persistence:
+      data:
+        enabled: true
+        existingClaim: firefly-data
+        advancedMounts:
+          main:
+            main:
+              - path: /var/www/html/firefly-iii/storage/upload
+

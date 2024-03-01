@@ -24,8 +24,7 @@ metadata:
   namespace: flux-system
 spec:
   dependsOn:
-    - name: cluster-apps-cloudnative-pg
-    # - name: cluster-apps-external-secrets-stores
+    - name: cloudnative-pg
   path: ./pitower/kubernetes/apps/database/cloudnative-pg/cluster
   prune: true
   sourceRef:

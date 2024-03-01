@@ -8,6 +8,10 @@ metadata:
 spec:
   instances: 1
   imageName: ghcr.io/cloudnative-pg/postgresql:14.9-17
+  # bootstrap:
+  #   initdb:
+  #     database: firefly
+  #     owner: firefly
   storage:
     size: 1Gi
     storageClass: ceph-block
