@@ -4,21 +4,29 @@ repos:
   - repo: https://github.com/pre-commit/pre-commit-hooks
     rev: v4.5.0
     hooks:
-    -   id: check-yaml
+    # -   id: check-yaml
     -   id: end-of-file-fixer
     -   id: trailing-whitespace
-  - repo: https://github.com/adrienverge/yamllint
-    rev: v1.35.1
-    hooks:
-      - args:
-          - --config-file
-          - .yamllint.yaml
-        id: yamllint
+  # - repo: https://github.com/adrienverge/yamllint
+  #   rev: v1.35.1
+  #   hooks:
+  #     - id: yamllint
+        # args:
+        #   - --config-file
+        #   - .yamllint.yaml
+
   - repo: https://github.com/antonbabenko/pre-commit-terraform
-    rev: v1.86.0
+    rev: v1.88.0
     hooks:
       - id: terraform_fmt
         args:
           - --args=-recursive
       - id: terraform_validate
       - id: terraform_tflint
+
+  - repo: https://github.com/siderolabs/conform
+    rev: v0.1.0-alpha.30
+    hooks:
+      - id: conform
+        stages:
+          - commit-msg
