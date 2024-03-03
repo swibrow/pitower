@@ -104,4 +104,3 @@ spec:
           main:
             main:
               - path: /var/www/html/firefly-iii/storage/upload
-

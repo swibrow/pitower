@@ -10,4 +10,3 @@ resources:
 commonLabels:
   app.kubernetes.io/name: firefly
   app.kubernetes.io/instance: firefly
-
