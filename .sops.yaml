@@ -14,3 +14,8 @@ creation_rules:
     key_groups:
       - age:
           - "age1tkaddc3hgjx0eagjl6mqpxvzzkerd44e34rua6gzucv6emr5f5fs4mlu67"
+
+  - path_regex: .*\.sops\.ya?ml$
+    key_groups:
+      - age:
+          - "age1tkaddc3hgjx0eagjl6mqpxvzzkerd44e34rua6gzucv6emr5f5fs4mlu67"
