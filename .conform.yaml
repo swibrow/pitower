@@ -1,0 +1,28 @@
+policies:
+  - type: commit
+    spec:
+      header:
+        length: 89
+        imperative: true
+        case: lower
+        invalidLastCharacters: .
+        # jira:
+        #   keys:
+        #   - PROJ
+        #   - JIRA
+      body:
+        required: false
+      dco: false
+      gpg:
+        required: false
+        identity:
+          gitHubOrganization: some-organization
+      spellcheck:
+        locale: US
+      maximumOfOneCommit: true
+      conventional:
+        types:
+          - "type"
+        scopes:
+          - "scope"
+        descriptionLength: 72
