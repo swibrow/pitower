@@ -4,4 +4,4 @@ kind: Kustomization
 resources:
   - ./namespace.yaml
   - ./echo-server/ks.yaml
-  # - ./cryptgeon/ks.yaml
+  - ./cryptgeon/ks.yaml

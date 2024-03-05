@@ -25,7 +25,7 @@ spec:
   uninstall:
     keepHistory: false
   values:
-    redisEndpoint: redis://default:lLPCF2l6sT@cryptgeon-redis-master.tools.svc.cluster.local  # TODO: use secret
+    redisEndpoint: redis://default:OoEJQOlAF3@cryptgeon-redis-master.tools.svc.cluster.local  # TODO: use secret
     redis:
       enabled: true
       auth.enabled: false
