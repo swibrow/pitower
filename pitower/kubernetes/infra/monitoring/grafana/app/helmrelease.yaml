@@ -87,6 +87,13 @@ spec:
             jsonData:
               prometheusType: Prometheus
             isDefault: true
+          - name: GitHub Repo Insights
+            type: grafana-github-datasource
+            jsonData:
+              owner: ""
+              repository: ""
+            secureJsonData:
+              accessToken: "${SECRET_GRAFANA_GITHUB_TOKEN}"
     dashboards:
       default:
         cloudflared:
