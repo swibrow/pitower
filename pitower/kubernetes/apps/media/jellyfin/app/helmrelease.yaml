@@ -75,7 +75,7 @@ spec:
     ingress:
       main:
         enabled: true
-        className: internal
+        className: external
         hosts:
           - host: &host jellyfin.pitower.link
             paths:
