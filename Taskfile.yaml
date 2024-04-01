@@ -2,6 +2,15 @@
 version: "3"
 
 includes:
+  gh:
+    taskfile: .taskfiles/gh
+    dir: .taskfiles/gh
+  k8s:
+    taskfile: .taskfiles/k8s
+    dir: .taskfiles/k8s
+  tf:
+    taskfile: .taskfiles/terraform
+    dir: .taskfiles/terraform
   # pitower:
   #   taskfile: pitower
   #   dir: pitower
@@ -12,8 +21,15 @@ includes:
     taskfile: pitower/kubernetes
     dir: pitower/kubernetes
 
+
+env:
+  TERRAFORM_WORKING_DIR: "terraform"
+  ENVIRONMENT: "dev"
+
 dotenv:
   - .envrc
+  - .config/.env.{{.ENVIRONMENT}}
+
 # vars:
 #   SECRET_PATHS_REGEX:
 #     sh: yq e '.creation_rules[].path_regex' .sops.yaml |  awk '{print "./"$0}' | tr '\n' '|'
@@ -44,3 +60,9 @@ tasks:
     silent: true
     cmds:
       - echo "{{.SECRET_FILES}}" | xargs  -I {} sops -e -i {}
+
+  gh:all:
+    desc: Run all GitHub tasks
+    cmds:
+      - task gh:repo
+      - task gh:update-environment-variables ENVIROMENT=dev

@@ -1,0 +1,24 @@
+---
+# yaml-language-server: $schema=https://taskfile.dev/schema.json
+version: "3"
+
+env:
+  TERRAFORM_WORKING_DIR: "terraform"
+
+tasks:
+  all:
+    desc: Run Terraform init and plan for all modules
+    silent: true
+    dir: "{{.USER_WORKING_DIR}}"
+    vars:
+      TERRAFORM_DIRS:
+        sh: find {{.TERRAFORM_WORKING_DIR}} -d -depth 1
+    cmds:
+      - for: {var: TERRAFORM_DIRS}
+        cmd: |
+          echo "Working on {{.ENVIRONMENT}} in {{ .ITEM }}"
+          cd {{ .ITEM }}
+          terraform init
+          terraform plan
+          terraform apply
+          cd ..
