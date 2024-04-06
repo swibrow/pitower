@@ -15,6 +15,7 @@ resources:
   - ./k8s-gateway.yaml
   - ./kubernetes-dashboard.yaml
   - ./metrics-server.yaml
+  - ./openebs.yaml
   - ./pihole.yaml
   - ./plex.yaml
   - ./postgres-operator.yaml
