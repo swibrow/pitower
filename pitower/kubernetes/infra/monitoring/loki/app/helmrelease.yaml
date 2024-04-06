@@ -162,8 +162,8 @@ spec:
       persistence:
         storageClass: openebs-hostpath
       extraVolumeMounts:
-        - name: rules
-          mountPath: /rules/fake
+        # - name: rules
+        #   mountPath: /rules/fake
         - name: scratch
           mountPath: /tmp/scratch
       extraVolumes:

@@ -26,9 +26,9 @@ env:
   TERRAFORM_WORKING_DIR: "terraform"
   ENVIRONMENT: "dev"
 
-dotenv:
-  - .envrc
-  - .config/.env.{{.ENVIRONMENT}}
+# dotenv:
+#   - .envrc
+#   - .config/.env.{{.ENVIRONMENT}}
 
 # vars:
 #   SECRET_PATHS_REGEX:
