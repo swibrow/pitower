@@ -137,7 +137,7 @@ spec:
         enabled: true
         ingressClassName: internal
         hosts:
-          - host: &host loki.pitower.link
+          - host: &host loki-gateway.pitower.link
             paths:
               - path: /
                 pathType: Prefix

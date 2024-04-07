@@ -19,11 +19,6 @@ sources:
     version: "2"
     address: 0.0.0.0:6010
 
-  vyos_source:
-    type: syslog
-    address: 0.0.0.0:6020
-    mode: tcp
-
 #
 # Transforms
 #
@@ -46,7 +41,7 @@ sinks:
   journald:
     inputs: ["journald_source"]
     type: loki
-    endpoint: http://loki.monitoring.svc.cluster.local
+    endpoint: http://loki-gateway.monitoring.svc.cluster.local
     encoding: { codec: json }
     out_of_order_action: accept
     remove_label_fields: true
@@ -57,7 +52,7 @@ sinks:
   kubernetes:
     inputs: ["kubernetes_remap"]
     type: loki
-    endpoint: http://loki.monitoring.svc.cluster.local
+    endpoint: http://loki-gateway.monitoring.svc.cluster.local
     encoding: { codec: json }
     out_of_order_action: accept
     remove_label_fields: true
