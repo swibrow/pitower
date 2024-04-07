@@ -64,7 +64,7 @@ tasks:
     dir: ./clusterconfig
     cmds:
       - for: ['1', '2', '3', '4', '5', '6']
-        cmd: talosctl apply-config --insecure --nodes 192.168.0.21{{ .ITEM }} --file ./worker-0{{ .ITEM }}.yaml
+        cmd: talosctl apply-config --nodes 192.168.0.21{{.ITEM}} --file ./worker-0{{.ITEM}}.yaml
 
   apply:worker:
     dir: ./clusterconfig
