@@ -1,0 +1,72 @@
+---
+# yaml-language-server: $schema=https://raw.githubusercontent.com/fluxcd-community/flux2-schemas/main/helmrelease-helm-v2beta1.json
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: home-assistant
+  namespace: home-automation
+spec:
+  interval: 30m
+  chart:
+    spec:
+      chart: app-template
+      version: 2.1.1
+      interval: 30m
+      sourceRef:
+        kind: HelmRepository
+        name: bjw-s
+        namespace: flux-system
+  values:
+    controllers:
+      main:
+        type: statefulset
+        annotations:
+          reloader.stakater.com/auto: "true"
+        statefulset:
+          volumeClaimTemplates:
+            - name: config
+              accessMode: ReadWriteMany
+              size: 1Gi
+              storageClass: ceph-filesystem
+              globalMounts:
+                - path: /config
+        containers:
+          main:
+            image:
+              repository: ghcr.io/home-assistant/home-assistant
+              tag: 2023.11.2@sha256:400f20c77f52ac31334c1e73a2f19b2d6e5820757d1d476f01960b1efed31949
+            probes:
+              liveness:
+                enabled: false
+              readiness:
+                enabled: false
+              startup:
+                enabled: false
+            resources:
+              requests:
+                cpu: 47m
+                memory: 512M
+    service:
+      main:
+        type: LoadBalancer
+        annotations:
+          io.cilium/lb-ipam-ips: 192.168.0.227
+        ports:
+          http:
+            port: 8123
+    ingress:
+      main:
+        enabled: true
+        className: "external"
+        annotations:
+          external-dns.alpha.kubernetes.io/target: external.pitower.link
+        hosts:
+          - host: &host "ha.pitower.link"
+            paths:
+              - path: /
+                service:
+                  name: main
+                  port: http
+        tls:
+          - hosts:
+              - *host
