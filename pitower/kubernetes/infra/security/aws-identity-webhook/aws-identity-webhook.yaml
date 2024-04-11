@@ -1,0 +1,43 @@
+---
+apiVersion: source.toolkit.fluxcd.io/v1beta2
+kind: HelmRepository
+metadata:
+  namespace: security
+  name: jkroepke
+spec:
+  url: https://jkroepke.github.io/helm-charts/
+  interval: 24h
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta2
+kind: HelmRelease
+metadata:
+  namespace: security
+  name: aws-identity-webhook
+spec:
+  chart:
+    spec:
+      sourceRef:
+        kind: HelmRepository
+        name: jkroepke
+      chart: amazon-eks-pod-identity-webhook
+      version: 2.1.3
+  interval: 1h
+  maxHistory: 1
+  values:
+    config:
+      annotationPrefix: eks.amazonaws.com
+      defaultAwsRegion: ""
+      stsRegionalEndpoint: false
+    pki:
+      certManager:
+        enabled: true
+    securityContext:
+      runAsNonRoot: true
+      runAsUser: 65534
+      runAsGroup: 65534
+      allowPrivilegeEscalation: false
+      readOnlyRootFilesystem: true
+      capabilities:
+        drop: ["ALL"]
+      seccompProfile:
+        type: RuntimeDefault

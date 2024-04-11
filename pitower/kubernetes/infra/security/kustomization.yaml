@@ -5,3 +5,4 @@ resources:
   - ./namespace.yaml
   - ./1password-connect/ks.yaml
   - ./external-secrets/ks.yaml
+  - ./aws-identity-webhook/
