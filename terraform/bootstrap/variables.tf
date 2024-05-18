@@ -12,5 +12,6 @@ variable "subjects" {
   default = [
     "swibrow/pitower:pull_request",
     "swibrow/pitower:ref:refs/heads/main",
+    # "repo:swibrow/actions-playground:*",
   ]
 }

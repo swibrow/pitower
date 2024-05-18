@@ -10,6 +10,7 @@ tasks:
           https://192.168.0.200:6443
           --with-secrets ./secrets.yaml
           --with-examples=true
+          --config-patch-control-plane @patches/controlplane.patch
           --config-patch @patches/general.patch
           --output ./clusterconfig
           --force
@@ -32,12 +33,12 @@ tasks:
   init:
     dir: ./clusterconfig
     cmds:
-      - talosctl apply-config --insecure --nodes 192.168.0.201 --file ./master-01.yaml
+      # - talosctl apply-config --insecure --nodes 192.168.0.201 --file ./master-01.yaml
       - talosctl apply-config --insecure --nodes 192.168.0.202 --file ./master-02.yaml
       - talosctl apply-config --insecure --nodes 192.168.0.203 --file ./master-03.yaml
       - talosctl config endpoint 192.168.0.201 192.168.0.202 192.168.0.203
-      - talosctl config merge ~/.talos/config
-      - talosctl bootstrap --nodes 192.168.0.201
+      # - talosctl config merge ~/.talos/config
+      # - talosctl bootstrap --nodes 192.168.0.201
 
   bootstrap:
     dir: ./clusterconfig
@@ -56,9 +57,9 @@ tasks:
     env:
       TALOSCONFIG: talosconfig
     cmds:
-      - talosctl apply-config --endpoints 192.168.0.201 --nodes 192.168.0.201 --file ./master-01.yaml
-      - talosctl apply-config --endpoints 192.168.0.202 --nodes 192.168.0.202 --file ./master-02.yaml
-      - talosctl apply-config --endpoints 192.168.0.203 --nodes 192.168.0.203 --file ./master-03.yaml
+      # - talosctl apply-config --endpoints 192.168.0.201 --nodes 192.168.0.201 --file ./master-01.yaml
+      # - talosctl apply-config --endpoints 192.168.0.202 --nodes 192.168.0.202 --file ./master-02.yaml
+      - talosctl apply-config --endpoints 192.168.0.203 --nodes 192.168.0.203 --file ./master-03.yaml -m reboot
 
   apply:workers:
     dir: ./clusterconfig
