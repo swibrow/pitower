@@ -52,10 +52,9 @@ spec:
               AUTHELIA_THEME: dark
               X_AUTHELIA_CONFIG: /config/configuration.yaml
               X_AUTHELIA_CONFIG_FILTERS: expand-env
-              LLDAP_BIND_PASSWORD: testtest
-            # envFrom:
-            #   - secretRef:
-            #       name: authelia-db-secret
+            envFrom:
+              - secretRef:
+                  name: authelia-secrets
             probes:
               liveness: &probes
                 enabled: true
