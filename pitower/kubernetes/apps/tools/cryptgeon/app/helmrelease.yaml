@@ -9,7 +9,7 @@ spec:
   chart:
     spec:
       chart: cryptgeon
-      version: 0.1.2
+      version: 0.1.0
       sourceRef:
         kind: HelmRepository
         name: swibrow
