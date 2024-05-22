@@ -41,15 +41,14 @@ spec:
               ENABLE_SIGNUP: 0
               FRACTION_PREF_DEFAULT: 0
               GUNICORN_MEDIA: 0
-              MAX_OWNED_SPACES_PREF_DEFAULT: 0
+              MAX_OWNED_SPACES_PREF_DEFAULT: 5
               SHOPPING_MIN_AUTOSYNC_INTERVAL: 5
               TANDOOR_PORT: &tandoorPort 8000
-              TANDOOR_DATABASE_URL: sqlite:////data/db.sqlite3
             envFrom:
               - secretRef:
                   name: tandoor-secret
-              # - secretRef:
-              #     name: tandoor-db-secret
+              - secretRef:
+                  name: tandoor-db-secret
             probes:
               liveness: &probes
                 enabled: true
