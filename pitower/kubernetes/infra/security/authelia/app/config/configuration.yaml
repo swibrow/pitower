@@ -18,7 +18,7 @@ authentication_backend:
     additional_groups_dn: ou=groups
     groups_filter: (member={dn})
     group_search_mode: filter
-    user: "uid=bind_user,ou=people,dc=pitower,dc=link"
+    user: "$${LLDAP_BIND_USERNAME}"
     password: "$${LLDAP_BIND_PASSWORD}"
     attributes:
       username: uid
@@ -37,7 +37,7 @@ session:
     - name: pitower_link_session
       domain: pitower.link
       authelia_url: https://auth.pitower.link
-      default_redirection_url: https://echo.pitower.link
+      default_redirection_url: https://pitower.link
   # redis:
   #   host: dragonfly.database.svc.cluster.local
   #   database_index: 1
