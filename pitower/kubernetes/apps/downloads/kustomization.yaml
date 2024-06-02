@@ -7,3 +7,4 @@ resources:
   - ./sabnzbd/ks.yaml
   - ./sonarr/ks.yaml
   - ./autobrr/ks.yaml
+  - ./prowlarr/ks.yaml
