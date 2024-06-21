@@ -22,7 +22,7 @@ spec:
         strategy: RollingUpdate
 
         annotations:
-          # secret.reloader.stakater.com/reload: lldap-secret, lldap-db-secret
+          secret.reloader.stakater.com/reload: lldap-secret
 
         pod:
           # securityContext:
@@ -53,9 +53,9 @@ spec:
               LLDAP_HTTP_URL: https://lldap.pitower.link
               LLDAP_LDAP_PORT: &ldapPort 389
               LLDAP_LDAP_BASE_DN: dc=pitower,dc=link
-            # envFrom:
-              # - secretRef:
-              #     name: lldap-secret
+            envFrom:
+              - secretRef:
+                  name: lldap-secret
               # - secretRef:
               #     name: lldap-db-secret
             probes:
@@ -97,7 +97,7 @@ spec:
 
     ingress:
       app:
-        className: "internal"
+        className: internal
         hosts:
           - host: &hostName lldap.pitower.link
             paths:
