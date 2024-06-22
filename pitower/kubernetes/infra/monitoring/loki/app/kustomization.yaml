@@ -6,3 +6,4 @@ namespace: monitoring
 resources:
   - ./objectbucketclaim.yaml
   - ./helmrelease.yaml
+  - ./prometheus-rule.yaml
