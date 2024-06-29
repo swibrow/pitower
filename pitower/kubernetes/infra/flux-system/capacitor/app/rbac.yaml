@@ -28,6 +28,8 @@ rules:
   resources:
     - gitrepositories
     - ocirepositories
+    - helmrepositories
+    - helmcharts
     - buckets
     - kustomizations
     - helmreleases
