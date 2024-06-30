@@ -99,7 +99,8 @@ spec:
               - name: "/dev/disk/by-id/nvme-AirDisk_512GB_SSD_NFQ0044010702P70GX"
 
       cleanupPolicy:
-        confirmation: "yes-really-destroy-data"
+        # set to "yes-really-destroy-data" to enable the cleanup job to delete all data when deleting the cluster
+        confirmation: ""
 
     ingress:
       ingressClassName: "internal"
