@@ -22,7 +22,12 @@ policies:
       maximumOfOneCommit: true
       conventional:
         types:
-          - "type"
+          - chore
+          - docs
+          - refactor
+          - style
+          - test
+          - release
         scopes:
-          - "scope"
+          - .*
         descriptionLength: 72
