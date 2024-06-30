@@ -34,7 +34,7 @@ spec:
       enabled: true
       className: internal
       hosts:
-        - host: &host "gitops.${SECRET_DOMAIN}"
+        - host: &host "gitops.pitower.link"
           paths:
             - path: /
               pathType: Prefix

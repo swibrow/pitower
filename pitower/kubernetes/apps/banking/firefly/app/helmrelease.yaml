@@ -86,7 +86,7 @@ spec:
         primary: true
         className: internal
         hosts:
-          - host: &host money.${SECRET_DOMAIN}
+          - host: &host money.pitower.link
             paths:
               - path: /
                 pathType: Prefix

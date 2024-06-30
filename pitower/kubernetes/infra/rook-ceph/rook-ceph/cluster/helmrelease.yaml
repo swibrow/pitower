@@ -21,6 +21,15 @@ spec:
     monitoring:
       enabled: true
       createPrometheusRules: true
+    ingress:
+      ingressClassName: internal
+      dashboard:
+        host:
+          name: &host rook.pitower.link
+          path: "/"
+        tls:
+          - hosts:
+              - *host
 
     configOverride: |
       [global]
@@ -102,17 +111,6 @@ spec:
         # set to "yes-really-destroy-data" to enable the cleanup job to delete all data when deleting the cluster
         confirmation: ""
 
-    ingress:
-      ingressClassName: "internal"
-      dashboard:
-        annotations:
-          nginx.ingress.kubernetes.io/backend-protocol: "HTTPS"
-        host:
-          name: &host rook.${SECRET_DOMAIN}
-          path: "/"
-        tls:
-          - hosts:
-              - *host
 
     cephBlockPools:
       - name: ceph-blockpool

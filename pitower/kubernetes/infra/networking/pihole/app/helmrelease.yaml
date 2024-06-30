@@ -45,12 +45,12 @@ spec:
       enabled: false
     dnsmasq:
       customSettings:
-        - rebind-domain-ok=/${SECRET_DOMAIN}/
+        - rebind-domain-ok=/pitower.link/
         - rev-server=192.168.0.0/24,192.168.0.253
         - server=/lan/192.168.0.253
         - server=//192.168.0.253
       # upstreamServers:
-      #   - server=/${SECRET_DOMAIN}/192.168.0.220
+      #   - server=/pitower.link/192.168.0.220
     dualStack:
       enabled: false
     extraEnvVars:
@@ -73,12 +73,12 @@ spec:
         nginx.ingress.kubernetes.io/app-root: /admin
       enabled: true
       hosts:
-        - pihole.${SECRET_DOMAIN}
+        - pihole.pitower.link
       ingressClassName: internal
       path: /
       tls:
         - hosts:
-            - pihole.${SECRET_DOMAIN}
+            - pihole.pitower.link
           secretName: pihole-tls
     maxSurge: 1
     maxUnavailable: 0

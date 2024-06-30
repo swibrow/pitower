@@ -9,7 +9,7 @@ metadata:
 spec:
   ingressClassName: external
   rules:
-    - host: &host "flux-webhook.${SECRET_DOMAIN}"
+    - host: &host "flux-webhook.pitower.link"
       http:
         paths:
           - path: /hook/
