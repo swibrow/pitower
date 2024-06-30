@@ -21,6 +21,7 @@ spec:
     monitoring:
       enabled: true
       createPrometheusRules: true
+
     ingress:
       ingressClassName: internal
       dashboard:
@@ -90,6 +91,7 @@ spec:
       dashboard:
         enabled: true
         urlPrefix: /
+        ssl: false
 
       storage:
         useAllNodes: false
