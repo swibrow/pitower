@@ -9,14 +9,14 @@ spec:
   chart:
     spec:
       chart: rook-ceph-cluster
-      version: v1.12.8
+      version: v1.12.11
       sourceRef:
         kind: HelmRepository
         name: rook-ceph
         namespace: flux-system
   values:
     toolbox:
-      enabled: false
+      enabled: true
 
     monitoring:
       enabled: true

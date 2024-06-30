@@ -145,8 +145,8 @@ spec:
         storageClass: openebs-hostpath
         size: 20Gi
 
-    chunksCache:
-      enabled: false
+    # chunksCache:
+    #   enabled: false
 
     monitoring:
       dashboards:
