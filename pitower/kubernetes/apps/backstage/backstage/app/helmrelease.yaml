@@ -17,7 +17,7 @@ spec:
     backstage:
       image:
         repository: cloudsnacks/backstage
-        tag: 0540057b1035839051b109bb973c33ddbcd17f32
+        tag: e8ecd4d142900aea82aae21975ff9e04813954c5
       command:
         - node
         - packages/backend

@@ -120,3 +120,19 @@ data:
         name: 'Cloud Snacks'
         email: git@cloudsnacks.ch
       defaultCommitMessage: "feat: its all downhill from here"
+
+    kubernetes:
+      serviceLocatorMethod:
+        type: 'multiTenant'
+      clusterLocatorMethods:
+        - type: 'config'
+          clusters:
+            - url: https://192.168.0.200:6443
+              name: pitower
+              authProvider: 'serviceAccount'
+              skipTLSVerify: false
+              skipMetricsLookup: true
+              serviceAccountToken: ${K8S_SERVICE_ACCOUNT_TOKEN}
+              dashboardUrl: http://127.0.0.1:64713 # url copied from running the command: minikube service kubernetes-dashboard -n kubernetes-dashboard
+              dashboardApp: standard
+              caData: ${K8S_CA_DATA}

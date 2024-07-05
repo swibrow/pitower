@@ -8,3 +8,4 @@ resources:
   - ./externalsecret.yaml
   - ./helmrepository.yaml
   - ./helmrelease.yaml
+  - ./rbac.yaml
