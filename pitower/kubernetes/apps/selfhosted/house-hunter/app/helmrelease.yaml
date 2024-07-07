@@ -27,6 +27,7 @@ spec:
             image:
               repository: ghcr.io/swibrow/house-hunter
               tag: latest
+              pullPolicy: Always
             envFrom:
               - secretRef:
                   name: house-hunter-db-secret
