@@ -1,6 +1,6 @@
 # pitower
 
-Power efficient HomeLab.
+Power (in)efficient HomeLab.
 
 **WORK IN PROGRESS**
 
