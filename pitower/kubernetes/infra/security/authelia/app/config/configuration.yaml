@@ -85,7 +85,7 @@ access_control:
 identity_providers:
   oidc:
     clients:
-      - client_id: 'jellyfin'
+      - client_id: $${OIDC_JELLYFIN_CLIENT_ID}"
         client_name: 'Jellyfin'
         client_secret: "$${OIDC_JELLYFIN_CLIENT_SECRET}"
         public: false
