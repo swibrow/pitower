@@ -4,11 +4,13 @@ Power efficient HomeLab.
 
 **WORK IN PROGRESS**
 
-What started as your run of the mill Kubernetes cluster using raspberry pis has transformed into solid little cluster to run all my unessary services.
+What started as your run of the mill Raspberry Pi Kubernetes cluster has transformed into a 68 core / 72GB Memory cluster to run all my unnecessary services.
 
-Shout out to [r/Home Operations](https://discord.com/invite/home-operations) for many ideas, and [Uptime Lab](https://uplab.pro/) for the Raspberry Pi rack 3d prints.
+![Resources](images/cluster_resources.png)
 
-![Kitchen Hutch Rack](images/IMG_3856.jpg)
+![Kitchen Hutch Rack](images/rack.jpg)
+
+Shout out to [r/Home Operations](https://discord.com/invite/home-operations) community, and [Uptime Lab](https://uplab.pro/).
 
 ## Hardware
 
@@ -22,8 +24,9 @@ Shout out to [r/Home Operations](https://discord.com/invite/home-operations) for
 
 ### Storage
 
-- Synology DSxxx+ 8TB x 1
-- 512GB NVMe x 3 (Rook Ceph)
+- Synology 4 Bay 8TB
+- 128GB SSD Host drives
+- 512GB NVMe x 3 (ceph Storeage)
 
 ### Network
 

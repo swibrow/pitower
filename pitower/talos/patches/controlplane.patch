@@ -5,6 +5,5 @@ cluster:
         # oidc-client-id:
         # oidc-username-claim: email
         # oidc-groups-claim: groups
-        # service-account-issuer: https://raw.githubusercontent.com/swibrow/pitower/main/pitower
-        # service-account-jwks-uri: https://192.168.0.202:6443/openid/v1/jwks
-        # Change to vip 200 once working as expected
+        service-account-issuer: https://raw.githubusercontent.com/swibrow/pitower/main/pitower
+        service-account-jwks-uri: https://192.168.0.200:6443/openid/v1/jwks
