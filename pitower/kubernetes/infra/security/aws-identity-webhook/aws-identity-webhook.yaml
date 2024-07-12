@@ -24,6 +24,7 @@ spec:
   interval: 1h
   maxHistory: 1
   values:
+    replicaCount: 2
     config:
       annotationPrefix: eks.amazonaws.com
       defaultAwsRegion: ""

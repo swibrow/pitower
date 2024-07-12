@@ -47,6 +47,10 @@ spec:
       extraEnvFrom:
         - secretRef:
             name: loki-bucket
+      persistence:
+        enabled: true
+        storageClass: openebs-hostpath
+        size: 20Gi
 
     chunksCache:
       enabled: false
