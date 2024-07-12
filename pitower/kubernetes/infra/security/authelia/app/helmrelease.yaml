@@ -22,7 +22,7 @@ spec:
         strategy: RollingUpdate
 
         annotations:
-          # secret.reloader.stakater.com/reload: authelia-secret,authelia-db-secret
+          secret.reloader.stakater.com/reload: authelia-secre
 
         pod:
           # securityContext:
@@ -55,6 +55,8 @@ spec:
             envFrom:
               - secretRef:
                   name: authelia-secrets
+              - secretRef:
+                  name: authelia-secret
             probes:
               liveness: &probes
                 enabled: true

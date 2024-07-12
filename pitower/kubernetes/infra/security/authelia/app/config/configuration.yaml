@@ -66,27 +66,40 @@ notifier:
 
 access_control:
   default_policy: one_factor
-#   networks:
-#     - name: internal
-#       networks:
-#         - "10.0.0.0/8"
-#         - "172.16.0.0/12"
-#         - "192.168.0.0/16"
   rules:
     - domain:
         - actual.pitower.link
       subject:
         - ["group:auth_users"]
       policy: one_factor
-    # - domain:
-    #     - echo-server.bjw-s.dev
-    #   subject:
-    #     - ["user:bernd"]
-    #   policy: one_factor
+    - domain:
+        - jellyfin.pitower.link
+      subject:
+        - ["group:auth_users"]
+      policy: one_factor
 
 # identity_validation:
 #   reset_password:
 #     jwt_secret: "{{ .authelia_jwt_secret }}"
+
+identity_providers:
+  oidc:
+    clients:
+      - client_id: 'jellyfin'
+        client_name: 'Jellyfin'
+        client_secret: "$${OIDC_JELLYFIN_CLIENT_SECRET}"
+        public: false
+        authorization_policy: 'one_factor'
+        require_pkce: true
+        pkce_challenge_method: 'S256'
+        redirect_uris:
+          - 'https://jellyfin.pitower.link/sso/OID/redirect/authelia'
+        scopes:
+          - 'openid'
+          - 'profile'
+          - 'groups'
+        userinfo_signed_response_alg: 'none'
+        token_endpoint_auth_method: 'client_secret_post'
 
 # identity_providers:
 #   oidc:
