@@ -28,7 +28,7 @@ authentication_backend:
       group_name: cn
 
 session:
-  secret: "a_very_important_secret"
+  secret: "{{ .authelia_session_secret }}"
   same_site: lax
   inactivity: 5m
   expiration: 1h
@@ -43,14 +43,14 @@ session:
   #   database_index: 1
 
 storage:
-  encryption_key: 'a_very_important_secret'
+  encryption_key: "{{ .authelia_storage_encryption_key }}"
   local:
     path: '/config/db.sqlite3'
 
 notifier:
   disable_startup_check: true
   smtp:
-    address: smtp-relay.default.svc.cluster.local:25
+    address: aspmx.l.google.com.:25
     sender: Authelia <authelia@pitower.link>
     disable_require_tls: true
 
@@ -78,14 +78,16 @@ access_control:
         - ["group:auth_users"]
       policy: one_factor
 
-# identity_validation:
-#   reset_password:
-#     jwt_secret: "{{ .authelia_jwt_secret }}"
+identity_validation:
+  reset_password:
+    jwt_secret: "{{ .authelia_jwt_secret }}"
+    jwt_lifespan: '5 minutes'
+    jwt_algorithm: 'HS256'
 
 identity_providers:
   oidc:
     clients:
-      - client_id: $${OIDC_JELLYFIN_CLIENT_ID}"
+      - client_id: "$${OIDC_JELLYFIN_CLIENT_ID}"
         client_name: 'Jellyfin'
         client_secret: "$${OIDC_JELLYFIN_CLIENT_SECRET}"
         public: false
