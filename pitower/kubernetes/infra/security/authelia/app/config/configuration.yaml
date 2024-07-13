@@ -91,7 +91,7 @@ identity_providers:
     hmac_secret: "{{ .authelia_oidc_hmac_secret }}"
     jwks:
       - key: |-
-          {{- .authelia_oidc_issuer_key | nindent 10 }}
+          {{- .encoded_authelia_oidc_issuer_key | nindent 10 }}
         algorithm: 'RS256'
     clients:
       - client_id: "{{ .authelia_jelly_id }}"
