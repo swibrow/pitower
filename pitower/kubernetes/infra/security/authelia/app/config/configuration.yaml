@@ -4,6 +4,29 @@
 log:
   level: 'debug'
 
+administration:
+  ## Explicitly enable Dynamic Configuration, either via CLI only or CLI and UI via enable_ui.
+  enable: true
+
+  ## Explicitly enable the Admin UI on this Authelia instance. If 'enable' is configured another process could also be
+  ## separately configured with this enabled.
+  enable_ui: true
+
+#   ## Configure the listener address for the UI. If it's exactly the same host and port component as above with a
+#   ## different path, listen on the same listener as above. If it's exactly the same, error.
+  address: 'tcp://:80'
+
+#   ## URL enabling the button/link in the portal for the UI.
+  url: 'https://auth.pitower.link/admin'
+
+#   ## List of users who are allowed to view the admin UI. In addition to the groups.
+#   users:
+#     - 'john'
+
+#   ## List of groups who are allowed to view the admin UI. In addition to the users.
+  groups:
+    - 'super_admin'
+
 authentication_backend:
   password_reset:
     disable: true
