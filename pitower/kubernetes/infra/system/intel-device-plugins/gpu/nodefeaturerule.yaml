@@ -6,11 +6,11 @@ metadata:
 spec:
   rules:
     - labels:
-        intel.feature.node.kubernetes.io/quicksync: "true"
         intel.feature.node.kubernetes.io/gpu: "true"
       matchFeatures:
         - feature: pci.device
           matchExpressions:
+            class: { op: In, value: ["0300"]}
             device: { op: In, value: ["46D1"]}
             vendor: { op: In, value: ["8086"]}
       name: intel.gpu
