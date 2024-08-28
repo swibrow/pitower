@@ -26,6 +26,7 @@ tasks:
       - talosctl machineconfig patch ./worker.yaml --patch @../patches/nodes/worker-01.patch --output worker-01.yaml
       - talosctl machineconfig patch ./worker.yaml --patch @../patches/nodes/worker-02.patch --output worker-02.yaml
       - talosctl machineconfig patch ./worker.yaml --patch @../patches/nodes/worker-03.patch --output worker-03.yaml
+      - talosctl machineconfig patch ./worker.yaml --patch @../patches/nodes/worker-04.patch --output worker-04.yaml
       - talosctl machineconfig patch ./worker.yaml --patch @../patches/nodes/worker-05.patch --output worker-05.yaml
       - talosctl machineconfig patch ./worker.yaml --patch @../patches/nodes/worker-06.patch --output worker-06.yaml
 
@@ -63,7 +64,7 @@ tasks:
   apply:workers:
     dir: ./clusterconfig
     cmds:
-      - for: ['1', '2', '3', '5', '6']
+      - for: ['1', '2', '3', '4', '5', '6']
         cmd: talosctl apply-config --nodes 192.168.0.21{{.ITEM}} --file ./worker-0{{.ITEM}}.yaml
 
   apply:worker:
@@ -126,7 +127,7 @@ tasks:
 
   workers:upgrade:
     cmds:
-      - for: ['1', '2', '3', '5', '6']
+      - for: ['1', '2', '3', '4', '5', '6']
         cmd: >
           talosctl upgrade
           --image $IMAGE
