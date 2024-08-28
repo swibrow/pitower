@@ -69,8 +69,8 @@ tasks:
 
   apply:worker:
     dir: ./clusterconfig
-    env:
-      TALOSCONFIG: talosconfig
+    # env:
+      # TALOSCONFIG: talosconfig
     cmds:
       - talosctl apply-config --nodes 192.168.0.21{{ .CLI_ARGS }} --file ./worker-0{{ .CLI_ARGS }}.yaml
 

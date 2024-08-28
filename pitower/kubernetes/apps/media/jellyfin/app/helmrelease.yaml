@@ -35,9 +35,9 @@ spec:
         pod:
           enableServiceLinks: false
           nodeSelector:
-            # intel.feature.node.kubernetes.io/gpu: "true"
+            intel.feature.node.kubernetes.io/gpu: "true"
             kubernetes.io/arch: amd64
-            kubernetes.io/hostname: "worker-01"
+            kubernetes.io/hostname: "worker-04"
           securityContext:
             runAsUser: 568
             runAsGroup: 568
@@ -48,7 +48,7 @@ spec:
           main:
             image:
               repository: jellyfin/jellyfin
-              tag: 2024061705@sha256:bef74eafe5ee6a972edbf78d279b90650ba2a954381c808a349467f64c963dd1
+              tag: 10.8.13-1
             env:
               DOTNET_SYSTEM_IO_DISABLEFILELOCKING: "true"
               JELLYFIN_FFmpeg__probesize: 50000000
@@ -56,7 +56,7 @@ spec:
             resources:
               requests:
                 cpu: 100m
-                # gpu.intel.com/i915: 1
+                gpu.intel.com/i915: 1
                 memory: 1024M
               limits:
                 # gpu.intel.com/i915: 1
