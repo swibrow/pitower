@@ -39,11 +39,10 @@ spec:
             kubernetes.io/arch: amd64
             kubernetes.io/hostname: "worker-04"
           securityContext:
-            runAsUser: 568
-            runAsGroup: 568
-            fsGroup: 568
-            fsGroupChangePolicy: "OnRootMismatch"
-
+            privileged: true
+          volumeMounts:
+            - name: quicksync
+              mountPath: /dev/dri
         containers:
           main:
             image:
@@ -61,7 +60,10 @@ spec:
               limits:
                 gpu.intel.com/i915: 1
                 memory: 8192M
-
+        volumes:
+          - name: quicksync
+            hostPath:
+              path: /dev/dri
     service:
       main:
         type: LoadBalancer
