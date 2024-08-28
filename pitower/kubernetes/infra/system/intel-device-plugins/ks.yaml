@@ -18,7 +18,7 @@ spec:
   prune: true
   wait: true
   dependsOn:
-    - name: cert-manager
+    - name: cluster-infra-cert-manager
     - name: node-feature-discovery-rules
 ---
 # yaml-language-server: $schema=https://raw.githubusercontent.com/fluxcd-community/flux2-schemas/main/kustomization-kustomize-v1.json
