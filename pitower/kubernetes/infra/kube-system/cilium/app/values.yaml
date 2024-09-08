@@ -41,53 +41,48 @@ containerRuntime:
 endpointRoutes:
   enabled: true
 
+envoy:
+  enabled: false
+
 hubble:
   enabled: true
   metrics:
     enabled:
-      - dns:query
+      - dns:query;ignoreAAAA
       - drop
       - tcp
       - flow
       - port-distribution
       - icmp
       - http
-    serviceMonitor:
-      enabled: true
-    dashboards:
-      enabled: true
-      annotations:
-        grafana_folder: Cilium
   relay:
     enabled: true
     rollOutPods: true
-    prometheus:
-      serviceMonitor:
-        enabled: true
+  serviceMonitor:
+    enabled: false
   ui:
     enabled: true
-    rollOutPods: true
     ingress:
-      enabled: true
-      className: internal
-      hosts:
-        - "hubble.pitower.link"
-      tls:
-        - hosts:
-            - "hubble.pitower.link"
+      enabled: false
+    rollOutPods: true
+
 ipam:
   mode: kubernetes
 ipv4NativeRoutingCIDR: 10.244.0.0/16
 k8sServiceHost: 127.0.0.1
-k8sServicePort: 6443
+k8sServicePort: 7445
 kubeProxyReplacement: true
 kubeProxyReplacementHealthzBindAddr: 0.0.0.0:10256
+
 l2announcements:
   enabled: true
+
 loadBalancer:
   algorithm: maglev
   mode: dsr
+
 localRedirectPolicy: true
+
 operator:
   replicas: 1
   rollOutPods: true
@@ -99,14 +94,17 @@ operator:
     enabled: true
     annotations:
       grafana_folder: Cilium
+
 prometheus:
   enabled: true
   serviceMonitor:
     enabled: true
     trustCRDsExist: true
+
 dashboards:
   enabled: true
   annotations:
     grafana_folder: Cilium
 rollOutCiliumPods: true
-tunnel: disabled
+
+routingMode: native

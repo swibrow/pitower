@@ -20,10 +20,8 @@ spec:
       authelia:
         replicas: 1
         strategy: RollingUpdate
-
         annotations:
-          secret.reloader.stakater.com/reload: authelia-secre
-
+          secret.reloader.stakater.com/reload: authelia-secret
         pod:
           # securityContext:
           #   runAsUser: 2000
@@ -43,7 +41,7 @@ spec:
           app:
             image:
               repository: ghcr.io/authelia/authelia
-              tag: 4.38.8
+              tag: 4.38.9
             env:
               AUTHELIA_SERVER_ADDRESS: tcp://0.0.0.0:80
               AUTHELIA_SERVER_DISABLE_HEALTHCHECK: "true"
@@ -120,7 +118,15 @@ spec:
         tls:
           - hosts:
               - *hostName
-
+    serviceMonitor:
+      app:
+        serviceName: authelia
+        endpoints:
+          - port: metrics
+            scheme: http
+            path: /metrics
+            interval: 1m
+            scrapeTimeout: 10s
     persistence:
       config:
         type: secret
