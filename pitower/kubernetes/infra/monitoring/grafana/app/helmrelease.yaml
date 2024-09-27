@@ -99,6 +99,14 @@ spec:
             editable: true
             options:
               path: /var/lib/grafana/dashboards/nginx
+          - name: github
+            orgId: 1
+            folder: GitHub
+            type: file
+            disableDeletion: false
+            editable: true
+            options:
+              path: /var/lib/grafana/dashboards/github
     datasources:
       datasources.yaml:
         apiVersion: 1
@@ -114,13 +122,6 @@ spec:
             jsonData:
               prometheusType: Prometheus
             isDefault: true
-          - name: GitHub Repo Insights
-            type: grafana-github-datasource
-            jsonData:
-              owner: ""
-              repository: ""
-            secureJsonData:
-              accessToken: "${SECRET_GRAFANA_GITHUB_TOKEN}"
           - name: Loki
             type: loki
             uid: loki
@@ -128,6 +129,13 @@ spec:
             url: http://loki-gateway.monitoring.svc.cluster.local
             jsonData:
               maxLines: 250
+          - name: GitHub
+            type: grafana-github-datasource
+            jsonData:
+              owner: ""
+              repository: ""
+            secureJsonData:
+              accessToken: "${SECRET_GRAFANA_GITHUB_TOKEN}"
     dashboards:
       default:
         authelia:
@@ -140,19 +148,15 @@ spec:
             - { name: DS_PROMETHEUS, value: Prometheus }
         external-dns:
           gnetId: 15038 # https://grafana.com/grafana/dashboards/15038?tab=revisions
-          revision: 1
+          revision: 3
           datasource: Prometheus
         cert-manager:
           url: https://raw.githubusercontent.com/monitoring-mixins/website/master/assets/cert-manager/dashboards/cert-manager.json
           datasource: Prometheus
         node-exporter-full:
           gnetId: 1860 # https://grafana.com/grafana/dashboards/1860?tab=revisions
-          revision: 31
+          revision: 37
           datasource: Prometheus
-        # pihole:
-        #   gnetId: 10176 # https://grafana.com/grafana/dashboards/10176?tab=revisions
-        #   revision: 2
-        #   datasource: Prometheus
         cloudnativepg:
           url: https://raw.githubusercontent.com/cloudnative-pg/grafana-dashboards/main/charts/cluster/grafana-dashboard.json
           datasource: Prometheus
@@ -192,6 +196,11 @@ spec:
         nginx-request-handling-performance:
           url: https://raw.githubusercontent.com/kubernetes/ingress-nginx/master/deploy/grafana/dashboards/request-handling-performance.json
           datasource: Prometheus
+      github:
+        github-repo-insights:
+          gnetId: 14000 # https://grafana.com/grafana/dashboards/12239?tab=revisions
+          revision: 1
+          datasource: GitHub
     sidecar:
       dashboards:
         enabled: true
