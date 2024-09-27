@@ -1,5 +1,7 @@
 ---
 machine:
+  install:
+    image: factory.talos.dev/installer/2f29e288424c1e9170e61bd283de477faf6ab18afc11857c7beba11a816c884d:v1.7.6
   network:
     hostname: master-02
     interfaces:

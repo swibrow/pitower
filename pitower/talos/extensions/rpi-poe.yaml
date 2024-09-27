@@ -1,0 +1,13 @@
+# a862538d0862e8ad5b17fadc2b56599677101537b3f75926085d8cbff4a411b9
+# curl -X POST --data-binary @rpi-poe.yaml https://factory.talos.dev/schematics
+overlay:
+  image: siderolabs/sbc-raspberrypi
+  name: rpi_generic
+  options:
+    configTxtAppend: |-
+      # PoE Hat Fan Speeds
+      dtoverlay=rpi-poe
+      dtparam=poe_fan_temp0=50000
+      dtparam=poe_fan_temp1=60000
+      dtparam=poe_fan_temp2=70000
+      dtparam=poe_fan_temp3=80000
