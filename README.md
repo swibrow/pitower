@@ -2,9 +2,7 @@
 
 Power (in)efficient HomeLab.
 
-**WORK IN PROGRESS**
-
-What started as your run of the mill Raspberry Pi Kubernetes cluster has transformed into a 68 core / 72GB Memory cluster to run all my unnecessary services.
+Your run of the mil pitower (stack of raspberry pi's).
 
 ![Resources](images/cluster_resources.png)
 
@@ -25,8 +23,8 @@ Shout out to [r/Home Operations](https://discord.com/invite/home-operations) com
 ### Storage
 
 - Synology 4 Bay 8TB
-- 128GB SSD Host drives
-- 512GB NVMe x 3 (ceph Storeage)
+- 128GB SSD boot drives
+- 512GB NVMe x 3 (ceph storage)
 
 ### Network
 

@@ -116,7 +116,7 @@ tasks:
 
   controlplanes:upgrade:
     env:
-      IMAGE: factory.talos.dev/installer/ee21ef4a5ef808a9b7484cc0dda0f25075021691c8c09a276591eedb638ea1f9:v1.7.4
+      IMAGE: factory.talos.dev/installer/a862538d0862e8ad5b17fadc2b56599677101537b3f75926085d8cbff4a411b9:v1.7.6
 
     cmds:
       - for: ['1', '2', '3']
@@ -124,6 +124,8 @@ tasks:
           talosctl upgrade
           --image $IMAGE
           --nodes 192.168.0.20{{ .ITEM }}
+          --preserve
+          --wait
 
   workers:upgrade:
     cmds:
@@ -132,3 +134,14 @@ tasks:
           talosctl upgrade
           --image $IMAGE
           --nodes 192.168.0.21{{ .ITEM }}
+
+  image-id:
+    dir: ./extensions
+    silent: true
+    cmds:
+      - for:
+          - amd.yaml
+          - intel.yaml
+          - rpi-poe.yaml
+        cmd: >
+          echo "$(basename {{ .ITEM }} .yaml): $(curl -sX POST --data-binary @{{ .ITEM }} https://factory.talos.dev/schematics | jq -r .id)"
