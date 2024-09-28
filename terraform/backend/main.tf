@@ -1,8 +1,6 @@
 terraform {
   required_version = ">= 1.7.0"
 
-  backend "local" {} // TODO: Create global backend
-
   required_providers {
     aws = {
       source  = "hashicorp/aws"
