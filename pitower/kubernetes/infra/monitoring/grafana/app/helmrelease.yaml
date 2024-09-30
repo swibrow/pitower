@@ -26,6 +26,8 @@ spec:
     keepHistory: false
   # https://github.com/grafana/helm-charts/blob/main/charts/grafana/values.yaml
   values:
+    annotations:
+      reloader.stakater.com/auto: "true"
     deploymentStrategy:
       type: Recreate
     admin:
@@ -107,12 +109,21 @@ spec:
             editable: true
             options:
               path: /var/lib/grafana/dashboards/github
+          - name: ceph
+            orgId: 1
+            folder: Ceph
+            type: file
+            disableDeletion: false
+            editable: true
+            options:
+              path: /var/lib/grafana/dashboards/ceph
     datasources:
       datasources.yaml:
         apiVersion: 1
         deleteDatasources:
           - { name: Prometheus, orgId: 1 }
           - { name: Loki, orgId: 1 }
+          - { name: Alertmanager, orgId: 1 }
         datasources:
           - name: Prometheus
             type: prometheus
@@ -127,8 +138,12 @@ spec:
             uid: loki
             access: proxy
             url: http://loki-gateway.monitoring.svc.cluster.local
+          - name: Alertmanager
+            type: alertmanager
+            access: proxy
+            url: http://alertmanager.monitoring.svc.cluster.local:9093
             jsonData:
-              maxLines: 250
+              implementation: prometheus
           - name: GitHub
             type: grafana-github-datasource
             jsonData:
@@ -150,6 +165,9 @@ spec:
           gnetId: 15038 # https://grafana.com/grafana/dashboards/15038?tab=revisions
           revision: 3
           datasource: Prometheus
+        external-secrets:
+          url: https://raw.githubusercontent.com/external-secrets/external-secrets/main/docs/snippets/dashboard.json
+          datasource: Prometheus
         cert-manager:
           url: https://raw.githubusercontent.com/monitoring-mixins/website/master/assets/cert-manager/dashboards/cert-manager.json
           datasource: Prometheus
@@ -170,6 +188,22 @@ spec:
         # flux-logs:
         #   url: https://raw.githubusercontent.com/fluxcd/flux2-monitoring-example/main/monitoring/configs/dashboards/logs.json
         #   datasource: Loki
+      ceph:
+        ceph-cluster:
+          # renovate: dashboardName="Ceph Cluster"
+          gnetId: 2842
+          revision: 18
+          datasource: Prometheus
+        ceph-osd:
+          # renovate: dashboardName="Ceph - OSD (Single)"
+          gnetId: 5336
+          revision: 9
+          datasource: Prometheus
+        ceph-pools:
+          # renovate: dashboardName="Ceph - Pools"
+          gnetId: 5342
+          revision: 9
+          datasource: Prometheus
       kubernetes:
         kubernetes-api-server:
           url: https://raw.githubusercontent.com/dotdc/grafana-dashboards-kubernetes/master/dashboards/k8s-system-api-server.json
@@ -220,8 +254,6 @@ spec:
     ingress:
       enabled: true
       ingressClassName: internal
-      annotations:
-        hajimari.io/icon: simple-icons:grafana
       hosts:
         - &host "grafana.pitower.link"
       tls:
@@ -229,7 +261,17 @@ spec:
             - *host
     persistence:
       enabled: false
-      storageClassName: ceph-block
-      size: 1Gi
+
     testFramework:
       enabled: false
+
+    plugins:
+      - grafana-worldmap-panel
+      - grafana-clock-panel
+      - grafana-github-datasource
+
+    servuceMonitor:
+      enabled: true
+
+    imageRenderer:
+      enabled: true
