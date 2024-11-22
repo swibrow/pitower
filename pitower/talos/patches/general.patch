@@ -10,6 +10,11 @@ machine:
           - rbind
           - rshared
           - rw
+  features:
+    hostDNS:
+        enabled: true
+        forwardKubeDNSToHost: false
+
 cluster:
   network:
     cni:
