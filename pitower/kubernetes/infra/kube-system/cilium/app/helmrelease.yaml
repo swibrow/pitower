@@ -38,11 +38,11 @@ spec:
       ui:
         ingress:
           enabled: true
-          className: "internal-nginx"
+          className: internal
           annotations:
-            external-dns.alpha.kubernetes.io/target: ingress-int.bjw-s.dev
+            external-dns.alpha.kubernetes.io/target: external.pitower.link
           hosts:
-            - hubble-main.bjw-s.dev
+            - hubble.pitower.link
 
     operator:
       prometheus:
