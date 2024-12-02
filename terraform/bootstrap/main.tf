@@ -1,5 +1,5 @@
 terraform {
-  required_version = ">= 1.5"
+  required_version = ">= 1.7.0"
 
   backend "s3" {
     bucket         = "swibrow-pitower-tf-state"
@@ -81,47 +81,9 @@ resource "aws_iam_policy" "additional" {
         ]
         Effect   = "Allow"
         Resource = "*"
-      }
+      },
     ]
   })
 
   tags = local.tags
-
-}
-
-# Testing Spacelift
-module "iam_assumable_role_spacelift" {
-  source  = "terraform-aws-modules/iam/aws//modules/iam-assumable-role"
-  version = "5.41.0"
-
-  create_role = true
-
-  role_name        = "spacelift-worker"
-  role_description = "Role for Spacelift to assume"
-
-  create_custom_role_trust_policy = true
-  custom_role_trust_policy        = data.aws_iam_policy_document.spacelift_assume_role.json
-  custom_role_policy_arns = [
-    "arn:aws:iam::aws:policy/PowerUserAccess",
-    "arn:aws:iam::aws:policy/IAMFullAccess"
-  ]
-
-  tags = local.tags
-}
-
-data "aws_iam_policy_document" "spacelift_assume_role" {
-  statement {
-    sid     = "AllowAssumeRole"
-    actions = ["sts:AssumeRole"]
-    effect  = "Allow"
-    principals {
-      type        = "AWS"
-      identifiers = ["324880187172"]
-    }
-    condition {
-      test     = "StringLike"
-      variable = "sts:ExternalId"
-      values   = ["wibrow@*"]
-    }
-  }
 }
