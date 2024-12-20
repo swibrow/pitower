@@ -104,6 +104,18 @@ spec:
                 service:
                   identifier: app
                   port: code-server
+      code:
+        enabled: true
+        className: external
+        annotations:
+          external-dns.alpha.kubernetes.io/target: external.pitower.link
+        hosts:
+          - host: code.pitower.link
+            paths:
+              - path: /
+                service:
+                  identifier: app
+                  port: code-server
 
     persistence:
       config:
@@ -114,12 +126,16 @@ spec:
               - path: /config
             code-server:
               - path: /config
-      tmp:
+      tmpfs:
         type: emptyDir
-      deploy-key:
-        type: secret
-        name: home-assistant-secret
-        defaultMode: 256
-        globalMounts:
-          - path: /root/.ssh/id_rsa
-            subPath: GH_DEPLOY_KEY
+        advancedMounts:
+          home-assistant:
+            app:
+              - path: /tmp
+                subPath: hass-tmp
+            code-server:
+              - path: /tmp
+                subPath: code-server-tmp
+              - path: /nonexistent
+                subPath: nonexistent
+
