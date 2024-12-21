@@ -104,19 +104,6 @@ spec:
                 service:
                   identifier: app
                   port: code-server
-      code:
-        enabled: true
-        className: external
-        annotations:
-          external-dns.alpha.kubernetes.io/target: external.pitower.link
-        hosts:
-          - host: code.pitower.link
-            paths:
-              - path: /
-                service:
-                  identifier: app
-                  port: code-server
-
     persistence:
       config:
         existingClaim: home-assistant-config
