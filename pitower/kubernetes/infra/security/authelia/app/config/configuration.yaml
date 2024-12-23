@@ -9,7 +9,7 @@ authentication_backend:
     disable: true
   refresh_interval: 1m
   ldap:
-    address: ldap://lldap.security.svc.cluster.local:389
+    address: ldap://lldap.security.svc.cluster.local:5389
     implementation: custom
     timeout: 5s
     start_tls: false
