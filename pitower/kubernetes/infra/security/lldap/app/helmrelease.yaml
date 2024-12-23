@@ -3,34 +3,33 @@
 apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
-  name: lldap
+  name: &app lldap
 spec:
   interval: 30m
   chart:
     spec:
       chart: app-template
-      version: 3.1.0
+      version: 3.5.1
       interval: 30m
       sourceRef:
         kind: HelmRepository
         name: bjw-s
         namespace: flux-system
   values:
+    defaultPodOptions:
+      topologySpreadConstraints:
+        - maxSkew: 1
+          topologyKey: kubernetes.io/hostname
+          whenUnsatisfiable: DoNotSchedule
+          labelSelector:
+            matchLabels:
+              app.kubernetes.io/name: *app
     controllers:
       lldap:
         replicas: 2
         strategy: RollingUpdate
         annotations:
           reloader.stakater.com/auto: "true"
-        pod:
-          topologySpreadConstraints:
-            - maxSkew: 1
-              topologyKey: kubernetes.io/hostname
-              whenUnsatisfiable: DoNotSchedule
-              labelSelector:
-                matchLabels:
-                  app.kubernetes.io/name: lldap
-
         containers:
           app:
             image:
@@ -46,48 +45,24 @@ spec:
                   name: lldap-secret
               - secretRef:
                   name: lldap-db
-            probes:
-              liveness: &probes
-                enabled: true
-                custom: true
-                spec:
-                  httpGet:
-                    path: /health
-                    port: *port
-                  initialDelaySeconds: 0
-                  periodSeconds: 10
-                  timeoutSeconds: 1
-                  failureThreshold: 3
-              readiness: *probes
-              startup:
-                enabled: true
-                custom: true
-                spec:
-                  httpGet:
-                    path: /health
-                    port: *port
-                  failureThreshold: 30
-                  periodSeconds: 10
             resources:
               requests:
                 cpu: 10m
               limits:
                 memory: 128Mi
-
     service:
       app:
-        controller: lldap
+        controller: *app
         ports:
           http:
             port: *port
           ldap:
             port: *ldapPort
-
     ingress:
       app:
         className: internal
         hosts:
-          - host: &hostName lldap.pitower.link
+          - host: &host "{{ .Release.Name }}.pitower.link"
             paths:
               - path: /
                 service:
@@ -95,9 +70,10 @@ spec:
                   port: http
         tls:
           - hosts:
-              - *hostName
+              - *host
 
     persistence:
       data:
-        enabled: true
-        existingClaim: lldap-data
+        type: emptyDir
+        globalMounts:
+          - path: /data
