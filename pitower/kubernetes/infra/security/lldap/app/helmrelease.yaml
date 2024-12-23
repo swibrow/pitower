@@ -36,10 +36,13 @@ spec:
               repository: ghcr.io/lldap/lldap
               tag: v0.6.1@sha256:4931eeeb841b1bbf5774161b5fd9dab88f41ffeb4b08ca656f0b7595cd7cb52a
             env:
-              LLDAP_HTTP_PORT: &port 80
+              TZ: ${CLUSTER_NAME}
+              LLDAP_HTTP_PORT: &port 8080
               LLDAP_HTTP_URL: https://lldap.pitower.link
-              LLDAP_LDAP_PORT: &ldapPort 389
+              LLDAP_LDAP_PORT: &ldapPort 5389
               LLDAP_LDAP_BASE_DN: dc=pitower,dc=link
+              LLDAP_KEY_FILE: ""
+              # LLDAP_FORCE_LDAP_USER_PASS_RESET: "true" # Uncomment to force password reset
             envFrom:
               - secretRef:
                   name: lldap-secret
