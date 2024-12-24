@@ -50,7 +50,7 @@ tasks:
       - brew install fluxcd/tap/flux
       - flux install
       - task: ../
-      - kubectl apply -f ../kubernetes/infra/flux-system/bootstrap.yaml
+      - kubectl apply -f ../kubernetes/apps/flux-system/bootstrap.yaml
 
   apply:controlplanes:
     dir: ./clusterconfig
