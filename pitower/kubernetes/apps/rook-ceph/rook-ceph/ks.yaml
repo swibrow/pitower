@@ -36,9 +36,8 @@ spec:
     kind: GitRepository
     name: pitower
   wait: true
-  dependsOn:
-    - name: rook-ceph
-    # - name: snapshot-controller
+  # dependsOn:
+    # - name: rook-ceph
 ---
 # yaml-language-server: $schema=https://raw.githubusercontent.com/fluxcd-community/flux2-schemas/main/kustomization-kustomize-v1.json
 apiVersion: kustomize.toolkit.fluxcd.io/v1
@@ -58,5 +57,5 @@ spec:
     kind: GitRepository
     name: pitower
   wait: false
-  dependsOn:
-    - name: rook-ceph-cluster
+  # dependsOn:
+  #   - name: rook-ceph-cluster
