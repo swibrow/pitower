@@ -15,6 +15,6 @@ spec:
   retryInterval: 1m
   timeout: 3m
   wait: true
-  dependsOn:
-    - name: cloudnative-pg
-    - name: external-secrets
+  # dependsOn:
+  #   - name: cloudnative-pg
+  #   - name: external-secrets
