@@ -19,9 +19,3 @@ spec:
   wait: false
   dependsOn:
     - name: external-secrets-stores
-    # - name: crunchy-postgres-operator-cluster
-    # - name: crunchy-postgres-operator-secretstore
-  # postBuild:
-  #   substitute:
-  #     APP: *appname
-  #     VOLSYNC_CLAIM: tandoor-data

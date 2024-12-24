@@ -50,7 +50,7 @@ tasks:
       - brew install fluxcd/tap/flux
       - flux install
       - task: ../
-      - kubectl apply -f ../kubernetes/infra/flux-system/bootstrap.yaml
+      - kubectl apply -f ../kubernetes/apps/flux-system/bootstrap.yaml
 
   apply:controlplanes:
     dir: ./clusterconfig
@@ -61,10 +61,11 @@ tasks:
       - talosctl apply-config --endpoints 192.168.0.202 --nodes 192.168.0.202 --file ./master-02.yaml
       - talosctl apply-config --endpoints 192.168.0.203 --nodes 192.168.0.203 --file ./master-03.yaml
 
+
   apply:workers:
     dir: ./clusterconfig
     cmds:
-      - for: ['1', '2', '3', '4', '5', '6']
+      - for: ['1', '2', '3', '4']
         cmd: talosctl apply-config --nodes 192.168.0.21{{.ITEM}} --file ./worker-0{{.ITEM}}.yaml
 
   apply:worker:
@@ -72,7 +73,18 @@ tasks:
     # env:
       # TALOSCONFIG: talosconfig
     cmds:
-      - talosctl apply-config --nodes 192.168.0.21{{ .CLI_ARGS }} --file ./worker-0{{ .CLI_ARGS }}.yaml
+      - talosctl apply-config --nodes 192.168.0.21{{ .CLI_ARGS }} --file ./worker-0{{ .CLI_ARGS }}.yaml --wait
+
+  reboot:controlplanes:
+    dir: ./clusterconfig
+    cmds:
+      - for: ['1', '2', '3']
+        cmd: talosctl reboot --endpoints 192.168.0.20{{ .ITEM }} --nodes 192.168.0.20{{ .ITEM }} --wait
+
+  reboot:workers:
+    cmds:
+      - for: ['1', '2', '3', '4']
+        cmd: talosctl reboot --nodes 192.168.0.21{{ .ITEM }} --wait
 
   addons:
     cmds:

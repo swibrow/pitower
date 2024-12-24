@@ -1,0 +1,20 @@
+---
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata:
+  name: wireguard
+  namespace: flux-system
+spec:
+  path: ./pitower/kubernetes/apps/vpn/wireguard/app
+  prune: true
+  sourceRef:
+    kind: GitRepository
+    name: pitower
+  healthChecks:
+    - apiVersion: apps/v1
+      kind: Deployment
+      name: wireguard
+      namespace: vpn
+  interval: 30m
+  retryInterval: 1m
+  timeout: 3m

@@ -29,3 +29,4 @@ resources:
   - ./postfinance.yaml
   - ./kubernetes-sigs-metrics-server.yaml
   - ./kubernetes-sigs-nfd.yaml
+  - ./tailscale.yaml

@@ -6,7 +6,7 @@ metadata:
   name: weave-gitops
   namespace: flux-system
 spec:
-  path: ./pitower/kubernetes/infra/flux-system/weave-gitops/app
+  path: ./pitower/kubernetes/apps/flux-system/weave-gitops/app
   prune: true
   sourceRef:
     kind: GitRepository

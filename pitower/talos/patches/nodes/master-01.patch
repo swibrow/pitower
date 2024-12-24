@@ -1,7 +1,5 @@
 ---
 machine:
-  install:
-    image: factory.talos.dev/installer/a862538d0862e8ad5b17fadc2b56599677101537b3f75926085d8cbff4a411b9:v1.7.6
   network:
     hostname: master-01
     interfaces:
@@ -10,5 +8,6 @@ machine:
       vip:
         ip: 192.168.0.200
   install:
+    image: factory.talos.dev/installer/a862538d0862e8ad5b17fadc2b56599677101537b3f75926085d8cbff4a411b9:v1.8.0
     extraKernelArgs:
       - initcall_blacklist=sensors_nct6683_init
