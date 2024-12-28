@@ -64,4 +64,4 @@ spec:
         advancedMounts:
           firefly:
             app:
-              - path: /var/www/html/storage
+              - path: /var/www/html/storage/upload
