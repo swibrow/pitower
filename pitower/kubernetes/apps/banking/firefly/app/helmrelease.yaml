@@ -48,6 +48,8 @@ spec:
     ingress:
       app:
         className: internal
+        annotations:
+          nginx.ingress.kubernetes.io/proxy-buffer-size: "16k"
         hosts:
           - host: &host money.pitower.link
             paths:
