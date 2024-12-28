@@ -22,7 +22,4 @@ spec:
   postBuild:
     substitute:
       APP: *appname
-      HOSTNAME: actual.pitower.link
-      APP_UID: "568"
-      APP_GID: "568"
       # VOLSYNC_CLAIM: actual-data
