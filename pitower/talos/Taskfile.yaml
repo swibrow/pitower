@@ -128,7 +128,7 @@ tasks:
 
   controlplanes:upgrade:
     env:
-      IMAGE: factory.talos.dev/installer/a862538d0862e8ad5b17fadc2b56599677101537b3f75926085d8cbff4a411b9:v1.7.6
+      IMAGE: factory.talos.dev/installer/a862538d0862e8ad5b17fadc2b56599677101537b3f75926085d8cbff4a411b9:v1.9.1
 
     cmds:
       - for: ['1', '2', '3']
@@ -139,14 +139,44 @@ tasks:
           --preserve
           --wait
 
-  workers:upgrade:
+  workers:upgrade:amd:
+    env:
+      IMAGE: factory.talos.dev/installer/f19ad7b4a5d29151f3a59ef2d9c581cf89e77142e52f0abb5022e8f0b95ad0b9:v1.9.1
+
     cmds:
-      - for: ['1', '2', '3', '4', '5', '6']
+      - for: ['1', '2', '3']
         cmd: >
           talosctl upgrade
           --image $IMAGE
           --nodes 192.168.0.21{{ .ITEM }}
+          --preserve
+          --wait
+  workers:upgrade:intel:
+    env:
+      IMAGE: factory.talos.dev/installer/97bf8e92fc6bba0f03928b859c08295d7615737b29db06a97be51dc63004e403:v1.9.1
 
+    cmds:
+      - for: ['4']
+        cmd: >
+          talosctl upgrade
+          --image $IMAGE
+          --nodes 192.168.0.21{{ .ITEM }}
+          --preserve
+          --wait
+
+
+  workers:upgrade:raspberrypi:
+    env:
+      IMAGE: factory.talos.dev/installer/a862538d0862e8ad5b17fadc2b56599677101537b3f75926085d8cbff4a411b9:v1.9.1
+
+    cmds:
+      - for: ['']
+        cmd: >
+          talosctl upgrade
+          --image $IMAGE
+          --nodes 192.168.0.21{{ .ITEM }}
+          --preserve
+          --wait
   image-id:
     dir: ./extensions
     silent: true

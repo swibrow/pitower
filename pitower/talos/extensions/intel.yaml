@@ -1,4 +1,4 @@
-# curl -X POST --data-binary @rpi-poe.yaml https://factory.talos.dev/schematics
+# curl -X POST --data-binary @intel.yaml https://factory.talos.dev/schematics
 customization:
   systemExtensions:
     officialExtensions:
