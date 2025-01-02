@@ -5,7 +5,7 @@ metadata:
   name: wireguard
   namespace: flux-system
 spec:
-  path: ./pitower/kubernetes/apps/vpn/wireguard/app
+  path: ./kubernetes/pitower/apps/vpn/wireguard/app
   prune: true
   sourceRef:
     kind: GitRepository

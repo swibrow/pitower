@@ -1,6 +1,6 @@
 ---
 creation_rules:
-  - path_regex: pitower/kubernetes/.*\.sops\.ya?ml
+  - path_regex: kubernetes/pitower/.*\.sops\.ya?ml
     encrypted_regex: "^(data|stringData)$"
     key_groups:
       - age:

@@ -1,0 +1,58 @@
+---
+## yaml-language-server: $schema=https://kubernetes-schemas.devbu.io/kustomize.toolkit.fluxcd.io/kustomization_v1.json
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata:
+  name: cloudnative-pg
+  namespace: flux-system
+spec:
+  path: ./kubernetes/pitower/apps/database/cloudnative-pg/app
+  prune: true
+  sourceRef:
+    kind: GitRepository
+    name: pitower
+  wait: true
+  interval: 30m
+  retryInterval: 1m
+  timeout: 5m
+---
+## yaml-language-server: $schema=https://kubernetes-schemas.devbu.io/kustomize.toolkit.fluxcd.io/kustomization_v1.json
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata:
+  name: cloudnative-pg-cluster
+  namespace: flux-system
+spec:
+  dependsOn:
+    - name: cloudnative-pg
+  path: ./kubernetes/pitower/apps/database/cloudnative-pg/cluster
+  prune: true
+  sourceRef:
+    kind: GitRepository
+    name: pitower
+  wait: true
+  interval: 30m
+  retryInterval: 1m
+  timeout: 5m
+---
+# yaml-language-server: $schema=https://kubernetes-schemas.pages.dev/kustomize.toolkit.fluxcd.io/kustomization_v1.json
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata:
+  name: &appname cloudnative-pg-secretstore
+  namespace: flux-system
+spec:
+  targetNamespace: database
+  commonMetadata:
+    labels:
+      app.kubernetes.io/name: *appname
+  interval: 10m
+  path: ./kubernetes/pitower/apps/database/cloudnative-pg/clustersecretstore
+  prune: true
+  sourceRef:
+    kind: GitRepository
+    name: pitower
+  wait: true
+  dependsOn:
+    - name: cloudnative-pg
+    - name: external-secrets

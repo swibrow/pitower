@@ -1,0 +1,28 @@
+---
+# yaml-language-server: $schema=https://raw.githubusercontent.com/fluxcd-community/flux2-schemas/main/kustomization-kustomize-v1.json
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata:
+  name: &appname backstage
+  namespace: flux-system
+spec:
+  targetNamespace: backstage
+  commonMetadata:
+    labels:
+      app.kubernetes.io/name: *appname
+  interval: 10m
+  path: "./kubernetes/pitower/apps/backstage/backstage/app"
+  prune: true
+  sourceRef:
+    kind: GitRepository
+    name: pitower
+  wait: false
+  dependsOn:
+    - name: cloudnative-pg-cluster
+  # postBuild:
+  #   substitute:
+  #     APP: *appname
+  #     HOSTNAME: actual.${SECRET_DOMAIN}
+  #     APP_UID: "568"
+  #     APP_GID: "568"
+      # VOLSYNC_CLAIM: actual-data

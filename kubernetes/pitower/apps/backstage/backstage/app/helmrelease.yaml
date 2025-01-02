@@ -1,0 +1,41 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: backstage
+spec:
+  interval: 30m
+  chart:
+    spec:
+      chart: backstage
+      version: 1.9.5
+      interval: 30m
+      sourceRef:
+        kind: HelmRepository
+        name: backstage
+  values:
+    backstage:
+      image:
+        repository: cloudsnacks/backstage
+        tag: e8ecd4d142900aea82aae21975ff9e04813954c5
+      command:
+        - node
+        - packages/backend
+      extraAppConfig:
+        - filename: app-config.yaml
+          configMapRef: backstage-app-config
+      extraEnvVars:
+        - name: NODE_ENV
+          value: development
+      extraEnvVarsSecrets:
+        - backstage-secrets
+        - backstage-db-secrets
+    ingress:
+      enabled: true
+      className: external
+      annotations:
+        external-dns.alpha.kubernetes.io/target: external.${SECRET_DOMAIN}
+      host: backstage.${SECRET_DOMAIN}
+      path: "/"
+      tls:
+        enabled: true
