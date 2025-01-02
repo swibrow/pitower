@@ -48,3 +48,6 @@ secrets.yaml
 
 # Helm charts dependencies
 **/charts/*
+
+# Ingore all .exclude folders
+**/.exclude/*
