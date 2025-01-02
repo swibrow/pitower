@@ -6,12 +6,12 @@ metadata:
   name: &appname kubelet-csr-approver
   namespace: flux-system
 spec:
-  targetNamespace: system-controllers
+  targetNamespace: system
   commonMetadata:
     labels:
       app.kubernetes.io/name: *appname
   interval: 10m
-  path: ./kubernetes/pitower/apps/system-controllers/kubelet-csr-approver/app
+  path: ./kubernetes/pitower/apps/system/kubelet-csr-approver/app
   prune: true
   sourceRef:
     kind: GitRepository

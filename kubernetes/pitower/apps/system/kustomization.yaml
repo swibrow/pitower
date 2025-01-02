@@ -8,3 +8,6 @@ resources:
   - ./volsync/ks.yaml
   - ./node-feature-discovery/ks.yaml
   - ./intel-device-plugins/ks.yaml
+  - ./kubelet-csr-approver/ks.yaml
+  - ./snapshot-controller/ks.yaml
+
