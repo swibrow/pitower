@@ -9,7 +9,7 @@ spec:
   chart:
     spec:
       chart: fluent-bit
-      version: 0.46.11
+      version: 0.48.3
       interval: 30m
       sourceRef:
         kind: HelmRepository
@@ -72,7 +72,7 @@ spec:
         [OUTPUT]
           Name loki
           Match kubernetes.*
-          host loki-gateway.monitoring.svc.cluster.local
-          port 80
+          host loki-headless.monitoring.svc.cluster.local
+          port 3100
           line_format json
           labels job=fluent-bit, cluster=${CLUSTER_NAME}, source=$source, namespace=$kubernetes_namespace_name
