@@ -31,7 +31,7 @@ spec:
           app:
             image:
               repository: ghcr.io/onedr0p/readarr-develop
-              tag: "0.3.27"
+              tag: "0.3.32"
             env:
               READARR__INSTANCE_NAME: Readarr
               READARR__PORT: &port 8787
