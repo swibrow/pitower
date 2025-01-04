@@ -17,7 +17,7 @@ spec:
 
   values:
     controllers:
-      main:
+      app:
         annotations:
           reloader.stakater.com/auto: "true"
 
