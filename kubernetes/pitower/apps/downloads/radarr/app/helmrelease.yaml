@@ -19,7 +19,7 @@ spec:
 
   values:
     controllers:
-      app:
+      radarr:
         annotations:
           reloader.stakater.com/auto: "true"
         pod:
@@ -43,6 +43,7 @@ spec:
 
     service:
       app:
+        controller: radarr
         ports:
           http:
             port: *port

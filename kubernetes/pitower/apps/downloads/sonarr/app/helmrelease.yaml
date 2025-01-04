@@ -18,7 +18,7 @@ spec:
         namespace: flux-system
   values:
     controllers:
-      app:
+      sonarr:
         annotations:
           reloader.stakater.com/auto: "true"
         pod:
@@ -53,6 +53,7 @@ spec:
 
     service:
       app:
+        controller: sonarr
         ports:
           http:
             port: *port

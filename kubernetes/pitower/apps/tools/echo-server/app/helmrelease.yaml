@@ -48,8 +48,8 @@ spec:
                   periodSeconds: 5
 
     service:
-      controller: echo-server
       app:
+        controller: echo-server
         ports:
           http:
             port: *port
