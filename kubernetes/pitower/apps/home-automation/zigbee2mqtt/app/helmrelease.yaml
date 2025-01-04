@@ -30,7 +30,7 @@ spec:
       namespace: rook-ceph
   values:
     controllers:
-      app:
+      zigbee2mqtt:
         annotations:
           reloader.stakater.com/auto: "true"
         containers:
@@ -77,6 +77,7 @@ spec:
             sonoff.feature.node.kubernetes.io/zigbee: "true"
     service:
       app:
+        controller: zigbee2mqtt
         ports:
           http:
             port: 8080
