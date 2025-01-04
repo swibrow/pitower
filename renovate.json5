@@ -1,0 +1,23 @@
+{
+  $schema: "https://docs.renovatebot.com/renovate-schema.json",
+  extends: [
+    "github>bjw-s/renovate-config",
+    "github>bjw-s/renovate-config:automerge-github-actions",
+    "github>swibrow/pitower//.renovate/allowedVersions.json5",
+    "github>swibrow/pitower//.renovate/autoMerge.json5",
+    "github>swibrow/pitower//.renovate/clusters.json5",
+    "github>swibrow/pitower//.renovate/grafanaDashboards.json5",
+    "github>swibrow/pitower//.renovate/groups.json5",
+    "github>swibrow/pitower//.renovate/versioning.json5",
+  ],
+  ignorePaths: [".archive/**"],
+  flux: {
+    fileMatch: ["^kubernetes/.+\\.ya?ml$"],
+  },
+  "helm-values": {
+    fileMatch: ["^kubernetes/.+\\.ya?ml$"],
+  },
+  kubernetes: {
+    fileMatch: ["^kubernetes/.+\\.ya?ml$"],
+  },
+}
