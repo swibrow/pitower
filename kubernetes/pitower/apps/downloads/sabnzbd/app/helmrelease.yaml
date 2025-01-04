@@ -10,7 +10,7 @@ spec:
   chart:
     spec:
       chart: app-template
-      version: 2.6.0
+      version: 3.6.0
       interval: 30m
       sourceRef:
         kind: HelmRepository
@@ -19,7 +19,7 @@ spec:
 
   values:
     controllers:
-      app:
+      sabnzbd:
         annotations:
           reloader.stakater.com/auto: "true"
         pod:
@@ -59,8 +59,15 @@ spec:
               requests:
                 cpu: 100m
                 memory: 512Mi
+            securityContext:
+              allowPrivilegeEscalation: false
+              readOnlyRootFilesystem: true
+              capabilities:
+                drop:
+                  - ALL
     service:
       app:
+        controller: sabnzbd
         ports:
           http:
             port: *port
