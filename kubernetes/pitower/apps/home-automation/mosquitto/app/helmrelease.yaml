@@ -28,7 +28,7 @@ spec:
       namespace: rook-ceph
   values:
     controllers:
-      app:
+      mosquitto:
         annotations:
           reloader.stakater.com/auto: "true"
         containers:
@@ -49,6 +49,7 @@ spec:
             fsGroupChangePolicy: OnRootMismatch
     service:
       app:
+        controller: mosquitto
         type: LoadBalancer
         annotations:
           external-dns.alpha.kubernetes.io/hostname: mosquitto.${SECRET_DOMAIN}
