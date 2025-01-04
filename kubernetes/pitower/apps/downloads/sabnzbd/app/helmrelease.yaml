@@ -104,3 +104,7 @@ spec:
         type: emptyDir
         globalMounts:
           - path: /downloads
+      tmp:
+        type: emptyDir
+        globalMounts:
+          - path: /tmp
