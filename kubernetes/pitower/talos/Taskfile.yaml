@@ -33,7 +33,7 @@ tasks:
   init:
     dir: ./clusterconfig
     cmds:
-      # - talosctl apply-config --insecure --nodes 192.168.0.201 --file ./master-01.yaml
+      - talosctl apply-config --insecure --nodes 192.168.0.201 --file ./master-01.yaml
       - talosctl apply-config --insecure --nodes 192.168.0.202 --file ./master-02.yaml
       - talosctl apply-config --insecure --nodes 192.168.0.203 --file ./master-03.yaml
       - talosctl config endpoint 192.168.0.201 192.168.0.202 192.168.0.203

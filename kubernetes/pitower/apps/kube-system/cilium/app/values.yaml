@@ -84,7 +84,7 @@ loadBalancer:
 localRedirectPolicy: true
 
 operator:
-  replicas: 1
+  replicas: 2
   rollOutPods: true
   prometheus:
     enabled: true
