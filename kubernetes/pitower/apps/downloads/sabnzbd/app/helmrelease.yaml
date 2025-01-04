@@ -91,7 +91,7 @@ spec:
       config:
         existingClaim: sabnzbd-config
         advancedMounts:
-          app:
+          sabnzbd:
             app:
               - path: /config
       media:
