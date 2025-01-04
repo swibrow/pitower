@@ -9,7 +9,7 @@ spec:
   chart:
     spec:
       chart: app-template
-      version: 2.4.0
+      version: 3.6.0
       sourceRef:
         kind: HelmRepository
         name: bjw-s
@@ -30,11 +30,11 @@ spec:
       namespace: rook-ceph
   values:
     controllers:
-      main:
+      app:
         annotations:
           reloader.stakater.com/auto: "true"
         containers:
-          main:
+          app:
             image:
               repository: ghcr.io/koenkk/zigbee2mqtt
               tag: 1.34.0
@@ -76,12 +76,12 @@ spec:
           nodeSelector:
             sonoff.feature.node.kubernetes.io/zigbee: "true"
     service:
-      main:
+      app:
         ports:
           http:
             port: 8080
     ingress:
-      main:
+      app:
         enabled: true
         className: internal
         hosts:
@@ -89,7 +89,7 @@ spec:
             paths:
               - path: /
                 service:
-                  name: main
+                  name: app
                   port: http
         tls:
           - hosts:

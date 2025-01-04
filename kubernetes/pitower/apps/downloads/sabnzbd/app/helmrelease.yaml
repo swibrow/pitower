@@ -10,7 +10,7 @@ spec:
   chart:
     spec:
       chart: app-template
-      version: 2.1.1
+      version: 2.6.0
       interval: 30m
       sourceRef:
         kind: HelmRepository
@@ -19,21 +19,9 @@ spec:
 
   values:
     controllers:
-      main:
-        type: statefulset
-
-        statefulset:
-          volumeClaimTemplates:
-            - name: config
-              accessMode: ReadWriteOnce
-              size: 100Gi
-              storageClass: ceph-filesystem
-              globalMounts:
-                - path: /config
-
+      app:
         annotations:
           reloader.stakater.com/auto: "true"
-
         pod:
           nodeSelector:
             kubernetes.io/arch: amd64
@@ -44,10 +32,10 @@ spec:
             fsGroupChangePolicy: OnRootMismatch
 
         containers:
-          main:
+          app:
             image:
               repository: ghcr.io/onedr0p/sabnzbd
-              tag: "4"
+              tag: 4.4.1@sha256:4188d3c29c53de1018edcfd5dc2d0a0c7955b9a239b91ff6c859626abd3494dc
             env:
               SABNZBD__PORT: &port 8080
               SABNZBD__HOST_WHITELIST_ENTRIES: >-
@@ -57,45 +45,48 @@ spec:
                 sabnzbd.downloads.svc.cluster,
                 sabnzbd.downloads.svc.cluster.local,
                 sabnzbd.${SECRET_DOMAIN}
-              # SABNZBD__API_KEY:
-              #   valueFrom:
-              #     secretKeyRef:
-              #       name: sabnzbd-secret
-              #       key: api_key
-              # SABNZBD__NZB_KEY:
-              #   valueFrom:
-              #     secretKeyRef:
-              #       name: sabnzbd-secret
-              #       key: nzb_key
-            # resources:
-            #   requests:
-            #     cpu: 5m
-            #     memory: "1024M"
-            #   limits:
-            #     memory: "4096M"
-
+            probes:
+              liveness:
+                enabled: true
+              readiness:
+                enabled: true
+              startup:
+                enabled: true
+                spec:
+                  failureThreshold: 30
+                  periodSeconds: 5
+            resources:
+              requests:
+                cpu: 100m
+                memory: 512Mi
     service:
-      main:
+      app:
         ports:
           http:
             port: *port
 
     ingress:
-      main:
+      app:
         enabled: true
-        className: "internal"
+        className: internal
         hosts:
           - host: &host "sabnzbd.${SECRET_DOMAIN}"
             paths:
               - path: /
                 service:
-                  name: main
+                  identifier: app
                   port: http
         tls:
           - hosts:
               - *host
 
     persistence:
+      config:
+        existingClaim: sabnzbd-config
+        advancedMounts:
+          app:
+            app:
+              - path: /config
       media:
         type: nfs
         server: data

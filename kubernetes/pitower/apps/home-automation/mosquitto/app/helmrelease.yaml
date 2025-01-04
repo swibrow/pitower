@@ -9,7 +9,7 @@ spec:
   chart:
     spec:
       chart: app-template
-      version: 2.4.0
+      version: 3.6.0
       sourceRef:
         kind: HelmRepository
         name: bjw-s
@@ -28,18 +28,11 @@ spec:
       namespace: rook-ceph
   values:
     controllers:
-      main:
+      app:
         annotations:
           reloader.stakater.com/auto: "true"
-        # initContainers:
-        #   init-config:
-        #     image:
-        #       repository: docker.io/library/eclipse-mosquitto
-        #       tag: 2.0.18@sha256:8c49a0fab9a1ee9bf5d229061eec4e279f04484c07f60c85c13821788360ce4f
-        #     command: ["/bin/sh", "-c"]
-        #     args: ["cp /tmp/secret/* /mosquitto/external_config/ && mosquitto_passwd -U /mosquitto/external_config/mosquitto_pwd"]
         containers:
-          main:
+          app:
             image:
               repository: docker.io/library/eclipse-mosquitto
               tag: 2.0.18@sha256:8c49a0fab9a1ee9bf5d229061eec4e279f04484c07f60c85c13821788360ce4f
@@ -55,7 +48,7 @@ spec:
             fsGroup: 568
             fsGroupChangePolicy: OnRootMismatch
     service:
-      main:
+      app:
         type: LoadBalancer
         annotations:
           external-dns.alpha.kubernetes.io/hostname: mosquitto.${SECRET_DOMAIN}
@@ -77,14 +70,3 @@ spec:
             main:
               - path: /mosquitto/config/mosquitto.conf
                 subPath: mosquitto.conf
-      # secret-file:
-      #   type: secret
-      #   name: mosquitto-secret
-      #   advancedMounts:
-      #     main:
-      #       init-config:
-      #         - path: /tmp/secret
-      # external-config:
-      #   type: emptyDir
-      #   globalMounts:
-      #     - path: /mosquitto/external_config

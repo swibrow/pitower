@@ -10,7 +10,7 @@ spec:
   chart:
     spec:
       chart: app-template
-      version: 2.1.1
+      version: 3.6.0
       interval: 30m
       sourceRef:
         kind: HelmRepository
@@ -19,7 +19,7 @@ spec:
 
   values:
     controllers:
-      main:
+      app:
         annotations:
           reloader.stakater.com/auto: "true"
         pod:
@@ -29,7 +29,7 @@ spec:
             fsGroup: 568
             fsGroupChangePolicy: "OnRootMismatch"
         containers:
-          main:
+          app:
             image:
               repository: ghcr.io/onedr0p/radarr-develop
               tag: 5.1.2.8207@sha256:7e026aae3fa4ac9d4066a0533fdbfaa35a0ccdc41033bc4f2460aa9401ecfb46
@@ -40,29 +40,23 @@ spec:
               RADARR__AUTHENTICATION_REQUIRED: DisabledForLocalAddresses
               RADARR__APPLICATION_URL: "https://radarr.${SECRET_DOMAIN}"
               RADARR__LOG_LEVEL: info
-            # resources:
-            #   requests:
-            #     cpu: 14m
-            #     memory: 431M
-            #   limits:
-            #     memory: 431M
 
     service:
-      main:
+      app:
         ports:
           http:
             port: *port
 
     ingress:
-      main:
+      app:
         enabled: true
-        className: "internal"
+        className: internal
         hosts:
           - host: &host radarr.${SECRET_DOMAIN}
             paths:
               - path: /
                 service:
-                  name: main
+                  name: app
                   port: http
         tls:
           - hosts:

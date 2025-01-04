@@ -9,7 +9,7 @@ spec:
   chart:
     spec:
       chart: app-template
-      version: 2.5.0
+      version: 3.6.0
       sourceRef:
         kind: HelmRepository
         name: bjw-s
@@ -22,40 +22,39 @@ spec:
           reloader.stakater.com/auto: "true"
 
         containers:
-          main:
+          app:
             image:
-              repository: docker.io/jmalloc/echo-server
-              tag: 0.3.6
+              repository: ghcr.io/mendhak/http-https-echo
+              tag: 35
+            env:
+              HTTP_PORT: &port 8080
+              LOG_WITHOUT_NEWLINE: "true"
+              LOG_IGNORE_PATH: "/healthz"
             resources:
               requests:
                 cpu: 5m
-                memory: 10Mi
+                memory: 32Mi
               limits:
-                memory: 50Mi
+                memory: 64Mi
             probes:
-              liveness: &probes
+              liveness:
                 enabled: true
-                custom: true
-                spec:
-                  httpGet:
-                    path: /health
-                    port: 8080
-                  initialDelaySeconds: 0
-                  periodSeconds: 10
-                  timeoutSeconds: 1
-                  failureThreshold: 3
-              readiness: *probes
+              readiness:
+                enabled: true
               startup:
-                enabled: false
+                enabled: true
+                spec:
+                  failureThreshold: 30
+                  periodSeconds: 5
 
     service:
-      main:
+      app:
         ports:
           http:
-            port: 8080
+            port: *port
 
     ingress:
-      main:
+      app:
         enabled: true
         className: external
         annotations:
@@ -65,7 +64,7 @@ spec:
             paths:
               - path: /
                 service:
-                  name: main
+                  name: app
                   port: http
         tls:
           - hosts:
