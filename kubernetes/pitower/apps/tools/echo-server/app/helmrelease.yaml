@@ -17,7 +17,7 @@ spec:
 
   values:
     controllers:
-      app:
+      echo-server:
         annotations:
           reloader.stakater.com/auto: "true"
 
@@ -48,6 +48,7 @@ spec:
                   periodSeconds: 5
 
     service:
+      controller: echo-server
       app:
         ports:
           http:
