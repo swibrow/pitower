@@ -108,7 +108,6 @@ spec:
 
     ingress:
       app:
-        enabled: true
         className: internal
         annotations:
           nginx.ingress.kubernetes.io/rewrite-target: /$1

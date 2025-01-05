@@ -31,7 +31,7 @@ spec:
         containers:
           app:
             image:
-              repository: ghcr.io/jellyfin/jellyfin
+              repository: jellyfin/jellyfin
               tag: "10.10.3"
             env:
               DOTNET_SYSTEM_IO_DISABLEFILELOCKING: "true"
