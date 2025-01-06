@@ -14,14 +14,6 @@ spec:
         kind: HelmRepository
         name: bjw-s
         namespace: flux-system
-  install:
-    remediation:
-      retries: 3
-  upgrade:
-    cleanupOnFail: true
-    remediation:
-      strategy: rollback
-      retries: 3
   values:
     controllers:
       excalidraw:
@@ -43,17 +35,9 @@ spec:
                 cpu: 5m
                 memory: 10Mi
               limits:
-                memory: 50Mi
+                memory: 512Mi
             env:
               PORT: &port 8080
-        pod:
-          topologySpreadConstraints:
-            - maxSkew: 1
-              topologyKey: kubernetes.io/hostname
-              whenUnsatisfiable: DoNotSchedule
-              labelSelector:
-                matchLabels:
-                  app.kubernetes.io/name: *app
     service:
       app:
         controller: *app
