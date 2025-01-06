@@ -6,6 +6,7 @@ metadata:
   name: cloudflared
   namespace: flux-system
 spec:
+  targetNamespace: network
   dependsOn:
     - name: external-dns
   path: ./kubernetes/pitower/apps/networking/cloudflared/app
