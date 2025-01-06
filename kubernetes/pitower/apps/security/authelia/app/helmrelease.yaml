@@ -100,7 +100,7 @@ spec:
 
     ingress:
       app:
-        className: "external"
+        className: external
         annotations:
           external-dns.alpha.kubernetes.io/target: external.${SECRET_DOMAIN}
           nginx.ingress.kubernetes.io/configuration-snippet: |
@@ -109,7 +109,7 @@ spec:
             add_header X-Frame-Options "SAMEORIGIN";
             add_header X-XSS-Protection "1; mode=block";
         hosts:
-          - host: &hostName auth.${SECRET_DOMAIN}
+          - host: &host auth.${SECRET_DOMAIN}
             paths:
               - path: /
                 service:
@@ -117,7 +117,7 @@ spec:
                   port: http
         tls:
           - hosts:
-              - *hostName
+              - *host
     serviceMonitor:
       app:
         serviceName: authelia
