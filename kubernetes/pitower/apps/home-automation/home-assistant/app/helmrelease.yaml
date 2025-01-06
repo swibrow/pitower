@@ -93,6 +93,10 @@ spec:
         annotations:
           external-dns.alpha.kubernetes.io/target: external.${SECRET_DOMAIN}
           nginx.ingress.kubernetes.io/rewrite-target: /$1
+          nginx.ingress.kubernetes.io/auth-method: 'GET'
+          nginx.ingress.kubernetes.io/auth-url: 'http://authelia.security.svc.cluster.local/api/authz/auth-request'
+          nginx.ingress.kubernetes.io/auth-signin: 'https://auth.${SECRET_DOMAIN}?rm=$request_method'
+          nginx.ingress.kubernetes.io/auth-response-headers: 'Remote-User,Remote-Name,Remote-Groups,Remote-Email'
         hosts:
           - host: &host ha.${SECRET_DOMAIN}
             paths:
@@ -107,22 +111,6 @@ spec:
         tls:
           - hosts:
               - *host
-      code-server:
-        enabled: true
-        className: external
-        annotations:
-          external-dns.alpha.kubernetes.io/target: external.${SECRET_DOMAIN}
-          nginx.ingress.kubernetes.io/auth-method: 'GET'
-          nginx.ingress.kubernetes.io/auth-url: 'http://authelia.security.svc.cluster.local/api/authz/auth-request'
-          nginx.ingress.kubernetes.io/auth-signin: 'https://auth.${SECRET_DOMAIN}?rm=$request_method'
-          nginx.ingress.kubernetes.io/auth-response-headers: 'Remote-User,Remote-Name,Remote-Groups,Remote-Email'
-        hosts:
-          - host: code.${SECRET_DOMAIN}
-            paths:
-              - path: /
-                service:
-                  identifier: app
-                  port: code-server
     persistence:
       config:
         existingClaim: home-assistant-config
@@ -144,4 +132,3 @@ spec:
                 subPath: code-server-tmp
               - path: /nonexistent
                 subPath: nonexistent
-
