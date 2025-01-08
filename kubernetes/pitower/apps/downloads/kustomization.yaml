@@ -9,3 +9,4 @@ resources:
   - ./autobrr/ks.yaml
   - ./prowlarr/ks.yaml
   - ./readarr/ks.yaml
+  - ./qbittorrent/ks.yaml
