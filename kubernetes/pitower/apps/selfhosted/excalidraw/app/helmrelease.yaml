@@ -23,17 +23,17 @@ spec:
           app:
             image:
               repository: docker.io/excalidraw/excalidraw
-              tag: v0.17.3
+              tag: latest@sha256:153d6beed671c9c3c7f558767dbf4ebc82d05283451a74f3823fb2fe05eae82e
               pullPolicy: IfNotPresent
-            probes:
-              liveness:
-                enabled: true
-              readiness:
-                enabled: true
-            resources:
-              requests:
-                cpu: 5m
-                memory: 10Mi
+            # probes:
+            #   liveness:
+            #     enabled: true
+            #   readiness:
+            #     enabled: true
+            # resources:
+            #   requests:
+            #     cpu: 5m
+            #     memory: 10Mi
               # limits:
               #   memory: 512Mi
             env:

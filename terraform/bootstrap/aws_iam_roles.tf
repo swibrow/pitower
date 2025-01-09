@@ -30,20 +30,26 @@ resource "aws_iam_role" "pitower_test" {
       }
     ]
   })
+}
 
-  inline_policy {
-    name = "pitower-test"
-    policy = jsonencode({
-      "Version" : "2012-10-17",
-      "Statement" : [
-        {
-          "Effect" : "Allow",
-          "Action" : [
-            "s3:ListAllMyBuckets"
-          ],
-          "Resource" : "*"
-        }
-      ]
-    })
-  }
+resource "aws_iam_role_policy" "pitower_test_policy" {
+  name = "pitower-test"
+  role = aws_iam_role.pitower_test.id
+  policy = jsonencode({
+    "Version" : "2012-10-17",
+    "Statement" : [
+      {
+        "Effect" : "Allow",
+        "Action" : [
+          "s3:ListAllMyBuckets"
+        ],
+        "Resource" : "*"
+      }
+    ]
+  })
+}
+
+resource "aws_iam_role_policy_attachment" "pitower_test_attachment" {
+  role       = aws_iam_role.pitower_test.name
+  policy_arn = aws_iam_policy.additional.arn
 }
