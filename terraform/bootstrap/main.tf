@@ -1,12 +1,12 @@
 terraform {
-  required_version = ">= 1.7.0"
+  required_version = ">= 1.10"
 
   backend "s3" {
-    bucket         = "swibrow-pitower-tf-state"
-    key            = "bootstrap.tfstate"
-    region         = "eu-central-2"
-    dynamodb_table = "swibrow-pitower-tf-state-lock"
-    encrypt        = true
+    bucket       = "swibrow-pitower-tf-state"
+    key          = "bootstrap.tfstate"
+    region       = "eu-central-2"
+    use_lockfile = true
+    encrypt      = true
   }
 
   required_providers {
@@ -26,13 +26,12 @@ provider "aws" {
 }
 
 locals {
-  name   = "pitower-github-oidc"
+  name   = "pitower"
   region = "eu-central-2"
 
   tags = merge(var.tags, {
     Stack       = local.name
-    StateBucket = "swibrow-pitower-tf-state" # TODO: dynamic lookup?
-    # Foo = "bar"
+    StateBucket = resource.aws_s3_bucket.state.id
   })
 }
 
@@ -56,7 +55,7 @@ module "iam_github_oidc_role" {
   source  = "terraform-aws-modules/iam/aws//modules/iam-github-oidc-role"
   version = "5.52.1"
 
-  name = local.name
+  name = "${local.name}-oidc"
 
   subjects = var.subjects
 

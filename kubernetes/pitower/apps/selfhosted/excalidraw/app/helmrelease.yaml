@@ -34,8 +34,8 @@ spec:
               requests:
                 cpu: 5m
                 memory: 10Mi
-              limits:
-                memory: 512Mi
+              # limits:
+              #   memory: 512Mi
             env:
               PORT: &port 8080
     service:
