@@ -35,9 +35,6 @@ bpf:
 bgp:
   enabled: false
 
-containerRuntime:
-  integration: containerd
-
 endpointRoutes:
   enabled: true
 
