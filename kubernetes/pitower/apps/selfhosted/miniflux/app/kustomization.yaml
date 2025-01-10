@@ -3,8 +3,6 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 resources:
-  - ./namespace.yaml
-  - ./excalidraw/ks.yaml
-  - ./tandoor/ks.yaml
-  - ./house-hunter/ks.yaml
-  - ./miniflux/ks.yaml
+  - ./helmrelease.yaml
+  - ./externalsecret.yaml
+  - ./secret.sops.yaml
