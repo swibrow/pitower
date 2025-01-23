@@ -18,5 +18,5 @@ spec:
     name: pitower
   wait: false
   dependsOn:
-    - name: cloudnative-pg
+    - name: cloudnative-pg-cluster
     - name: external-secrets-stores

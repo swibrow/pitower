@@ -3,7 +3,7 @@
 apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
-  name: readarr
+  name: bookbountry
 spec:
   interval: 30m
   chart:
@@ -17,9 +17,9 @@ spec:
         namespace: flux-system
   values:
     controllers:
-      readarr:
+      bookbountry:
         annotations:
-          secret.reloader.stakater.com/reload: readarr-secret
+          reloader.stakater.com/auto: "true"
         pod:
           securityContext:
             runAsUser: 2000
@@ -30,46 +30,44 @@ spec:
         containers:
           app:
             image:
-              repository: ghcr.io/onedr0p/readarr-develop
-              tag: "0.3.32"
+              repository: thewicklowwolf/bookbounty
+              tag: "0.2.2"
             env:
-              READARR__INSTANCE_NAME: Readarr
-              READARR__PORT: &port 8787
-              READARR__APPLICATION_URL: "https://readarr.${SECRET_DOMAIN}"
-              READARR__LOG_LEVEL: info
-              READARR__API_KEY:
+              readarr_address: "http://readarr.downloads.svc.cluster.local:8787"
+              readarr_api_key:
                 valueFrom:
                   secretKeyRef:
                     name: readarr-secret
                     key: api_key
-            probes:
-              liveness:
-                enabled: true
-              readiness:
-                enabled: true
-              startup:
-                enabled: true
-                spec:
-                  failureThreshold: 30
-                  periodSeconds: 5
+              libgen_address: http://libgen.is
+            # probes:
+            #   liveness:
+            #     enabled: true
+            #   readiness:
+            #     enabled: true
+            #   startup:
+            #     enabled: true
+            #     spec:
+            #       failureThreshold: 30
+            #       periodSeconds: 5
             resources:
               requests:
                 cpu: 5m
                 memory: 224M
-              limits:
-                memory: 224M
+              # limits:
+              #   memory: 224M
     service:
       app:
-        controller: readarr
+        controller: bookbountry
         ports:
           http:
-            port: *port
+            port: 5000
 
     ingress:
       app:
         className: internal
         hosts:
-          - host: readarr.${SECRET_DOMAIN}
+          - host: bookbounty.${SECRET_DOMAIN}
             paths:
               - path: /
                 service:
@@ -77,10 +75,10 @@ spec:
                   port: http
     persistence:
       config:
-        existingClaim: readarr-config
-      media:
+        existingClaim: bookbounty-config
+      downloads:
         type: nfs
         server: data
-        path: /volume1/media
+        path: /volume1/media/downloads/bookbounty
         globalMounts:
-          - path: /data/nas-media
+          - path: /bookbounty/downloads
