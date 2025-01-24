@@ -3,3 +3,4 @@ kind: Kustomization
 resources:
   - ./podmonitor.yaml
   - ./pitower.yaml
+  - ./rbac.yaml

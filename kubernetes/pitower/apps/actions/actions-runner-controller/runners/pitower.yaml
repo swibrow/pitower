@@ -24,14 +24,34 @@ spec:
     containerMode:
       type: kubernetes
       kubernetesModeWorkVolumeClaim:
-        accessModes: ["ReadWriteOnce"]
-        storageClassName: ceph-block
+        accessModes:
+          - ReadWriteOnce
+        storageClassName: openebs-hostpath
         resources:
           requests:
-            storage: 2Gi
+            storage: 5Gi
       kubernetesModeServiceAccount:
         annotations:
           eks.amazonaws.com/role-arn: arn:aws:iam::633355703129:role/pitower
     controllerServiceAccount:
       namespace: actions
-      name: actions-runner-controller-gha-rs-controller
+      name: actions-runner-controller
+    template:
+      spec:
+        containers:
+          - name: runner
+            image: ghcr.io/onedr0p/actions-runner:2.321.0
+            command:
+              - /home/runner/run.sh
+            env:
+              - name: ACTIONS_RUNNER_REQUIRE_JOB_CONTAINER
+                value: "false"
+              - name: NODE_IP
+                valueFrom:
+                  fieldRef:
+                    fieldPath: status.hostIP
+            volumeMounts:
+              - mountPath: /var/run/secrets/talos.dev
+                name: talos
+                readOnly: true
+        serviceAccountName: actions-runner
