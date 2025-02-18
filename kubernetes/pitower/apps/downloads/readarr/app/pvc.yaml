@@ -10,3 +10,15 @@ spec:
     requests:
       storage: 1Gi
   storageClassName: ceph-filesystem
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: readarr-config
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 1Gi
+  storageClassName: ceph-filesystem
