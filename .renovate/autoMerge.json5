@@ -18,5 +18,12 @@
       matchPackageNames: ["kube-prometheus-stack"],
       ignoreTests: false,
     },
+    {
+      description: "Auto merge helm patches",
+      matchDatasources: ["helm"],
+      automerge: true,
+      matchUpdateTypes: ["patch"],
+      ignoreTests: false,
+    },
   ],
 }
