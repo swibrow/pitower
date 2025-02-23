@@ -22,7 +22,7 @@
       description: "Auto merge helm patches",
       matchDatasources: ["helm"],
       automerge: true,
-      matchUpdateTypes: ["patch"],
+      matchUpdateTypes: ["patch", "digest"],
       ignoreTests: false,
     },
   ],
