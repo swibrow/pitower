@@ -31,7 +31,7 @@ spec:
           app:
             image:
               repository: thewicklowwolf/bookbounty
-              tag: "0.2.2"
+              tag: "0.2.4"
             env:
               readarr_address: "http://readarr.downloads.svc.cluster.local:8787"
               readarr_api_key:
