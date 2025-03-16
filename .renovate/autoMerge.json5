@@ -5,9 +5,8 @@
       description: "Auto merge container digests and patches",
       matchDatasources: ["docker"],
       automerge: true,
-      automergeType: "pull-request",
-      matchUpdateTypes: ["digest", "patch"],
-      ignoreTests: true,
+      matchUpdateTypes: ["digest", "patch", "pin", "pinDigest"],
+      ignoreTests: false,
     },
     {
       description: "Auto merge KPS minors and patches",
