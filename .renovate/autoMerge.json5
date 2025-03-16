@@ -6,8 +6,7 @@
       matchDatasources: ["docker"],
       automerge: true,
       automergeType: "pull-request",
-      matchUpdateTypes: ["digest", "patch],
-      // matchPackagePrefixes: ["ghcr.io/onedr0p", "ghcr.io/bjw-s"],
+      matchUpdateTypes: ["digest", "patch"],
       ignoreTests: true,
     },
     {
