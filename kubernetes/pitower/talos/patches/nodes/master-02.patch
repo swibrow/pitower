@@ -3,11 +3,13 @@ machine:
   network:
     hostname: master-02
     interfaces:
-    - interface: enxdca6324f95ca
-      dhcp: true
-      # vip:
-      #   ip: 192.168.0.200
+    # - interface: enxdca6324f95ca
+      - deviceSelector:
+          physical: true
+        dhcp: true
+        vip:
+          ip: 192.168.0.200
   install:
-    image: factory.talos.dev/installer/a862538d0862e8ad5b17fadc2b56599677101537b3f75926085d8cbff4a411b9:v1.9.1
+    image: factory.talos.dev/installer/a862538d0862e8ad5b17fadc2b56599677101537b3f75926085d8cbff4a411b9:v1.9.5
     extraKernelArgs:
       - initcall_blacklist=sensors_nct6683_init

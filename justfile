@@ -131,7 +131,7 @@ nuke-controlplanes:
 # Upgrade control planes
 upgrade-controlplanes:
     #!/usr/bin/env bash
-    export IMAGE="factory.talos.dev/installer/a862538d0862e8ad5b17fadc2b56599677101537b3f75926085d8cbff4a411b9:v1.9.1"
+    export IMAGE="factory.talos.dev/installer/a862538d0862e8ad5b17fadc2b56599677101537b3f75926085d8cbff4a411b9:v1.9.5"
     for i in {1..3}; do
         talosctl upgrade \
             --image "$IMAGE" \
@@ -143,7 +143,7 @@ upgrade-controlplanes:
 # Upgrade AMD workers
 upgrade-workers-amd:
     #!/usr/bin/env bash
-    export IMAGE="factory.talos.dev/installer/f19ad7b4a5d29151f3a59ef2d9c581cf89e77142e52f0abb5022e8f0b95ad0b9:v1.9.1"
+    export IMAGE="factory.talos.dev/installer/f19ad7b4a5d29151f3a59ef2d9c581cf89e77142e52f0abb5022e8f0b95ad0b9:v1.9.5"
     for i in {1..3}; do
         talosctl upgrade \
             --image "$IMAGE" \
@@ -155,7 +155,7 @@ upgrade-workers-amd:
 # Upgrade Intel workers
 upgrade-workers-intel:
     #!/usr/bin/env bash
-    export IMAGE="factory.talos.dev/installer/97bf8e92fc6bba0f03928b859c08295d7615737b29db06a97be51dc63004e403:v1.9.1"
+    export IMAGE="factory.talos.dev/installer/97bf8e92fc6bba0f03928b859c08295d7615737b29db06a97be51dc63004e403:v1.9.5"
     talosctl upgrade \
         --image "$IMAGE" \
         --nodes "192.168.0.214" \
@@ -165,7 +165,7 @@ upgrade-workers-intel:
 # Upgrade Raspberry Pi workers
 upgrade-workers-raspberrypi:
     #!/usr/bin/env bash
-    export IMAGE="factory.talos.dev/installer/a862538d0862e8ad5b17fadc2b56599677101537b3f75926085d8cbff4a411b9:v1.9.1"
+    export IMAGE="factory.talos.dev/installer/a862538d0862e8ad5b17fadc2b56599677101537b3f75926085d8cbff4a411b9:v1.9.5"
     talosctl upgrade \
         --image "$IMAGE" \
         --preserve \
