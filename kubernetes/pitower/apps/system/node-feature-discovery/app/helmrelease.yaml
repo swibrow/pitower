@@ -27,9 +27,6 @@ spec:
         requests:
           cpu: 21m
           memory: 51Mi
-        limits:
-          memory: 51Mi
-
     worker:
       config:
         core:
@@ -41,5 +38,4 @@ spec:
         requests:
           cpu: 5m
           memory: 48Mi
-        limits:
-          memory: 48Mi
+
