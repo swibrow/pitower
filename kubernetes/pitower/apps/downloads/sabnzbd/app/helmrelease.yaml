@@ -101,9 +101,11 @@ spec:
         globalMounts:
           - path: /data/nas-media
       downloads:
-        type: emptyDir
-        globalMounts:
-          - path: /downloads
+        existingClaim: sabnzbd-downloads
+        advancedMounts:
+          sabnzbd:
+            app:
+              - path: /downloads
       tmp:
         type: emptyDir
         globalMounts:
