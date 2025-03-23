@@ -14,6 +14,7 @@ machine:
     hostDNS:
         enabled: true
         forwardKubeDNSToHost: false
+        resolveMemberNames: true
 
 cluster:
   network:

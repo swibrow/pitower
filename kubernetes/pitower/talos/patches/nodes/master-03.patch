@@ -3,7 +3,6 @@ machine:
   network:
     hostname: master-03
     interfaces:
-    # - interface: enxdca63246b2ba
       - deviceSelector:
           physical: true
         dhcp: true

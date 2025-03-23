@@ -3,5 +3,6 @@
 customization:
   systemExtensions:
     officialExtensions:
+      - siderolabs/util-linux-tools
       - siderolabs/amd-ucode
       - siderolabs/amdgpu-firmware

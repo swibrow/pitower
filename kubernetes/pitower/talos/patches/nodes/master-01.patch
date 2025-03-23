@@ -3,12 +3,11 @@ machine:
   network:
     hostname: master-01
     interfaces:
-    # - interface: enxdca6324feea9
       - deviceSelector:
           physical: true
         dhcp: true
-        vip:
-          ip: 192.168.0.200
+        # vip:
+        #   ip: 192.168.0.200
   install:
     image: factory.talos.dev/installer/a862538d0862e8ad5b17fadc2b56599677101537b3f75926085d8cbff4a411b9:v1.9.5
     extraKernelArgs:
