@@ -9,6 +9,6 @@ machine:
         vip:
           ip: 192.168.0.200
   install:
-    image: factory.talos.dev/installer/a862538d0862e8ad5b17fadc2b56599677101537b3f75926085d8cbff4a411b9:v1.9.5
+    image: factory.talos.dev/installer/de94b242ed9adec9def2581ffbf1e2d1873e42b17032771770d241dee54d7c00:v1.9.5
     extraKernelArgs:
       - initcall_blacklist=sensors_nct6683_init
