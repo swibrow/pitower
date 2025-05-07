@@ -8,3 +8,4 @@ resources:
   - ./tandoor/ks.yaml
   - ./house-hunter/ks.yaml
   - ./miniflux/ks.yaml
+  - ./glance/ks.yaml
