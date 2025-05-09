@@ -6,15 +6,17 @@ pages:
           - type: clock
             hour-format: 24h
             timezones:
-              - timezone: Europe/Paris
-                label: Zurich
+              - timezone: Australia/Brisbane
 
           - type: calendar
 
           - type: weather
             location: Zurich, Switzerland
             hour-format: 24h
-
+          - type: server-stats
+            servers:
+              - type: local
+                name: Services
       - size: full
         widgets:
           - type: hacker-news
@@ -23,12 +25,10 @@ pages:
             channels:
               - UCR-DXc1voovS8nhAvccRZhg # Jeff Geerling
               - UCv6J_jJa8GJqFwQNgNrMuww # ServeTheHome
-              - UCOk-gHyjcWZNj3Br4oxwh0A # Techno Tim
-              - UCcEH1uSjWiKpYp4B2lShqlA # Christian Schaffer
-              - UCuCkxoKLYO_EQ2GeFtbM_bw # Half as Interesting
-              - UCLqQ5m7AXj_oyUvLZPsts0Q # Hands On Katie
-              - UCGaVdbSav8xWuFWTadK6loA # vlogbrothers
-              - UCUdzaY_Jzjt09b9xLpg0T6g # WoodworkingisBullshit
+              - UCYeiozh-4QwuC1sjgCmB92w # DevOps Toolbox
+              - UCAbaiKvP8kZfY706loT4ivg # Xaryu
+              - UCeY0bbntW8C7n6g2i4v3c1w # The Linux Foundation
+              - UCiaQzXI5528Il6r2NNkrkJA # Digital Spaceport
 
           - type: reddit
             subreddit: selfhosted
@@ -40,25 +40,29 @@ pages:
             collapse-after: 3
             cache: 10m
             feeds:
-              - url: https://letsencrypt.org/feed.xml
-              - url: https://chipsandcheese.com/feed/
-              - url: https://www.home-assistant.io/atom.xml
+              - url: https://kubernetes.io/feed.xml
+              - url: https://kubefeeds.com/feed/
+              - url: https://devops.com/feed/
+              - url: https://thenewstack.io/feed
+              - url: https://kubernetespodcast.com/feed
+              - url: https://www.cncf.io/feed/?post_type=lf_kubeweekly
+              - url: https://www.reddit.com/r/selfhosted/.rss
+              - url: https://www.cncf.io/blog/feed/
 
           - type: releases
             show-source-icon: true
             repositories:
-              - go-gitea/gitea
-              - glanceapp/glance
-              - k3s-io/k3s
+              - siderolabs/talos
+              - hashicorp/terraform
 
           - type: markets
             markets:
               - symbol: SPY
                 name: S&P 500
-              - symbol: HPE
-                name: HPE
-              - symbol: HPQ
-                name: HPQ
+              - symbol: BTC-USD
+                name: Bitcoin
+              - symbol: INTC
+                name: Intel
 # Other widgets:
 # - grafana - network and UPS
 # - bookmarks
