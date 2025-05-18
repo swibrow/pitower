@@ -12,9 +12,6 @@ spec:
       app.kubernetes.io/name: *app
   interval: 30m
   path: "./kubernetes/pitower/apps/selfhosted/whoami/app"
-  postBuild:
-    substitute:
-      HOSTNAME: whoami.${SECRET_DOMAIN}
   prune: true
   sourceRef:
     kind: GitRepository

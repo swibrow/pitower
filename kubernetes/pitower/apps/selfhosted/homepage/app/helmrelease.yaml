@@ -29,8 +29,8 @@ spec:
               repository: ghcr.io/gethomepage/homepage
               tag: v1.2.0
             env:
-              TZ: ${CONFIG_TIMEZONE}
-              HOMEPAGE_ALLOWED_HOSTS: ${HOSTNAME}
+              TZ: ${TIMEZONE}
+              HOMEPAGE_ALLOWED_HOSTS: home.${SECRET_DOMAIN}
               # LOG_LEVEL: debug
             # envFrom:
             #   - secretRef:
@@ -45,7 +45,7 @@ spec:
                     path: /api/healthcheck
                     httpHeaders:
                       - name: Host
-                        value: ${HOSTNAME}
+                        value: home.${SECRET_DOMAIN}
                   initialDelaySeconds: 0
               readiness: *probes
               startup: *probes
@@ -62,11 +62,12 @@ spec:
         enabled: true
         className: external
         annotations:
+          external-dns.alpha.kubernetes.io/target: external.${SECRET_DOMAIN}
           # authentik.home.arpa/enabled: "true"
           # nginx.ingress.kubernetes.io/auth-signin: |-
           #   https://${HOSTNAME}/outpost.goauthentik.io/start?rd=$escaped_request_uri
         hosts:
-          - host: ${HOSTNAME}
+          - host: home.${SECRET_DOMAIN}
             paths:
               - path: /
                 service:
