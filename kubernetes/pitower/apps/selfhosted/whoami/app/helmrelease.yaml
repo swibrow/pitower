@@ -1,0 +1,55 @@
+---
+# yaml-language-server: $schema=https://raw.githubusercontent.com/bjw-s-labs/helm-charts/app-template-4.0.1/charts/other/app-template/schemas/helmrelease-helm-v2.schema.json
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: whoami
+spec:
+  chart:
+    spec:
+      chart: app-template
+      sourceRef:
+        kind: HelmRepository
+        name: bjw-s-labs
+        namespace: flux-system
+      version: 4.0.1
+  interval: 30m
+  maxHistory: 3
+  uninstall:
+    keepHistory: false
+  values:
+    controllers:
+      whoami:
+        strategy: RollingUpdate
+        containers:
+          app:
+            image:
+              repository: docker.io/traefik/whoami
+              tag: v1.11.0
+            env:
+              WHOAMI_PORT_NUMBER: &port 8080
+            probes:
+              liveness: &probes
+                enabled: true
+                custom: true
+                spec:
+                  httpGet:
+                    port: *port
+              readiness: *probes
+    service:
+      app:
+        controller: whoami
+        ports:
+          http:
+            port: *port
+    ingress:
+      app:
+        enabled: true
+        className: public
+        hosts:
+          - host: ${HOSTNAME}
+            paths:
+              - path: /
+                service:
+                  identifier: app
+                  port: http

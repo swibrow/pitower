@@ -30,3 +30,4 @@ resources:
   - ./kubernetes-sigs-metrics-server.yaml
   - ./kubernetes-sigs-nfd.yaml
   - ./tailscale.yaml
+  - ./bjw-s-labs.yaml

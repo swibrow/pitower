@@ -6,10 +6,14 @@ metadata:
   name: homepage
 spec:
   interval: 30m
-  chartRef:
-    kind: OCIRepository
-    name: app-template
-    namespace: flux-system
+  chart:
+    spec:
+      chart: app-template
+      sourceRef:
+        kind: HelmRepository
+        name: bjw-s-labs
+        namespace: flux-system
+      version: 4.0.1
   maxHistory: 3
   uninstall:
     keepHistory: false
@@ -72,7 +76,7 @@ spec:
       config:
         enabled: true
         type: configMap
-        name: *configmap
+        name: homepage-config
         globalMounts:
           - subPath: bookmarks.yaml
             path: /app/config/bookmarks.yaml

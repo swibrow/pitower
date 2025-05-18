@@ -9,3 +9,5 @@ resources:
   - ./house-hunter/ks.yaml
   - ./miniflux/ks.yaml
   - ./glance/ks.yaml
+  - ./whoami/ks.yaml
+  - ./homepage/ks.yaml
