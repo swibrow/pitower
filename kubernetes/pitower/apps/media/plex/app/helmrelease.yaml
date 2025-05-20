@@ -30,7 +30,7 @@ spec:
           app:
             image:
               repository: ghcr.io/home-operations/plex
-              tag: 1.41.6.9685
+              tag: 1.41.7.9799
             env:
               PLEX_ADVERTISE_URL: https://192.168.0.228:32400,https://plex.pitower.link:443
               PLEX_NO_AUTH_NETWORKS: 192.168.0.0/24
