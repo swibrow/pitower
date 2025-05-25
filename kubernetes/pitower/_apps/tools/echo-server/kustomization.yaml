@@ -8,7 +8,6 @@ helmCharts:
     repo: oci://ghcr.io/bjw-s/helm
     version: 3.7.3
     releaseName: echo-server
-    includeCRDs: false
     valuesFile: values.yaml
 
 # Common labels for all resources
