@@ -9,7 +9,7 @@ spec:
   dependsOn:
     - name: cert-manager-issuers
   path: ./kubernetes/pitower/apps/networking/nginx/certificates
-  prune: true
+  prune: false
   sourceRef:
     kind: GitRepository
     name: pitower
@@ -28,7 +28,7 @@ spec:
   dependsOn:
     - name: nginx-certificates
   path: ./kubernetes/pitower/apps/networking/nginx/external
-  prune: true
+  prune: false
   sourceRef:
     kind: GitRepository
     name: pitower
@@ -47,7 +47,7 @@ spec:
   dependsOn:
     - name: nginx-certificates
   path: ./kubernetes/pitower/apps/networking/nginx/internal
-  prune: true
+  prune: false
   sourceRef:
     kind: GitRepository
     name: pitower
