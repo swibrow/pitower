@@ -15,7 +15,7 @@ spec:
   postBuild:
     substitute:
       HOSTNAME: home.${SECRET_DOMAIN}
-  prune: true
+  prune: false
   sourceRef:
     kind: GitRepository
     name: pitower

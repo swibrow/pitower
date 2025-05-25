@@ -15,7 +15,7 @@ spec:
     kind: GitRepository
     name: pitower
   interval: 10m
-  prune: true
+  prune: false
   wait: true
   dependsOn:
     - name: cert-manager
@@ -37,7 +37,7 @@ spec:
     kind: GitRepository
     name: pitower
   interval: 30m
-  prune: true
+  prune: false
   wait: true
   # dependsOn:
   #   - name: intel-device-plugins-operator

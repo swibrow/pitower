@@ -12,7 +12,7 @@ spec:
       app.kubernetes.io/name: *app
   interval: 30m
   path: "./kubernetes/pitower/apps/selfhosted/whoami/app"
-  prune: true
+  prune: false
   sourceRef:
     kind: GitRepository
     name: pitower

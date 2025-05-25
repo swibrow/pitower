@@ -1,0 +1,55 @@
+---
+# yaml-language-server: $schema=https://raw.githubusercontent.com/datreeio/CRDs-catalog/refs/heads/main/argoproj.io/appproject_v1alpha1.json
+apiVersion: argoproj.io/v1alpha1
+kind: AppProject
+metadata:
+  name: apps
+  namespace: argocd
+spec:
+  description: Apps
+  sourceRepos:
+    - https://github.com/swibrow/pitower
+  destinations:
+    - namespace: "*"
+      name: "*"
+  clusterResourceWhitelist:
+    - group: "*"
+      kind: "*"
+  roles:
+    - name: admin
+      description: Admin permissions
+      policies:
+        - p, role:admin, applications, create, */*, allow
+        - p, role:admin, applications, update, */*, allow
+        - p, role:admin, applications, update/*, */*, allow
+        - p, role:admin, applications, delete, */*, allow
+        - p, role:admin, applications, delete/*, */*, allow
+        - p, role:admin, applications, sync, */*, allow
+        - p, role:admin, applications, override, */*, allow
+        - p, role:admin, applications, action/*, */*, allow
+        - p, role:admin, applicationsets, get, */*, allow
+        - p, role:admin, applicationsets, create, */*, allow
+        - p, role:admin, applicationsets, update, */*, allow
+        - p, role:admin, applicationsets, delete, */*, allow
+        - p, role:admin, certificates, create, *, allow
+        - p, role:admin, certificates, update, *, allow
+        - p, role:admin, certificates, delete, *, allow
+        - p, role:admin, clusters, create, *, allow
+        - p, role:admin, clusters, update, *, allow
+        - p, role:admin, clusters, delete, *, allow
+        - p, role:admin, repositories, create, *, allow
+        - p, role:admin, repositories, update, *, allow
+        - p, role:admin, repositories, delete, *, allow
+        - p, role:admin, write-repositories, create, *, allow
+        - p, role:admin, write-repositories, update, *, allow
+        - p, role:admin, write-repositories, delete, *, allow
+        - p, role:admin, projects, create, *, allow
+        - p, role:admin, projects, update, *, allow
+        - p, role:admin, projects, delete, *, allow
+        - p, role:admin, accounts, update, *, allow
+        - p, role:admin, gpgkeys, create, *, allow
+        - p, role:admin, gpgkeys, delete, *, allow
+        - p, role:admin, exec, create, */*, allow
+
+      groups:
+        - sam.wibrow@gmail.com

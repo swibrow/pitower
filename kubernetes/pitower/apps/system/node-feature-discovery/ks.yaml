@@ -12,7 +12,7 @@ spec:
       app.kubernetes.io/name: *appname
   interval: 10m
   path: "./kubernetes/pitower/apps/system/node-feature-discovery/app"
-  prune: true
+  prune: false
   sourceRef:
     kind: GitRepository
     name: pitower
@@ -31,7 +31,7 @@ spec:
       app.kubernetes.io/name: *appname
   interval: 10m
   path: "./kubernetes/pitower/apps/system/node-feature-discovery/rules"
-  prune: true
+  prune: false
   sourceRef:
     kind: GitRepository
     name: pitower

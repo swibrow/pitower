@@ -10,7 +10,7 @@ spec:
   dependsOn:
     - name: external-dns
   path: ./kubernetes/pitower/apps/networking/cloudflared/app
-  prune: true
+  prune: false
   sourceRef:
     kind: GitRepository
     name: pitower
