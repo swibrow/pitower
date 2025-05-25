@@ -38,9 +38,9 @@ ingress:
     enabled: true
     className: external
     annotations:
-      external-dns.alpha.kubernetes.io/target: external.${SECRET_DOMAIN}
+      external-dns.alpha.kubernetes.io/target: external.pitower.link
     hosts:
-      - host: echo.${SECRET_DOMAIN}
+      - host: echo.pitower.link
         paths:
           - path: /
             service:
@@ -48,4 +48,4 @@ ingress:
               port: http
     tls:
       - hosts:
-          - echo.${SECRET_DOMAIN}
+          - echo.pitower.link
