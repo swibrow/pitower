@@ -1,0 +1,17 @@
+---
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+# Helm chart configuration
+helmCharts:
+  - name: app-template
+    repo: oci://ghcr.io/bjw-s/helm
+    version: 3.7.3
+    releaseName: echo-server
+    includeCRDs: false
+    valuesFile: values.yaml
+
+# Common labels for all resources
+commonLabels:
+  app.kubernetes.io/name: echo-server
+  app.kubernetes.io/instance: echo-server

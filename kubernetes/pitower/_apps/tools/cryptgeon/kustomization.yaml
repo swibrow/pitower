@@ -1,0 +1,42 @@
+---
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+# Helm chart configuration
+helmCharts:
+  - name: cryptgeon
+    repo: https://swibrow.github.io/helm-charts/
+    version: 0.1.0
+    releaseName: cryptgeon
+    includeCRDs: false
+    valuesInline:
+      redisEndpoint: redis://default:OoEJQOlAF3@cryptgeon-redis-master.tools.svc.cluster.local
+      redis:
+        enabled: true
+        auth.enabled: false
+        architecture: standalone
+        master:
+          persistence:
+            enabled: true
+            accessModes:
+              - ReadWriteOnce
+            size: 256Mi
+        metrics.enabled: true
+      ingress:
+        enabled: true
+        className: external
+        annotations:
+          external-dns.alpha.kubernetes.io/target: external.${SECRET_DOMAIN}
+        hosts:
+          - host: secrets.${SECRET_DOMAIN}
+            paths:
+              - path: /
+                pathType: Prefix
+        tls:
+          - hosts:
+              - secrets.${SECRET_DOMAIN}
+
+# Common labels for all resources
+commonLabels:
+  app.kubernetes.io/name: cryptgeon
+  app.kubernetes.io/instance: cryptgeon
