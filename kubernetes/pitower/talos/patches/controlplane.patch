@@ -1,9 +1,13 @@
 cluster:
   apiServer:
+    certSANs:
+      - k8s.pitower.internal
+      - 192.168.0.200
+      - 127.0.0.1
     extraArgs:
         # oidc-issuer-url: https://oauth.abc.com/
         # oidc-client-id:
         # oidc-username-claim: email
         # oidc-groups-claim: groups
         service-account-issuer: https://raw.githubusercontent.com/swibrow/pitower/main/kubernetes/pitower
-        service-account-jwks-uri: https://192.168.0.200:6443/openid/v1/jwks
+        service-account-jwks-uri: https://k8s.pitower.internal:6443/openid/v1/jwks

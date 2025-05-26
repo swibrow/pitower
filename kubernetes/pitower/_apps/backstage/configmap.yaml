@@ -127,7 +127,7 @@ data:
       clusterLocatorMethods:
         - type: 'config'
           clusters:
-            - url: https://192.168.0.200:6443
+            - url: https://k8s.pitower.internal:6443
               name: pitower
               authProvider: 'serviceAccount'
               skipTLSVerify: false
