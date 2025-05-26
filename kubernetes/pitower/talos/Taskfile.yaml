@@ -7,7 +7,7 @@ tasks:
       - sops -d ./secrets.sops.yaml > ./secrets.yaml
       - talosctl gen config
         pitower
-        https://192.168.0.200:6443
+        https://k8s.pitower.internal:6443
         --with-secrets ./secrets.yaml
         --with-examples=true
         --config-patch-control-plane @patches/controlplane.patch

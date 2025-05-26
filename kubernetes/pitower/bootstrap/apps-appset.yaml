@@ -33,7 +33,7 @@ spec:
         namespace: "{{index .path.segments 3}}"
       syncPolicy:
         automated:
-          prune: false
+          prune: true
           selfHeal: true
           allowEmpty: true
         syncOptions:
