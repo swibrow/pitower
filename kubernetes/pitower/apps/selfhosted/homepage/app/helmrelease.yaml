@@ -30,7 +30,7 @@ spec:
               tag: v1.2.0
             env:
               TZ: ${TIMEZONE}
-              HOMEPAGE_ALLOWED_HOSTS: home.${SECRET_DOMAIN}
+              HOMEPAGE_ALLOWED_HOSTS: home.pitower.link
               # LOG_LEVEL: debug
             # envFrom:
             #   - secretRef:
@@ -45,7 +45,7 @@ spec:
                     path: /api/healthcheck
                     httpHeaders:
                       - name: Host
-                        value: home.${SECRET_DOMAIN}
+                        value: home.pitower.link
                   initialDelaySeconds: 0
               readiness: *probes
               startup: *probes
@@ -62,12 +62,12 @@ spec:
         enabled: true
         className: external
         annotations:
-          external-dns.alpha.kubernetes.io/target: external.${SECRET_DOMAIN}
+          external-dns.alpha.kubernetes.io/target: external.pitower.link
           # authentik.home.arpa/enabled: "true"
           # nginx.ingress.kubernetes.io/auth-signin: |-
           #   https://${HOSTNAME}/outpost.goauthentik.io/start?rd=$escaped_request_uri
         hosts:
-          - host: home.${SECRET_DOMAIN}
+          - host: home.pitower.link
             paths:
               - path: /
                 service:

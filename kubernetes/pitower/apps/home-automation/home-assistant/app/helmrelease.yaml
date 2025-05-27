@@ -90,10 +90,10 @@ spec:
       app:
         className: external
         annotations:
-          external-dns.alpha.kubernetes.io/target: external.${SECRET_DOMAIN}
+          external-dns.alpha.kubernetes.io/target: external.pitower.link
           nginx.ingress.kubernetes.io/rewrite-target: /$1
         hosts:
-          - host: &host ha.${SECRET_DOMAIN}
+          - host: &host ha.pitower.link
             paths:
               - path: /(.*)
                 service:
@@ -105,12 +105,12 @@ spec:
       code-server:
         className: external
         annotations:
-          external-dns.alpha.kubernetes.io/target: external.${SECRET_DOMAIN}
+          external-dns.alpha.kubernetes.io/target: external.pitower.link
           nginx.ingress.kubernetes.io/rewrite-target: /$1
-          nginx.ingress.kubernetes.io/auth-method: 'GET'
-          nginx.ingress.kubernetes.io/auth-url: 'http://authelia.security.svc.cluster.local/api/authz/auth-request'
-          nginx.ingress.kubernetes.io/auth-signin: 'https://auth.${SECRET_DOMAIN}?rm=$request_method'
-          nginx.ingress.kubernetes.io/auth-response-headers: 'Remote-User,Remote-Name,Remote-Groups,Remote-Email'
+          nginx.ingress.kubernetes.io/auth-method: "GET"
+          nginx.ingress.kubernetes.io/auth-url: "http://authelia.security.svc.cluster.local/api/authz/auth-request"
+          nginx.ingress.kubernetes.io/auth-signin: "https://auth.pitower.link?rm=$request_method"
+          nginx.ingress.kubernetes.io/auth-response-headers: "Remote-User,Remote-Name,Remote-Groups,Remote-Email"
         hosts:
           - host: *host
             paths:

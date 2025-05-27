@@ -48,7 +48,7 @@ spec:
         controller: jellyfin
         type: LoadBalancer
         annotations:
-          external-dns.alpha.kubernetes.io/hostname: jellyfin.${SECRET_DOMAIN}
+          external-dns.alpha.kubernetes.io/hostname: jellyfin.pitower.link
           io.cilium/lb-ipam-ips: "192.168.0.229"
         ports:
           http:
@@ -58,9 +58,9 @@ spec:
       app:
         className: external
         annotations:
-          external-dns.alpha.kubernetes.io/target: external.${SECRET_DOMAIN}
+          external-dns.alpha.kubernetes.io/target: external.pitower.link
         hosts:
-          - host: &host jellyfin.${SECRET_DOMAIN}
+          - host: &host jellyfin.pitower.link
             paths:
               - path: /
                 service:
@@ -101,4 +101,4 @@ spec:
         advancedMounts:
           jellyfin:
             app:
-             - path: /dev/dri
+              - path: /dev/dri

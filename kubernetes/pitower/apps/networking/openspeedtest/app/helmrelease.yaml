@@ -57,9 +57,9 @@ spec:
       app:
         className: external
         annotations:
-          external-dns.alpha.kubernetes.io/target: external.${SECRET_DOMAIN}
+          external-dns.alpha.kubernetes.io/target: external.pitower.link
         hosts:
-          - host: openspeedtest.${SECRET_DOMAIN}
+          - host: openspeedtest.pitower.link
             paths:
               - path: /
                 service:

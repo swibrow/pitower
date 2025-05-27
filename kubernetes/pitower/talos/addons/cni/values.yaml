@@ -25,8 +25,7 @@ securityContext:
 cgroup:
   autoMount:
     enabled: false
-  hostRoot:
-    /sys/fs/cgroup
+  hostRoot: /sys/fs/cgroup
 
 autoDirectNodeRoutes: true
 
@@ -71,10 +70,10 @@ hubble:
       enabled: true
       className: internal
       hosts:
-        - "hubble.${SECRET_DOMAIN}"
+        - "hubble.pitower.link"
       tls:
         - hosts:
-            - "hubble.${SECRET_DOMAIN}"
+            - "hubble.pitower.link"
 ipam:
   mode: kubernetes
 ipv4NativeRoutingCIDR: 10.244.0.0/16

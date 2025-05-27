@@ -38,7 +38,7 @@ spec:
             env:
               TZ: ${TIMEZONE}
               LLDAP_HTTP_PORT: &port 8080
-              LLDAP_HTTP_URL: https://lldap.${SECRET_DOMAIN}
+              LLDAP_HTTP_URL: https://lldap.pitower.link
               LLDAP_LDAP_PORT: &ldapPort 5389
               LLDAP_LDAP_BASE_DN: dc=pitower,dc=link
               LLDAP_KEY_FILE: ""
@@ -58,7 +58,7 @@ spec:
         controller: *app
         type: LoadBalancer
         annotations:
-          external-dns.alpha.kubernetes.io/hostname: lldap.${SECRET_DOMAIN}
+          external-dns.alpha.kubernetes.io/hostname: lldap.pitower.link
           io.cilium/lb-ipam-ips: "192.168.0.222"
         ports:
           http:
@@ -69,7 +69,7 @@ spec:
       app:
         className: internal
         hosts:
-          - host: &host "{{ .Release.Name }}.${SECRET_DOMAIN}"
+          - host: &host "{{ .Release.Name }}.pitower.link"
             paths:
               - path: /
                 service:

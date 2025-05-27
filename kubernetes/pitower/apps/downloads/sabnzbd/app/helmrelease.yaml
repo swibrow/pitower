@@ -44,7 +44,7 @@ spec:
                 sabnzbd.downloads.svc,
                 sabnzbd.downloads.svc.cluster,
                 sabnzbd.downloads.svc.cluster.local,
-                sabnzbd.${SECRET_DOMAIN}
+                sabnzbd.pitower.link
             probes:
               liveness:
                 enabled: true
@@ -77,7 +77,7 @@ spec:
         enabled: true
         className: internal
         hosts:
-          - host: &host "sabnzbd.${SECRET_DOMAIN}"
+          - host: &host "sabnzbd.pitower.link"
             paths:
               - path: /
                 service:

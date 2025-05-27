@@ -1,0 +1,44 @@
+controllers:
+  firefly-importer:
+    annotations:
+      reloader.stakater.com/auto: "true"
+    containers:
+      app:
+        image:
+          repository: fireflyiii/data-importer
+          tag: version-1.5.6
+        resources:
+          requests:
+            cpu: 15m
+            memory: 64Mi
+        env:
+          TZ: ${TIMEZONE}
+          TRUSTED_PROXIES: "**"
+          FIREFLY_III_URL: "http://firefly.banking.svc.cluster.local:8080"
+          VANITY_URL: "https://money.pitower.link"
+          CAN_AUTO_IMPORT: "true"
+          CAN_POST_FILES: "true"
+        envFrom:
+          - secretRef:
+              name: firefly-importer-secret
+service:
+  app:
+    controller: firefly-importer
+    ports:
+      http:
+        port: 8080
+ingress:
+  app:
+    className: internal
+    annotations:
+      nginx.ingress.kubernetes.io/proxy-buffer-size: "16k"
+    hosts:
+      - host: &host money-import.pitower.link
+        paths:
+          - path: /
+            service:
+              identifier: app
+              port: http
+    tls:
+      - hosts:
+          - *host

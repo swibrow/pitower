@@ -33,19 +33,19 @@ data:
                   service_name: Radarr # service name for that widget
     - Automation:
         - Home Assistant:
-            href: https://ha.${SECRET_DOMAIN}
+            href: https://ha.pitower.link
             icon: home-assistant.svg
             widget:
               type: homeassistant
-              url: http://ha.${SECRET_DOMAIN}:8123
+              url: http://ha.pitower.link:8123
               key: {{HOMEPAGE_VAR_HASS_TOKEN}}
     - Infrastructure:
         - Unifi:
-            href: https://unifi.${SECRET_DOMAIN}
+            href: https://unifi.pitower.link
             icon: unifi.png
             widget:
               type: unifi
-              url: https://unifi.${SECRET_DOMAIN}
+              url: https://unifi.pitower.link
               key: {{HOMEPAGE_VAR_UNIFI_TOKEN}}
   settings.yaml: |
     title: Dashboard

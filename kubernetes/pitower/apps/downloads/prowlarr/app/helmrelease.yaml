@@ -81,7 +81,7 @@ spec:
       app:
         className: internal
         hosts:
-          - host: prowlarr.${SECRET_DOMAIN}
+          - host: prowlarr.pitower.link
             paths:
               - path: /
                 service:

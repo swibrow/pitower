@@ -5,9 +5,11 @@ kind: Kustomization
 namespace: banking
 resources:
   - ./externalsecret.yaml
-  - ./helmrelease.yaml
   - ./pvc.yaml
-  - ./secret.sops.yaml
-commonLabels:
-  app.kubernetes.io/name: firefly
-  app.kubernetes.io/instance: firefly
+
+helmCharts:
+  - name: app-template
+    repo: oci://ghcr.io/bjw-s-labs/helm
+    version: 4.0.1
+    releaseName: firefly
+    valuesFile: values.yaml

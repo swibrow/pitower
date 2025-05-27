@@ -26,7 +26,7 @@ spec:
       ingressClassName: internal
       dashboard:
         host:
-          name: &host rook.${SECRET_DOMAIN}
+          name: &host rook.pitower.link
           path: "/"
         tls:
           - hosts:

@@ -63,7 +63,7 @@ spec:
         enabled: true
         className: "internal"
         hosts:
-          - host: &host "sonarr.${SECRET_DOMAIN}"
+          - host: &host "sonarr.pitower.link"
             paths:
               - path: /
                 service:

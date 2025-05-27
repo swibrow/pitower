@@ -14,7 +14,7 @@ spec:
   path: ./kubernetes/pitower/apps/selfhosted/homepage/app
   postBuild:
     substitute:
-      HOSTNAME: home.${SECRET_DOMAIN}
+      HOSTNAME: home.pitower.link
   prune: false
   sourceRef:
     kind: GitRepository

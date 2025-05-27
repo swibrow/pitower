@@ -61,7 +61,7 @@ spec:
               ZIGBEE2MQTT_CONFIG_DEVICE_OPTIONS_LEGACY: true # Revert when blueprints are updated to support z2m 2.0
               ZIGBEE2MQTT_CONFIG_DEVICE_OPTIONS_RETAIN: true
               ZIGBEE2MQTT_CONFIG_FRONTEND_PORT: 8080
-              ZIGBEE2MQTT_CONFIG_FRONTEND_URL: "https://zigbee.${SECRET_DOMAIN}"
+              ZIGBEE2MQTT_CONFIG_FRONTEND_URL: "https://zigbee.pitower.link"
               ZIGBEE2MQTT_CONFIG_MQTT_INCLUDE_DEVICE_INFORMATION: true
               ZIGBEE2MQTT_CONFIG_MQTT_KEEPALIVE: 60
               ZIGBEE2MQTT_CONFIG_MQTT_REJECT_UNAUTHORIZED: false
@@ -113,7 +113,7 @@ spec:
         annotations:
           nginx.ingress.kubernetes.io/rewrite-target: /$1
         hosts:
-          - host: &host "zigbee.${SECRET_DOMAIN}"
+          - host: &host "zigbee.pitower.link"
             paths:
               - path: /(.*)
                 service:

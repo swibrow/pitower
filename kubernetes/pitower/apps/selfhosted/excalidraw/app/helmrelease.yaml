@@ -34,8 +34,8 @@ spec:
             #   requests:
             #     cpu: 5m
             #     memory: 10Mi
-              # limits:
-              #   memory: 512Mi
+            # limits:
+            #   memory: 512Mi
             env:
               PORT: &port 8080
     service:
@@ -48,9 +48,9 @@ spec:
       app:
         className: external
         annotations:
-          external-dns.alpha.kubernetes.io/target: external.${SECRET_DOMAIN}
+          external-dns.alpha.kubernetes.io/target: external.pitower.link
         hosts:
-          - host: &host draw.${SECRET_DOMAIN}
+          - host: &host draw.pitower.link
             paths:
               - path: /
                 service:

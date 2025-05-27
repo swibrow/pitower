@@ -19,7 +19,6 @@ spec:
   values:
     controllers:
       qbittorrent:
-
         pod:
           securityContext:
             fsGroup: 2000
@@ -73,7 +72,7 @@ spec:
       app:
         className: internal
         hosts:
-          - host: qbittorrent.${SECRET_DOMAIN}
+          - host: qbittorrent.pitower.link
             paths:
               - path: /
                 service:

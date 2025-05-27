@@ -35,7 +35,7 @@ spec:
             env:
               READARR__INSTANCE_NAME: Readarr
               READARR__PORT: &port 8787
-              READARR__APPLICATION_URL: "https://readarr.${SECRET_DOMAIN}"
+              READARR__APPLICATION_URL: "https://readarr.pitower.link"
               READARR__LOG_LEVEL: info
               READARR__API_KEY:
                 valueFrom:
@@ -69,7 +69,7 @@ spec:
       app:
         className: internal
         hosts:
-          - host: readarr.${SECRET_DOMAIN}
+          - host: readarr.pitower.link
             paths:
               - path: /
                 service:

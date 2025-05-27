@@ -122,10 +122,10 @@ spec:
           hajimari.io/icon: simple-icons:prometheus
         pathType: Prefix
         hosts:
-          - "prometheus.${SECRET_DOMAIN}"
+          - "prometheus.pitower.link"
         tls:
           - hosts:
-              - "prometheus.${SECRET_DOMAIN}"
+              - "prometheus.pitower.link"
       prometheusSpec:
         externalLabels:
           cluster: pitower

@@ -75,7 +75,7 @@ spec:
       app:
         className: internal
         hosts:
-          - host: autobrr.${SECRET_DOMAIN}
+          - host: autobrr.pitower.link
             paths:
               - path: /
                 service:

@@ -49,9 +49,9 @@ spec:
       app:
         className: external
         annotations:
-          external-dns.alpha.kubernetes.io/target: external.${SECRET_DOMAIN}
+          external-dns.alpha.kubernetes.io/target: external.pitower.link
         hosts:
-          - host: &host house-hunter.${SECRET_DOMAIN}
+          - host: &host house-hunter.pitower.link
             paths:
               - path: /
                 service:

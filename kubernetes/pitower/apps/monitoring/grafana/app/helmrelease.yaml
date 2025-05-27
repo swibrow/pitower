@@ -34,7 +34,7 @@ spec:
       existingSecret: grafana-admin-secret
     env:
       GF_EXPLORE_ENABLED: true
-      GF_SERVER_ROOT_URL: "https://grafana.${SECRET_DOMAIN}"
+      GF_SERVER_ROOT_URL: "https://grafana.pitower.link"
     envFromSecret: grafana-secrets
     grafana.ini:
       analytics:
@@ -42,7 +42,7 @@ spec:
         check_for_plugin_updates: false
         reporting_enabled: false
       auth:
-        signout_redirect_url: "https://auth.${SECRET_DOMAIN}/logout"
+        signout_redirect_url: "https://auth.pitower.link/logout"
         oauth_auto_login: true
         oauth_allow_insecure_email_lookup: true
       auth.generic_oauth:
@@ -52,9 +52,9 @@ spec:
         scopes: openid profile email groups
         client_id: grafana
         empty_scopes: false
-        auth_url: https://auth.${SECRET_DOMAIN}/api/oidc/authorization
-        token_url: https://auth.${SECRET_DOMAIN}/api/oidc/token
-        api_url: https://auth.${SECRET_DOMAIN}/api/oidc/userinfo
+        auth_url: https://auth.pitower.link/api/oidc/authorization
+        token_url: https://auth.pitower.link/api/oidc/token
+        api_url: https://auth.pitower.link/api/oidc/userinfo
         login_attribute_path: preferred_username
         groups_attribute_path: groups
         name_attribute_path: name
@@ -254,9 +254,9 @@ spec:
       enabled: true
       ingressClassName: external
       annotations:
-        external-dns.alpha.kubernetes.io/target: external.${SECRET_DOMAIN}
+        external-dns.alpha.kubernetes.io/target: external.pitower.link
       hosts:
-        - &host "grafana.${SECRET_DOMAIN}"
+        - &host "grafana.pitower.link"
       tls:
         - hosts:
             - *host
