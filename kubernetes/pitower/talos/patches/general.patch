@@ -15,11 +15,11 @@ machine:
         enabled: true
         forwardKubeDNSToHost: false
         resolveMemberNames: true
-  network:
-    extraHostEntries:
-      - ip: 192.168.0.200
-        aliases:
-          - k8s.pitower.internal
+  # network:
+  #   extraHostEntries:
+  #     - ip: 192.168.0.200
+  #       aliases:
+  #         - k8s.pitower.internal
 cluster:
   network:
     cni:

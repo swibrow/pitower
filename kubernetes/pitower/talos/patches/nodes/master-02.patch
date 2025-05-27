@@ -6,8 +6,8 @@ machine:
       - deviceSelector:
           physical: true
         dhcp: true
-        vip:
-          ip: 192.168.0.200
+        # vip:
+        #   ip: 192.168.0.200
   install:
     image: factory.talos.dev/installer/de94b242ed9adec9def2581ffbf1e2d1873e42b17032771770d241dee54d7c00:v1.9.5
     extraKernelArgs:
