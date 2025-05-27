@@ -5,7 +5,7 @@ metadata:
 spec:
   acme:
     server: https://acme-v02.api.letsencrypt.org/directory
-    email: "${SECRET_ACME_EMAIL}"
+    email: sam.wibrow.wa@gmail.com
     privateKeySecretRef:
       name: letsencrypt-production
     solvers:
@@ -25,7 +25,7 @@ metadata:
 spec:
   acme:
     server: https://acme-staging-v02.api.letsencrypt.org/directory
-    email: "${SECRET_ACME_EMAIL}"
+    email: sam.wibrow.wa@gmail.com
     privateKeySecretRef:
       name: letsencrypt-staging
     solvers:
