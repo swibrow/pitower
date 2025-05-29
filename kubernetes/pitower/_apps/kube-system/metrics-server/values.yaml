@@ -1,0 +1,15 @@
+metrics:
+  enabled: true
+serviceMonitor:
+  enabled: true
+replicas: 2
+tolerations:
+  - effect: NoSchedule
+    key: node-role.kubernetes.io/master
+    operator: Exists
+nodeAffinity:
+  requiredDuringSchedulingIgnoredDuringExecution:
+    nodeSelectorTerms:
+      - matchExpressions:
+          - key: node-role.kubernetes.io/master
+            operator: Exists

@@ -1,0 +1,11 @@
+crds:
+  enabled: true
+csi:
+  enableCephfsDriver: false
+monitoring:
+  enabled: true
+resources:
+  requests:
+    memory: 128Mi
+    cpu: 100m
+  limits: {}

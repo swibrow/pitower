@@ -1,0 +1,104 @@
+toolbox:
+  enabled: true
+
+monitoring:
+  enabled: true
+  createPrometheusRules: true
+
+ingress:
+  ingressClassName: internal
+  dashboard:
+    host:
+      name: &host rook.pitower.link
+      path: "/"
+    tls:
+      - hosts:
+          - *host
+
+configOverride: |
+  [global]
+  bdev_enable_discard = true
+  bdev_async_discard = true
+
+cephClusterSpec:
+  network:
+    provider: host
+
+  resources:
+    mgr:
+      requests:
+        cpu: "125m"
+        memory: "512Mi"
+      limits:
+        memory: "2Gi"
+    mon:
+      requests:
+        cpu: "49m"
+        memory: "512Mi"
+      limits:
+        memory: "1Gi"
+    osd:
+      requests:
+        cpu: "442m"
+        memory: "1Gi"
+      limits:
+        memory: "6Gi"
+    mgr-sidecar:
+      requests:
+        cpu: "49m"
+        memory: "128Mi"
+      limits:
+        memory: "256Mi"
+    crashcollector:
+      requests:
+        cpu: "15m"
+        memory: "64Mi"
+      limits:
+        memory: "64Mi"
+    logcollector:
+      requests:
+        cpu: "100m"
+        memory: "100Mi"
+      limits:
+        memory: "1Gi"
+    cleanup:
+      requests:
+        cpu: "250m"
+        memory: "100Mi"
+      limits:
+        memory: "1Gi"
+
+  crashCollector:
+    disable: false
+
+  dashboard:
+    enabled: true
+    urlPrefix: /
+    ssl: false
+
+  storage:
+    useAllNodes: false
+    useAllDevices: false
+    config:
+      osdsPerDevice: "1"
+    nodes:
+      - name: "worker-01"
+        devices:
+          - name: "/dev/disk/by-id/nvme-AirDisk_512GB_SSD_NFQ0044006866P70GX"
+      - name: "worker-02"
+        devices:
+          - name: "/dev/disk/by-id/nvme-AirDisk_512GB_SSD_NFQ0044007344P70GX"
+      - name: "worker-03"
+        devices:
+          - name: "/dev/disk/by-id/nvme-AirDisk_512GB_SSD_NFQ0044010702P70GX"
+
+  cleanupPolicy:
+    # set to "yes-really-destroy-data" to enable the cleanup job to delete all data when deleting the cluster
+    confirmation: ""
+
+cephBlockPoolsVolumeSnapshotClass:
+  enabled: true
+
+cephFileSystems: []
+
+cephObjectStores: []

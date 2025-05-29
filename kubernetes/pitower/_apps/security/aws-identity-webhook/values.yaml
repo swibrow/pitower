@@ -1,0 +1,18 @@
+replicaCount: 2
+config:
+  annotationPrefix: eks.amazonaws.com
+  defaultAwsRegion: ""
+  stsRegionalEndpoint: false
+pki:
+  certManager:
+    enabled: true
+securityContext:
+  runAsNonRoot: true
+  runAsUser: 65534
+  runAsGroup: 65534
+  allowPrivilegeEscalation: false
+  readOnlyRootFilesystem: true
+  capabilities:
+    drop: ["ALL"]
+  seccompProfile:
+    type: RuntimeDefault

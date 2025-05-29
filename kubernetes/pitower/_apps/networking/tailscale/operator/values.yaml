@@ -1,0 +1,4 @@
+operatorConfig:
+  hostname: tailscale-operator
+apiServerProxyConfig:
+  mode: "true"
