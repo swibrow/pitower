@@ -1,0 +1,92 @@
+controllers:
+  sabnzbd:
+    annotations:
+      reloader.stakater.com/auto: "true"
+    pod:
+      nodeSelector:
+        kubernetes.io/arch: amd64
+      securityContext:
+        runAsUser: 568
+        runAsGroup: 568
+        fsGroup: 568
+        fsGroupChangePolicy: OnRootMismatch
+
+    containers:
+      app:
+        image:
+          repository: ghcr.io/onedr0p/sabnzbd
+          tag: 4.4.1@sha256:36674664a94760ae934c09b1d97546a3e79a0f110edda88085e74778c26d68e3
+        env:
+          SABNZBD__PORT: &port 8080
+          SABNZBD__HOST_WHITELIST_ENTRIES: >-
+            sabnzbd,
+            sabnzbd.downloads,
+            sabnzbd.downloads.svc,
+            sabnzbd.downloads.svc.cluster,
+            sabnzbd.downloads.svc.cluster.local,
+            sabnzbd.pitower.link
+        probes:
+          liveness:
+            enabled: true
+          readiness:
+            enabled: true
+          startup:
+            enabled: true
+            spec:
+              failureThreshold: 30
+              periodSeconds: 5
+        resources:
+          requests:
+            cpu: 100m
+            memory: 512Mi
+        securityContext:
+          allowPrivilegeEscalation: false
+          readOnlyRootFilesystem: true
+          capabilities:
+            drop:
+              - ALL
+service:
+  app:
+    controller: sabnzbd
+    ports:
+      http:
+        port: *port
+
+ingress:
+  app:
+    enabled: true
+    className: internal
+    hosts:
+      - host: &host "sabnzbd.pitower.link"
+        paths:
+          - path: /
+            service:
+              identifier: app
+              port: http
+    tls:
+      - hosts:
+          - *host
+
+persistence:
+  config:
+    existingClaim: sabnzbd-config
+    advancedMounts:
+      sabnzbd:
+        app:
+          - path: /config
+  media:
+    type: nfs
+    server: data
+    path: /volume1/media
+    globalMounts:
+      - path: /data/nas-media
+  downloads:
+    existingClaim: sabnzbd-downloads
+    advancedMounts:
+      sabnzbd:
+        app:
+          - path: /downloads
+  tmp:
+    type: emptyDir
+    globalMounts:
+      - path: /tmp
