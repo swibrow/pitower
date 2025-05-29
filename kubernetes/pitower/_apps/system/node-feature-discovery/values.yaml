@@ -1,0 +1,18 @@
+prometheus:
+  enable: true
+master:
+  resources:
+    requests:
+      cpu: 21m
+      memory: 51Mi
+worker:
+  config:
+    core:
+      sources:
+        - pci
+        - system
+        - usb
+  resources:
+    requests:
+      cpu: 5m
+      memory: 48Mi

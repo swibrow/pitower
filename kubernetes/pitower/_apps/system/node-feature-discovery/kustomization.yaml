@@ -1,0 +1,15 @@
+---
+# yaml-language-server: $schema=https://raw.githubusercontent.com/SchemaStore/schemastore/master/src/schemas/json/kustomization.json
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+namespace: system
+resources:
+  - rules/eaton.yaml
+  - rules/zigbee.yaml
+
+helmCharts:
+  - name: node-feature-discovery
+    repo: https://kubernetes-sigs.github.io/node-feature-discovery/charts
+    version: 0.17.3
+    releaseName: node-feature-discovery
+    valuesFile: values.yaml

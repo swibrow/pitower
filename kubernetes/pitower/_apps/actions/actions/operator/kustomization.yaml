@@ -1,0 +1,16 @@
+---
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+namespace: actions
+resources:
+  - externalsecret.yaml
+  - podmonitor.yaml
+  # Grafana Dashboard
+  - dashboard
+
+helmCharts:
+  - name: actions-runner-controller
+    repo: https://actions-runner-controller.github.io/actions-runner-controller
+    # version: 0.32.1
+    releaseName: actions-runner-controller
+    valuesFile: values.yaml
