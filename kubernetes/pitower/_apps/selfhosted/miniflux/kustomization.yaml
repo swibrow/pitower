@@ -5,7 +5,6 @@ kind: Kustomization
 namespace: selfhosted
 resources:
   - externalsecret.yaml
-# - ./pvc.yaml
 
 helmCharts:
   - name: app-template

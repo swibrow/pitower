@@ -4,8 +4,8 @@ apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 namespace: downloads
 resources:
+  - externalsecret.yaml
   - pvc.yaml
-  - bookbounty.yaml
 
 helmCharts:
   - name: app-template

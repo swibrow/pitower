@@ -23,7 +23,7 @@ controllers:
           PORT: &port 8080
 service:
   app:
-    controller: *app
+    controller: excalidraw
     ports:
       http:
         port: *port

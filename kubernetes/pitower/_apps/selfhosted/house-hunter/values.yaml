@@ -21,7 +21,7 @@ controllers:
 
 service:
   app:
-    controller: *appname
+    controller: house-hunter
     ports:
       http:
         port: 8000
