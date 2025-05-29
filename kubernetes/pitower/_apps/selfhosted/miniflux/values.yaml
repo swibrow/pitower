@@ -1,0 +1,70 @@
+controllers:
+  miniflux:
+    strategy: RollingUpdate
+    annotations:
+      reloader.stakater.com/auto: "true"
+
+    pod:
+      securityContext:
+        runAsUser: 2000
+        runAsGroup: 2000
+
+    containers:
+      app:
+        image:
+          repository: ghcr.io/miniflux/miniflux
+          tag: 2.2.9-distroless
+        env:
+          BASE_URL: https://miniflux.pitower.link
+          CREATE_ADMIN: "1"
+          DEBUG: "1"
+          LOG_DATE_TIME: "1"
+          POLLING_SCHEDULER: "entry_frequency"
+          POLLING_FREQUENCY: "15"
+          RUN_MIGRATIONS: "1"
+        envFrom:
+          - secretRef:
+              name: miniflux-secret
+          - secretRef:
+              name: miniflux-db-secret
+        probes:
+          liveness:
+            enabled: true
+            custom: true
+            spec:
+              initialDelaySeconds: 30
+              periodSeconds: 10
+              timeoutSeconds: 1
+              failureThreshold: 3
+              httpGet:
+                path: /healthcheck
+                port: 8080
+        resources:
+          requests:
+            cpu: 12m
+            memory: 64M
+          limits:
+            memory: 256M
+
+service:
+  app:
+    controller: miniflux
+    ports:
+      http:
+        port: 8080
+
+ingress:
+  app:
+    className: external
+    annotations:
+      external-dns.alpha.kubernetes.io/target: external.pitower.link
+    hosts:
+      - host: &host miniflux.pitower.link
+        paths:
+          - path: /
+            service:
+              identifier: app
+              port: http
+    tls:
+      - hosts:
+          - *host

@@ -1,0 +1,43 @@
+controllers:
+  house-hunter:
+    annotations:
+      reloader.stakater.com/auto: "true"
+
+    containers:
+      app:
+        image:
+          repository: ghcr.io/swibrow/house-hunter
+          tag: latest
+          pullPolicy: Always
+        envFrom:
+          - secretRef:
+              name: house-hunter-db-secret
+        resources:
+          requests:
+            cpu: 10m
+            memory: 128Mi
+          limits:
+            memory: 512Mi
+
+service:
+  app:
+    controller: *appname
+    ports:
+      http:
+        port: 8000
+
+ingress:
+  app:
+    className: external
+    annotations:
+      external-dns.alpha.kubernetes.io/target: external.pitower.link
+    hosts:
+      - host: &host house-hunter.pitower.link
+        paths:
+          - path: /
+            service:
+              identifier: app
+              port: http
+    tls:
+      - hosts:
+          - *host

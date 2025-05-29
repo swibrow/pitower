@@ -1,8 +1,9 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
+namespace: actions
 resources:
   - ./podmonitor.yaml
-  - ./rbac.yaml
+  # - ./rbac.yaml
 
 helmCharts:
   - name: pitower

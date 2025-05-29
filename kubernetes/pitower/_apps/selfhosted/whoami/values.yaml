@@ -1,0 +1,37 @@
+controllers:
+  whoami:
+    strategy: RollingUpdate
+    containers:
+      app:
+        image:
+          repository: docker.io/traefik/whoami
+          tag: v1.11.0
+        env:
+          WHOAMI_PORT_NUMBER: &port 8080
+        probes:
+          liveness: &probes
+            enabled: true
+            custom: true
+            spec:
+              httpGet:
+                port: *port
+          readiness: *probes
+service:
+  app:
+    controller: whoami
+    ports:
+      http:
+        port: *port
+ingress:
+  app:
+    enabled: true
+    className: external
+    annotations:
+      external-dns.alpha.kubernetes.io/target: external.pitower.link
+    hosts:
+      - host: whoami.pitower.link
+        paths:
+          - path: /
+            service:
+              identifier: app
+              port: http
