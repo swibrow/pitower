@@ -1,0 +1,44 @@
+controllers:
+  mosquitto:
+    annotations:
+      reloader.stakater.com/auto: "true"
+    containers:
+      app:
+        image:
+          repository: docker.io/library/eclipse-mosquitto
+          tag: 2.0.21@sha256:94f5a3d7deafa59fa3440d227ddad558f59d293c612138de841eec61bfa4d353
+        securityContext:
+          allowPrivilegeEscalation: false
+          readOnlyRootFilesystem: true
+          capabilities: { drop: ["ALL"] }
+    pod:
+      securityContext:
+        runAsUser: 568
+        runAsGroup: 568
+        runAsNonRoot: true
+        fsGroup: 568
+        fsGroupChangePolicy: OnRootMismatch
+service:
+  app:
+    controller: mosquitto
+    type: LoadBalancer
+    annotations:
+      external-dns.alpha.kubernetes.io/hostname: mosquitto.pitower.link
+      io.cilium/lb-ipam-ips: 192.168.0.226
+    ports:
+      http:
+        port: 1883
+persistence:
+  config:
+    enabled: true
+    existingClaim: mosquitto
+    globalMounts:
+      - path: /data
+  config-file:
+    type: configMap
+    name: mosquitto-configmap
+    advancedMounts:
+      mosquitto:
+        app:
+          - path: /mosquitto/config/mosquitto.conf
+            subPath: mosquitto.conf
