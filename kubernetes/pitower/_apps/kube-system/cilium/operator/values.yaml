@@ -106,7 +106,7 @@ localRedirectPolicy: true
 prometheus:
   enabled: true
   serviceMonitor:
-    enabled: true
+    enabled: false
     trustCRDsExist: true
 
 ### Check these values
