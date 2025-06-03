@@ -3,7 +3,7 @@ crds:
 csi:
   enableCephfsDriver: false
 monitoring:
-  enabled: true
+  enabled: false
 resources:
   requests:
     memory: 128Mi
