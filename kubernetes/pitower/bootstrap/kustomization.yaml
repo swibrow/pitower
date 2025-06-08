@@ -5,7 +5,7 @@ resources:
   - namespace.yaml
   # - secrets.sops.yaml
   - apps-appproject.yaml
-  - apps-appset.yaml
+  # - apps-appset.yaml
 
 helmCharts:
   - name: argo-cd
