@@ -4,7 +4,7 @@ data:
 kind: Secret
 metadata:
     name: sops-age
-    namespace: flux-system
+    namespace: argocd
 type: Opaque
 sops:
     kms: []
@@ -21,8 +21,8 @@ sops:
             UWkwWmNDaThjQW9DWG53QXlkTWhQeU0Kl/xaJNWpyTuLlFWvarP+XQS+GroFGia1
             zMWQzvkKXs/qGAf0wg9l3kjOoz8wtTxvl6b5SHv4lmG1AdpSFNRLmg==
             -----END AGE ENCRYPTED FILE-----
-    lastmodified: "2024-02-01T19:28:51Z"
-    mac: ENC[AES256_GCM,data:YgFY7aJjnZ/ettShIwXYCt8yUIgaDt9FC9A6ATEOA6zDZN9tuKT8nA1jbX4J1EaupTzR/MS+Mwx+fcqvQHtDh6qAquEq+Ge/Gqgp1pt9+E2GLS6I6wm5kzgWXyBLI+684HfXDz2afzBlRSKYcaSk/2K+y0SDFS1Jai6IXSn9Xug=,iv:rN2euLjDQllKTIRmhlfPaMAbOcaEsUZDKuI1jkhhX4U=,tag:+rEDCi+4TnpFno9qE5Kaog==,type:str]
+    lastmodified: "2025-06-08T11:22:14Z"
+    mac: ENC[AES256_GCM,data:7PKMB9uWZsAR/uKNc6LHnZoTilTOSIlOYNtetH8rtgJUkakvNHrXpKEltvBvWXN8Io3BNT+/B4lFDRXf3OemM9xSiPaH0xfL6gcOrZR8RvtFyf1+43Y/O0rAi0ExS3OPKewZ67jI70N0LLJXhw51XNCYId/FusquCkqp7uY4kEA=,iv:UnL6BMwSIvtyEHZ0sds7tF3G2fr6rTDy4J9Usf1k5ic=,tag:RBzdl1rHRuq6jl+73jawag==,type:str]
     pgp: []
     encrypted_regex: ^(data|stringData)$
-    version: 3.8.1
+    version: 3.9.1
