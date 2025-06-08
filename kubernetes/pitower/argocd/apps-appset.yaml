@@ -16,14 +16,14 @@ spec:
     preserveResourcesOnDeletion: true # Prevents deletion of resources when the ApplicationSet is deleted
   template:
     metadata:
-      name: "{{.path.basename}}"
+      name: "{{index .path.segments 3}}-{{.path.basename}}"
       namespace: argocd
       labels:
         app.kubernetes.io/category: "{{index .path.segments 3}}"
         app.kubernetes.io/name: "{{.path.basename}}"
         app.kubernetes.io/instance: "{{.path.basename}}"
-      finalizers:
-        - resources-finalizer.argocd.argoproj.io
+      # finalizers:
+      #   - resources-finalizer.argocd.argoproj.io
     spec:
       project: apps
       source:
