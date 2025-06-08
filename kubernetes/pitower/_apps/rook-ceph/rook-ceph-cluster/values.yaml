@@ -94,7 +94,7 @@ cephClusterSpec:
 
   cleanupPolicy:
     # set to "yes-really-destroy-data" to enable the cleanup job to delete all data when deleting the cluster
-    confirmation: ""
+    confirmation: "yes-really-destroy-data"
 
 cephBlockPoolsVolumeSnapshotClass:
   enabled: true
