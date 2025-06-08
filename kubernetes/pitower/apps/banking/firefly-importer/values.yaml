@@ -12,7 +12,7 @@ controllers:
             cpu: 15m
             memory: 64Mi
         env:
-          TZ: ${TIMEZONE}
+          TZ: Europe/Zurich
           TRUSTED_PROXIES: "**"
           FIREFLY_III_URL: "http://firefly.banking.svc.cluster.local:8080"
           VANITY_URL: "https://money.pitower.link"

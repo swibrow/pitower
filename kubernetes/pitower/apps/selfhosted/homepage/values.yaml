@@ -9,7 +9,7 @@ controllers:
           repository: ghcr.io/gethomepage/homepage
           tag: v1.2.0
         env:
-          TZ: ${TIMEZONE}
+          TZ: Europe/Zurich
           HOMEPAGE_ALLOWED_HOSTS: home.pitower.link
           # LOG_LEVEL: debug
         # envFrom:

@@ -11,7 +11,7 @@ controllers:
           - --config
           - /config/glance.yml
         env:
-          TZ: "${TIMEZONE}"
+          TZ: Europe/Zurich
         securityContext:
           allowPrivilegeEscalation: false
           readOnlyRootFilesystem: true

@@ -44,7 +44,7 @@ controller:
       namespaceSelector:
         any: true
   extraArgs:
-    default-ssl-certificate: "networking/${SECRET_DOMAIN/./-}-production-tls"
+    default-ssl-certificate: "networking/pitower-link-production-tls"
   topologySpreadConstraints:
     - maxSkew: 1
       topologyKey: kubernetes.io/hostname

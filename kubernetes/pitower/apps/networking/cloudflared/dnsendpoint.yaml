@@ -8,4 +8,4 @@ spec:
   endpoints:
     - dnsName: "external.pitower.link"
       recordType: CNAME
-      targets: ["${SECRET_CLOUDFLARE_TUNNEL_ID}.cfargotunnel.com"]
+      targets: ["7ee9277a-e2f3-45ae-a0ac-4e85d39fc334.cfargotunnel.com"]

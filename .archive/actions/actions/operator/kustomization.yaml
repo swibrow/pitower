@@ -11,6 +11,7 @@ resources:
 helmCharts:
   - name: actions-runner-controller
     repo: https://actions-runner-controller.github.io/actions-runner-controller
-    # version: 0.32.1
+    version: 0.23.7
     releaseName: actions-runner-controller
     valuesFile: values.yaml
+    includeCRDs: true

@@ -18,7 +18,7 @@ controllers:
           repository: ghcr.io/lldap/lldap
           tag: v0.6.1@sha256:4931eeeb841b1bbf5774161b5fd9dab88f41ffeb4b08ca656f0b7595cd7cb52a
         env:
-          TZ: ${TIMEZONE}
+          TZ: Europe/Zurich
           LLDAP_HTTP_PORT: &port 8080
           LLDAP_HTTP_URL: https://lldap.pitower.link
           LLDAP_LDAP_PORT: &ldapPort 5389

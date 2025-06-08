@@ -83,15 +83,17 @@ bgp:
 endpointRoutes:
   enabled: true
 
+# Disabled until issues are fixed
 envoy:
-  enabled: true
+  enabled: false
   rollOutPods: true
 
 gatewayAPI:
-  enabled: true
+  enabled: false
   enableAlpn: true
   enableAppProtocol: true
 
+#################################
 ipam:
   mode: kubernetes
 ipv4NativeRoutingCIDR: 10.244.0.0/16

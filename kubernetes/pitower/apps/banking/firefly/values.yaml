@@ -17,7 +17,7 @@ controllers:
           - secretRef:
               name: firefly-db-secrets
         env:
-          TZ: ${TIMEZONE}
+          TZ: Europe/Zurich
           TRUSTED_PROXIES: "**"
           MAIL_MAILER: log
           MAIL_HOST: smtp-relay.gmail.com
