@@ -84,7 +84,13 @@ endpointRoutes:
   enabled: true
 
 envoy:
-  enabled: false
+  enabled: true
+  rollOutPods: true
+
+gatewayAPI:
+  enabled: true
+  enableAlpn: true
+  enableAppProtocol: true
 
 ipam:
   mode: kubernetes
@@ -118,3 +124,4 @@ dashboards:
 rollOutCiliumPods: true
 
 routingMode: native
+

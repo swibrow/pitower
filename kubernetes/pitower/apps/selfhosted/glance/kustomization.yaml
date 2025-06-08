@@ -14,9 +14,6 @@ configMapGenerator:
   - name: glance-config
     files:
       - glance.yml=./resources/glance.yaml
-    options:
-      annotations:
-        kustomize.toolkit.fluxcd.io/substitute: disabled
 
 generatorOptions:
   disableNameSuffixHash: true

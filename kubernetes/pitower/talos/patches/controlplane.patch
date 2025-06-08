@@ -1,5 +1,7 @@
 cluster:
   allowSchedulingOnControlPlanes: true
+  coreDNS:
+      disabled: true
   apiServer:
     certSANs:
       # - k8s.pitower.internal
