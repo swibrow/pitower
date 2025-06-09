@@ -1,7 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: ApplicationSet
 metadata:
-  name: cert-manager
+  name: monitoring
   namespace: argocd
 spec:
   goTemplate: true
@@ -11,7 +11,7 @@ spec:
         repoURL: https://github.com/swibrow/pitower
         revision: main
         directories:
-          - path: pitower/kubernetes/apps/cert-manager/*
+          - path: pitower/kubernetes/apps/monitoring/*
   # syncPolicy:
   #   preserveResourcesOnDeletion: true # Prevents deletion of resources when the ApplicationSet is deleted
   template:
