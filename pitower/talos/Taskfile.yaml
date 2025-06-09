@@ -33,17 +33,18 @@ tasks:
   init:
     dir: ./clusterconfig
     cmds:
-      - talosctl apply-config --insecure --nodes 192.168.0.201 --file ./master-01.yaml
-      - talosctl apply-config --insecure --nodes 192.168.0.202 --file ./master-02.yaml
-      - talosctl apply-config --insecure --nodes 192.168.0.203 --file ./master-03.yaml
-      - talosctl config endpoint 192.168.0.201 192.168.0.202 192.168.0.203
+      # - talosctl apply-config --insecure --nodes 192.168.0.201 --file ./worker-01.yaml
+      - talosctl apply-config --insecure --nodes 192.168.0.202 --file ./worker-02.yaml
+      # - talosctl apply-config --insecure --nodes 192.168.0.203 --file ./worker-03.yaml
+      # - talosctl config endpoint 192.168.0.201 192.168.0.202 192.168.0.203
       # - talosctl config merge ~/.talos/config
       # - talosctl bootstrap --nodes 192.168.0.201
 
   bootstrap:
     dir: ./clusterconfig
     cmds:
-      - talosctl kubeconfig --nodes 192.168.0.200 --force
+      - talosctl bootstrap --nodes 192.168.0.201
+      - talosctl kubeconfig --nodes 192.168.0.250
 
   flux:
     cmds:
@@ -57,19 +58,19 @@ tasks:
     env:
       TALOSCONFIG: talosconfig
     cmds:
-      - talosctl apply-config --endpoints 192.168.0.241 --nodes 192.168.0.241 --file ./worker-01.yaml
-      - talosctl apply-config --endpoints 192.168.0.242 --nodes 192.168.0.242 --file ./worker-02.yaml
-      - talosctl apply-config --endpoints 192.168.0.243 --nodes 192.168.0.243 --file ./worker-03.yaml
+      - talosctl apply-config --endpoints 192.168.0.201 --nodes 192.168.0.201 --file ./worker-01.yaml
+      - talosctl apply-config --endpoints 192.168.0.202 --nodes 192.168.0.202 --file ./worker-02.yaml
+      - talosctl apply-config --endpoints 192.168.0.203 --nodes 192.168.0.203 --file ./worker-03.yaml
 
   apply:workers:
     dir: ./clusterconfig
     cmds:
-      - talosctl apply-config --nodes 192.168.0.214 --file ./worker-04.yaml
+      - talosctl apply-config --nodes 192.168.0.204 --file ./worker-04.yaml
       # - talosctl apply-config --nodes 192.168.0.215 --file ./worker-05.yaml
       # - talosctl apply-config --nodes 192.168.0.216 --file ./worker-06.yaml
-      - talosctl apply-config --nodes 192.168.0.201 --file ./worker-pi-01.yaml
-      - talosctl apply-config --nodes 192.168.0.202 --file ./worker-pi-02.yaml
-      - talosctl apply-config --nodes 192.168.0.203 --file ./worker-pi-03.yaml
+      - talosctl apply-config --nodes 192.168.0.211 --file ./worker-pi-01.yaml
+      - talosctl apply-config --nodes 192.168.0.212 --file ./worker-pi-02.yaml
+      - talosctl apply-config --nodes 192.168.0.213 --file ./worker-pi-03.yaml
 
   apply:worker:
     dir: ./clusterconfig
@@ -104,7 +105,7 @@ tasks:
 
   # workers:nuke:
   #   cmds:
-  #     - for: ["1", "2", "3", "5", "6"]
+  #     - for: ["1", "2", "3", "4", "5", "6"]
   #       cmd: >
   #         talosctl reset
   #         --system-labels-to-wipe=STATE
@@ -117,12 +118,11 @@ tasks:
 
   # controlplanes:nuke:
   #   cmds:
-  #     - for: ["1", "2", "3"]
+  #     - for: ["2", "3"]
   #       cmd: >
   #         talosctl reset
   #         --system-labels-to-wipe=STATE
   #         --system-labels-to-wipe=EPHEMERAL
-  #         --system-labels-to-wipe=META
   #         --graceful=false
   #         --reboot
   #         --wait=false
@@ -130,10 +130,10 @@ tasks:
 
   controlplanes:upgrade:
     env:
-      IMAGE: factory.talos.dev/installer/de94b242ed9adec9def2581ffbf1e2d1873e42b17032771770d241dee54d7c00:v1.9.5
+      IMAGE: factory.talos.dev/installer/de94b242ed9adec9def2581ffbf1e2d1873e42b17032771770d241dee54d7c00:v1.10.3
 
     cmds:
-      - for: ["1", "2", "3"]
+      - for: ["2", "3"]
         cmd: >
           talosctl upgrade
           --image $IMAGE
@@ -141,9 +141,34 @@ tasks:
           --preserve
           --wait
 
-  workers:upgrade:amd:
+  controlplanes:upgrade:amd:
     env:
-      IMAGE: factory.talos.dev/installer/f19ad7b4a5d29151f3a59ef2d9c581cf89e77142e52f0abb5022e8f0b95ad0b9:v1.9.5
+      IMAGE: factory.talos.dev/installer/f19ad7b4a5d29151f3a59ef2d9c581cf89e77142e52f0abb5022e8f0b95ad0b9:v1.10.3
+
+    cmds:
+      - for: ["3"]
+        cmd: >
+          talosctl upgrade
+          --image $IMAGE
+          --nodes 192.168.0.20{{ .ITEM }}
+          --preserve
+          --wait
+  workers:upgrade:intel:
+    env:
+      IMAGE: factory.talos.dev/installer/97bf8e92fc6bba0f03928b859c08295d7615737b29db06a97be51dc63004e403:v1.10.3
+
+    cmds:
+      - for: ["4"]
+        cmd: >
+          talosctl upgrade
+          --image $IMAGE
+          --nodes 192.168.0.20{{ .ITEM }}
+          --preserve
+          --wait
+
+  workers:upgrade:raspberrypi:
+    env:
+      IMAGE: factory.talos.dev/installer/a862538d0862e8ad5b17fadc2b56599677101537b3f75926085d8cbff4a411b9:v1.10.3
 
     cmds:
       - for: ["1", "2", "3"]
@@ -153,31 +178,7 @@ tasks:
           --nodes 192.168.0.21{{ .ITEM }}
           --preserve
           --wait
-  workers:upgrade:intel:
-    env:
-      IMAGE: factory.talos.dev/installer/97bf8e92fc6bba0f03928b859c08295d7615737b29db06a97be51dc63004e403:v1.9.5
 
-    cmds:
-      - for: ["4"]
-        cmd: >
-          talosctl upgrade
-          --image $IMAGE
-          --nodes 192.168.0.21{{ .ITEM }}
-          --preserve
-          --wait
-
-  workers:upgrade:raspberrypi:
-    env:
-      IMAGE: factory.talos.dev/installer/a862538d0862e8ad5b17fadc2b56599677101537b3f75926085d8cbff4a411b9:v1.9.5
-
-    cmds:
-      - for: [""]
-        cmd: >
-          talosctl upgrade
-          --image $IMAGE
-          --nodes 192.168.0.21{{ .ITEM }}
-          --preserve
-          --wait
   image-id:
     dir: ./extensions
     silent: true
