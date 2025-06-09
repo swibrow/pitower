@@ -97,7 +97,7 @@ cephClusterSpec:
     confirmation: ""
 
 cephBlockPoolsVolumeSnapshotClass:
-  enabled: true
+  enabled: false # Enable this later
 
 cephFileSystems: []
 
