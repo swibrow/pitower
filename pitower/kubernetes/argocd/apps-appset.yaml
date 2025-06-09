@@ -11,7 +11,7 @@ spec:
         repoURL: https://github.com/swibrow/pitower
         revision: main
         directories:
-          - path: kubernetes/pitower/apps/*/*
+          - path: pitower/kubernetes/apps/*/*
   syncPolicy:
     preserveResourcesOnDeletion: true # Prevents deletion of resources when the ApplicationSet is deleted
   template:
@@ -35,7 +35,7 @@ spec:
         namespace: "{{index .path.segments 3}}"
       syncPolicy:
         automated:
-          prune: false
+          prune: true
           selfHeal: false
           allowEmpty: true
         syncOptions:

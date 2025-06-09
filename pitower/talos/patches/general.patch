@@ -3,9 +3,9 @@ machine:
     extraArgs:
       rotate-server-certificates: true
     extraMounts:
-      - destination: /var/openebs/local
+      - destination: /var/mnt/extra
         type: bind
-        source: /var/openebs/local
+        source: /var/mnt/extra
         options:
           - rbind
           - rshared
