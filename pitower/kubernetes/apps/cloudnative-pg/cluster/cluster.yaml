@@ -4,7 +4,7 @@ apiVersion: postgresql.cnpg.io/v1
 kind: Cluster
 metadata:
   name: postgres
-  namespace: database
+  namespace: cloudnative-pg
 spec:
   instances: 2
   imageName: ghcr.io/cloudnative-pg/postgresql:16
@@ -27,7 +27,7 @@ apiVersion: postgresql.cnpg.io/v1
 kind: Cluster
 metadata:
   name: tandoor
-  namespace: database
+  namespace: cloudnative-pg
 spec:
   instances: 2
   imageName: ghcr.io/cloudnative-pg/postgresql:16
@@ -46,7 +46,7 @@ apiVersion: postgresql.cnpg.io/v1
 kind: Cluster
 metadata:
   name: autobrr
-  namespace: database
+  namespace: cloudnative-pg
 spec:
   instances: 2
   imageName: ghcr.io/cloudnative-pg/postgresql:16
@@ -65,7 +65,7 @@ apiVersion: postgresql.cnpg.io/v1
 kind: Cluster
 metadata:
   name: backstage
-  namespace: database
+  namespace: cloudnative-pg
 spec:
   instances: 2
   imageName: ghcr.io/cloudnative-pg/postgresql:16
@@ -81,7 +81,7 @@ apiVersion: postgresql.cnpg.io/v1
 kind: Cluster
 metadata:
   name: house-hunter
-  namespace: database
+  namespace: cloudnative-pg
 spec:
   instances: 2
   imageName: ghcr.io/cloudnative-pg/postgresql:16
@@ -101,7 +101,7 @@ apiVersion: postgresql.cnpg.io/v1
 kind: Cluster
 metadata:
   name: lldap
-  namespace: database
+  namespace: cloudnative-pg
 spec:
   instances: 2
   imageName: ghcr.io/cloudnative-pg/postgresql:16
@@ -121,7 +121,7 @@ apiVersion: postgresql.cnpg.io/v1
 kind: Cluster
 metadata:
   name: firefly
-  namespace: database
+  namespace: cloudnative-pg
 spec:
   instances: 2
   imageName: ghcr.io/cloudnative-pg/postgresql:16
@@ -141,7 +141,7 @@ apiVersion: postgresql.cnpg.io/v1
 kind: Cluster
 metadata:
   name: miniflux
-  namespace: database
+  namespace: cloudnative-pg
 spec:
   instances: 2
   imageName: ghcr.io/cloudnative-pg/postgresql:16
