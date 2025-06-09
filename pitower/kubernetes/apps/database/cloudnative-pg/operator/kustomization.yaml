@@ -8,4 +8,5 @@ helmCharts:
     repo: https://cloudnative-pg.io/charts/
     version: 0.24.0
     releaseName: cloudnative-pg
+    includeCRDs: true
     valuesFile: values.yaml

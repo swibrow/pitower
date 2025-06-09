@@ -8,5 +8,6 @@ helmCharts:
     repo: https://helm.cilium.io/
     version: 1.17.4
     releaseName: cilium
+    includeCRDs: true
     valuesFile: values.yaml
     namespace: kube-system
