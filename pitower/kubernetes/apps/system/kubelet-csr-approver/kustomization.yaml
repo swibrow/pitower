@@ -8,4 +8,5 @@ helmCharts:
     repo: https://postfinance.github.io/kubelet-csr-approver
     version: 1.2.10
     releaseName: kubelet-csr-approver
+    namespace: system
     valuesFile: values.yaml

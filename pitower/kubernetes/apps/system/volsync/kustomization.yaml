@@ -11,4 +11,6 @@ helmCharts:
     repo: https://backube.github.io/helm-charts/
     version: 0.12.1
     releaseName: volsync
+    includeCRDs: true
+    namespace: system
     valuesFile: values.yaml

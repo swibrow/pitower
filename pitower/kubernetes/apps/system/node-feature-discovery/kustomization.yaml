@@ -12,4 +12,5 @@ helmCharts:
     repo: https://kubernetes-sigs.github.io/node-feature-discovery/charts
     version: 0.17.3
     releaseName: node-feature-discovery
+    namespace: system
     valuesFile: values.yaml

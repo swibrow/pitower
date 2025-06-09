@@ -11,4 +11,6 @@ helmCharts:
     repo: https://piraeus.io/helm-charts/
     version: 4.0.2
     releaseName: snapshot-controller
+    includeCRDs: true
+    namespace: system
     valuesFile: values.yaml

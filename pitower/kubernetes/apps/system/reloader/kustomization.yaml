@@ -9,3 +9,4 @@ helmCharts:
     version: 2.1.3
     releaseName: reloader
     valuesFile: values.yaml
+    namespace: system

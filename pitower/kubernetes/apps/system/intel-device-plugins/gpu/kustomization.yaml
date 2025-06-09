@@ -9,3 +9,4 @@ helmCharts:
     version: 0.32.1
     releaseName: intel-device-plugins-gpu
     valuesFile: values.yaml
+    namespace: system

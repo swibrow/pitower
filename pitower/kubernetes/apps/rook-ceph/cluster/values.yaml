@@ -20,7 +20,7 @@ cephClusterSpec:
     provider: host
 
   mon:
-    count: 1
+    count: 3
   mgr:
     count: 1
 
@@ -91,7 +91,8 @@ cephClusterSpec:
       - name: "worker-03"
         devices:
           - name: "/dev/disk/by-id/nvme-AirDisk_512GB_SSD_NFQ0044010702P70GX"
-
+    # migration:
+    #     confirmation: "yes-really-migrate-osds"
   cleanupPolicy:
     # set to "yes-really-destroy-data" to enable the cleanup job to delete all data when deleting the cluster
     confirmation: ""

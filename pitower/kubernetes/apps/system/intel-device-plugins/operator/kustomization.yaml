@@ -9,3 +9,5 @@ helmCharts:
     version: 0.32.1
     releaseName: intel-device-plugins-operator
     valuesFile: values.yaml
+    includeCRDs: true
+    namespace: system
