@@ -14,3 +14,4 @@ helmCharts:
     releaseName: node-feature-discovery
     namespace: system
     valuesFile: values.yaml
+    includeCRDs: true
