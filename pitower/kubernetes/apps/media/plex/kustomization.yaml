@@ -12,3 +12,4 @@ helmCharts:
     version: 4.0.1
     releaseName: plex
     valuesFile: values.yaml
+    namespace: media

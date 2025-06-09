@@ -10,3 +10,4 @@ helmCharts:
     releaseName: openebs
     valuesFile: values.yaml
     includeCRDs: true
+    namespace: openebs-system

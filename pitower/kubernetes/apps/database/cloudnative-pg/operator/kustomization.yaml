@@ -10,3 +10,4 @@ helmCharts:
     releaseName: cloudnative-pg
     includeCRDs: true
     valuesFile: values.yaml
+    namespace: database
