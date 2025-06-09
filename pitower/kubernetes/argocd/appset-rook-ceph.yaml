@@ -41,6 +41,8 @@ spec:
         syncOptions:
           - CreateNamespace=true
           - ServerSideApply=true
+          - SkipDryRunOnMissingResource=true
+          - ApplyOutOfSyncOnly=true
         retry:
           limit: 5
           backoff:
