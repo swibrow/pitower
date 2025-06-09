@@ -1,0 +1,11 @@
+---
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+namespace: selfhosted
+# Helm chart configuration
+helmCharts:
+  - name: app-template
+    repo: oci://ghcr.io/bjw-s/helm
+    version: 3.7.3
+    releaseName: echo-server
+    valuesFile: values.yaml

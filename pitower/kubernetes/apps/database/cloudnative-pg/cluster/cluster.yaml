@@ -6,15 +6,15 @@ metadata:
   name: postgres
   namespace: database
 spec:
-  instances: 1
-  imageName: ghcr.io/cloudnative-pg/postgresql:14.9-17
+  instances: 2
+  imageName: ghcr.io/cloudnative-pg/postgresql:16
   # bootstrap:
   #   initdb:
   #     database: firefly
   #     owner: firefly
   storage:
     size: 1Gi
-    storageClass: ceph-block
+    storageClass: openebs-hostpath
   postgresql:
     parameters:
       max_connections: "600"
@@ -29,15 +29,15 @@ metadata:
   name: tandoor
   namespace: database
 spec:
-  instances: 1
-  imageName: ghcr.io/cloudnative-pg/postgresql:14.9-17
+  instances: 2
+  imageName: ghcr.io/cloudnative-pg/postgresql:16
   bootstrap:
     initdb:
       database: tandoor
       owner: tandoor
   storage:
     size: 1Gi
-    storageClass: ceph-block
+    storageClass: openebs-hostpath
   monitoring:
     enablePodMonitor: true
 ---
@@ -48,15 +48,15 @@ metadata:
   name: autobrr
   namespace: database
 spec:
-  instances: 1
-  imageName: ghcr.io/cloudnative-pg/postgresql:14.9-17
+  instances: 2
+  imageName: ghcr.io/cloudnative-pg/postgresql:16
   bootstrap:
     initdb:
       database: tandoor
       owner: tandoor
   storage:
     size: 1Gi
-    storageClass: ceph-block
+    storageClass: openebs-hostpath
   monitoring:
     enablePodMonitor: true
 ---
@@ -68,11 +68,11 @@ metadata:
   namespace: database
 spec:
   instances: 2
-  imageName: ghcr.io/cloudnative-pg/postgresql:14.9-17
+  imageName: ghcr.io/cloudnative-pg/postgresql:16
   enableSuperuserAccess: true
   storage:
     size: 1Gi
-    storageClass: ceph-block
+    storageClass: openebs-hostpath
   monitoring:
     enablePodMonitor: true
 ---
@@ -84,7 +84,7 @@ metadata:
   namespace: database
 spec:
   instances: 2
-  imageName: ghcr.io/cloudnative-pg/postgresql:14.9-17
+  imageName: ghcr.io/cloudnative-pg/postgresql:16
   enableSuperuserAccess: true
   bootstrap:
     initdb:
