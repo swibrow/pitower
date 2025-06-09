@@ -5,6 +5,7 @@ kind: Kustomization
 namespace: media
 resources:
   - externalsecret.yaml
+  - pvc.yaml
 
 helmCharts:
   - name: app-template

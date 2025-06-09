@@ -38,6 +38,7 @@ servers:
       - name: loop
       - name: reload
       - name: loadbalance
+
 affinity:
   nodeAffinity:
     requiredDuringSchedulingIgnoredDuringExecution:
