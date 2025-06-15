@@ -13,3 +13,4 @@ helmCharts:
     version: 4.0.1
     releaseName: firefly
     valuesFile: values.yaml
+    namespace: banking

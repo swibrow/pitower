@@ -20,7 +20,7 @@ controllers:
           CAN_POST_FILES: "true"
         envFrom:
           - secretRef:
-              name: firefly-importer-secret
+              name: firefly-importer-secrets
 service:
   app:
     controller: firefly-importer
