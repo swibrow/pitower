@@ -26,7 +26,7 @@ provider "aws" {
 }
 
 locals {
-  name   = "home-ops"
+  name   = "pitower"
   region = "eu-central-2"
 
   tags = merge(var.tags, {
