@@ -86,7 +86,7 @@ ingress:
     className: external
     annotations:
       external-dns.alpha.kubernetes.io/target: external.pitower.link
-      nginx.ingress.kubernetes.io/rewrite-target: /$1
+      nginx.ingress.kubernetes.io/rewrite-target: /$2
       nginx.ingress.kubernetes.io/auth-method: "GET"
       nginx.ingress.kubernetes.io/auth-url: "http://authelia.security.svc.cluster.local/api/authz/auth-request"
       nginx.ingress.kubernetes.io/auth-signin: "https://auth.pitower.link?rm=$request_method"
@@ -94,7 +94,7 @@ ingress:
     hosts:
       - host: *host
         paths:
-          - path: /code/(.*)
+          - path: /code(/|$)(.*)
             service:
               identifier: app
               port: code-server
