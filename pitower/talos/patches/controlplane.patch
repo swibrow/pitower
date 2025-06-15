@@ -12,5 +12,5 @@ cluster:
         # oidc-client-id:
         # oidc-username-claim: email
         # oidc-groups-claim: groups
-        service-account-issuer: https://raw.githubusercontent.com/swibrow/pitower/main/kubernetes/pitower
+        service-account-issuer: https://raw.githubusercontent.com/swibrow/home-ops/main/pitower/kubernetes
         service-account-jwks-uri: https://k8s.pitower.internal:6443/openid/v1/jwks

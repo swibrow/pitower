@@ -6,7 +6,7 @@ metadata:
 spec:
   project: default
   source:
-    repoURL: 'https://github.com/swibrow/pitower.git'
+    repoURL: 'https://github.com/swibrow/home-ops.git'
     targetRevision: main
     path: pitower/kubernetes/bootstrap
   destination:

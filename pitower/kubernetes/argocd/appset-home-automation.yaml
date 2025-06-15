@@ -8,7 +8,7 @@ spec:
   goTemplateOptions: ["missingkey=error"]
   generators:
     - git:
-        repoURL: https://github.com/swibrow/pitower
+        repoURL: https://github.com/swibrow/home-ops
         revision: main
         directories:
           - path: pitower/kubernetes/apps/home-automation/*
@@ -27,7 +27,7 @@ spec:
     spec:
       project: apps
       source:
-        repoURL: https://github.com/swibrow/pitower
+        repoURL: https://github.com/swibrow/home-ops
         targetRevision: main
         path: "{{.path.path}}"
       destination:

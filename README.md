@@ -1,4 +1,4 @@
-# pitower
+# Home Ops
 
 Power (in)efficient HomeLab.
 
