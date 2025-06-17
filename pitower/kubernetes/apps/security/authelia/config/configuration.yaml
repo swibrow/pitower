@@ -1,6 +1,5 @@
 ---
 # https://github.com/authelia/authelia/blob/master/config.template.yml
-# Note: Authelia vars should be escaped with $${VAR_NAME} to avoid interpolation by Flux
 log:
   level: "debug"
 
@@ -19,8 +18,8 @@ authentication_backend:
     additional_groups_dn: ou=groups
     groups_filter: (member={dn})
     group_search_mode: filter
-    user: "$${LLDAP_BIND_USER_DN}"
-    password: "$${LLDAP_BIND_PASSWORD}"
+    user: "${LLDAP_BIND_USER_DN}"
+    password: "${LLDAP_BIND_PASSWORD}"
     attributes:
       username: uid
       display_name: displayName

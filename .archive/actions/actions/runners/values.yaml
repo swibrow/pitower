@@ -1,5 +1,5 @@
 runnerScaleSetName: default
-githubConfigUrl: https://github.com/swibrow/pitower
+githubConfigUrl: https://github.com/swibrow/home-ops
 githubConfigSecret: actions-runner-controller-auth
 minRunners: 0
 maxRunners: 10

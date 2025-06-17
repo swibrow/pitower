@@ -4,12 +4,12 @@
     "github>bjw-s/renovate-config",
     "github>bjw-s/renovate-config:automerge-docker-digest",
     "github>bjw-s/renovate-config:automerge-github-actions",
-    "github>swibrow/pitower//.renovate/allowedVersions.json5",
-    "github>swibrow/pitower//.renovate/autoMerge.json5",
-    "github>swibrow/pitower//.renovate/clusters.json5",
-    "github>swibrow/pitower//.renovate/grafanaDashboards.json5",
-    "github>swibrow/pitower//.renovate/groups.json5",
-    "github>swibrow/pitower//.renovate/versioning.json5",
+    "github>swibrow/home-ops//.renovate/allowedVersions.json5",
+    "github>swibrow/home-ops//.renovate/autoMerge.json5",
+    "github>swibrow/home-ops//.renovate/clusters.json5",
+    "github>swibrow/home-ops//.renovate/grafanaDashboards.json5",
+    "github>swibrow/home-ops//.renovate/groups.json5",
+    "github>swibrow/home-ops//.renovate/versioning.json5",
   ],
   ignorePaths: [".archive/**"],
   flux: {
@@ -20,5 +20,5 @@
   },
   kubernetes: {
     fileMatch: ["^kubernetes/.+\\.ya?ml$"],
-  },
+  }
 }

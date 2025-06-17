@@ -8,7 +8,7 @@ metadata:
 spec:
   description: Apps
   sourceRepos:
-    - https://github.com/swibrow/pitower
+    - https://github.com/swibrow/home-ops
   destinations:
     - namespace: "*"
       name: "*"

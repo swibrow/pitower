@@ -8,7 +8,7 @@ spec:
   goTemplateOptions: ["missingkey=error"]
   generators:
     - git:
-        repoURL: https://github.com/swibrow/pitower
+        repoURL: https://github.com/swibrow/home-ops
         revision: main
         directories:
           - path: pitower/kubernetes/apps/home-automation/*
@@ -27,13 +27,18 @@ spec:
     spec:
       project: apps
       source:
-        repoURL: https://github.com/swibrow/pitower
+        repoURL: https://github.com/swibrow/home-ops
         targetRevision: main
         path: "{{.path.path}}"
       destination:
         server: https://kubernetes.default.svc
         namespace: "{{index .path.segments 3}}"
       syncPolicy:
+        managedNamespaceMetadata:
+          labels:
+            pod-security.kubernetes.io/enforce: privileged
+            pod-security.kubernetes.io/audit: privileged
+            pod-security.kubernetes.io/warn: privileged
         automated:
           prune: true
           selfHeal: false

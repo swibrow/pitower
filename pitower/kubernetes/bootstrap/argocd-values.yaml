@@ -35,7 +35,7 @@ configs:
   repositories:
     pitower:
       type: git
-      url: https://github.com/swibrow/pitower
+      url: https://github.com/swibrow/home-ops
 
 redis:
   enabled: true

@@ -1,6 +1,6 @@
 {
-  "issuer": "https://raw.githubusercontent.com/swibrow/pitower/main/pitower/kubernetes",
-  "jwks_uri": "https://raw.githubusercontent.com/swibrow/pitower/main/pitower/kubernetes/.well-known/jwks",
+  "issuer": "https://raw.githubusercontent.com/swibrow/home-ops/main/pitower/kubernetes",
+  "jwks_uri": "https://raw.githubusercontent.com/swibrow/home-ops/main/pitower/kubernetes/.well-known/jwks",
   "response_types_supported": [
     "id_token"
   ],
